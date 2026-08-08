@@ -22,29 +22,29 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "Personal Memory Engine — Never Lose Context Again",
+  title: "Personal Memory Engine — Never Lose the Thread of Your Life",
   description:
-    "The world's first AI system that continuously builds a living world model of your life. Not an AI journal. Not a note-taking app. Not a chatbot.",
+    "Never lose the thread of your life. A personal memory engine that connects the people, moments, decisions, and stories that make up your life.",
   keywords: [
     "Personal Memory Engine",
-    "World Model",
-    "Context Engine",
+    "Memory",
+    "Context",
     "Personal AI",
     "Living Memory",
     "Identity",
     "Relationships",
   ],
   openGraph: {
-    title: "Personal Memory Engine — Never Lose Context Again",
+    title: "Personal Memory Engine — Never Lose the Thread of Your Life",
     description:
-      "Humans don't lose memories. They lose context. The first AI system that remembers your world.",
+      "Never lose the thread of your life. A personal memory engine that connects the people, moments, decisions, and stories that make up your life.",
     type: "website",
     siteName: "Personal Memory Engine",
   },
   twitter: {
     card: "summary_large_image",
     title: "Personal Memory Engine",
-    description: "Never lose context again.",
+    description: "Never lose the thread of your life.",
   },
 };
 

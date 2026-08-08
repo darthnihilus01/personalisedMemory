@@ -1,24 +1,24 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Lock, Trash2, VolumeX } from "lucide-react";
+import { ShieldCheck, MicOff, Lock, Trash2, Eye } from "lucide-react";
 
 const STATEMENTS = [
   {
-    icon: ShieldCheck,
-    text: "Your voice never leaves your device unless you choose to sync.",
+    icon: MicOff,
+    text: "You choose what enters your memory.",
   },
   {
     icon: Lock,
-    text: "Everything is encrypted.",
-  },
-  {
-    icon: Lock,
-    text: "Nothing you say is ever used to train any model.",
+    text: "Your memories are encrypted.",
   },
   {
     icon: Trash2,
-    text: "You can delete anything, anytime — permanently.",
+    text: "You can delete what you don't want remembered.",
+  },
+  {
+    icon: Eye,
+    text: "The system should show where important memories and conclusions came from.",
   },
 ];
 
@@ -39,6 +39,17 @@ export default function PrivacySection() {
           </span>
         </motion.div>
 
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-3xl sm:text-5xl font-light text-white text-center leading-tight tracking-tight mb-12"
+        >
+          Your life{" "}
+          <span className="font-serif italic text-amber-200/90">is yours.</span>
+        </motion.h2>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -50,10 +61,7 @@ export default function PrivacySection() {
             {STATEMENTS.map((item, idx) => {
               const Icon = item.icon;
               return (
-                <li
-                  key={idx}
-                  className="flex items-start gap-4"
-                >
+                <li key={idx} className="flex items-start gap-4">
                   <span className="w-8 h-8 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-emerald-400 shrink-0">
                     <Icon className="w-4 h-4" />
                   </span>
@@ -64,16 +72,6 @@ export default function PrivacySection() {
               );
             })}
           </ul>
-
-          <div className="mt-8 pt-6 border-t border-white/[0.08] flex items-start gap-4">
-            <span className="w-8 h-8 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-amber-300 shrink-0">
-              <VolumeX className="w-4 h-4" />
-            </span>
-            <p className="text-base text-white/85 leading-relaxed font-normal">
-              Don&apos;t want to be reminded of someone right now? Mute them. Your
-              memories stay — they just stop showing up until you&apos;re ready.
-            </p>
-          </div>
         </motion.div>
       </div>
     </section>

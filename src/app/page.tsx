@@ -4,8 +4,9 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import WhatItDoes from "@/components/WhatItDoes";
-import Incidents from "@/components/Incidents";
-import BrainSection from "@/components/BrainSection";
+import EventsContext from "@/components/EventsContext";
+import MemoryEngineSection from "@/components/MemoryEngineSection";
+import CompoundingMemory from "@/components/CompoundingMemory";
 import PrivacySection from "@/components/PrivacySection";
 import WaitlistSection from "@/components/WaitlistSection";
 import ProductWorkspace from "@/components/ProductWorkspace";
@@ -27,6 +28,11 @@ export default function Home() {
     }
   };
 
+  const scrollToContent = () => {
+    const element = document.getElementById("what-it-does");
+    if (element) element.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="relative min-h-screen flex flex-col bg-[#09090b] text-white selection:bg-amber-500/20 selection:text-amber-100 overflow-x-hidden">
       {/* Navbar */}
@@ -43,17 +49,20 @@ export default function Home() {
             {/* Hero */}
             <HeroSection
               onScrollToWaitlist={scrollToWaitlist}
-              onOpenWorkspace={() => setViewMode("workspace")}
+              onScrollToContent={scrollToContent}
             />
 
             {/* What It Does */}
             <WhatItDoes />
 
-            {/* Incidents: list → detail → compiled day */}
-            <Incidents />
+            {/* Events & Context */}
+            <EventsContext />
 
-            {/* The Brain */}
-            <BrainSection />
+            {/* The Memory Engine */}
+            <MemoryEngineSection />
+
+            {/* Why This Gets Better Over Time */}
+            <CompoundingMemory />
 
             {/* Privacy */}
             <PrivacySection />

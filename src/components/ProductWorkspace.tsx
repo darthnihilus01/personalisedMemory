@@ -7,7 +7,7 @@ import { Mic, MicOff, Search, Users, Compass, Orbit, Sparkles, Clock, ArrowRight
 interface MemoryItem {
   id: string;
   title: string;
-  category: "Voice Note" | "Compiled Entry" | "Relationship Shift" | "Project Pivot";
+  category: "Voice Note" | "Connected Memory" | "Relationship Shift" | "Project Pivot";
   timestamp: string;
   people: string[];
   summary: string;
@@ -30,9 +30,9 @@ const MEMORY_FEED: MemoryItem[] = [
   },
   {
     id: "mem-2",
-    title: "Daily Diary Page — Tuesday, Oct 14",
-    category: "Compiled Entry",
-    timestamp: "Yesterday • End-of-Day Entry",
+    title: "Tuesday, Oct 14",
+    category: "Connected Memory",
+    timestamp: "Yesterday • End of day",
     people: ["Priya", "Mom"],
     summary: "Started a bit rough waking up late. Had lunch with Priya celebrating her news. Afternoon project review with team went smoothly, followed by a quick check-in call with Mom.",
     rawQuote: "Mom mentioned her knee physical therapy is going well. Team gave great feedback on the project.",
@@ -163,7 +163,7 @@ export default function ProductWorkspace() {
                 : "text-white/50 hover:text-white"
             }`}
           >
-            The Memory Brain
+            The Memory Engine
           </button>
           <button
             onClick={() => setActiveTab("reasoning")}
@@ -312,7 +312,7 @@ export default function ProductWorkspace() {
       {activeTab === "graph" && (
         <div className="panel-quiet p-6 sm:p-8 rounded-2xl max-w-4xl mx-auto text-center space-y-6">
           <div className="space-y-2 text-left pb-4 border-b border-white/[0.08]">
-            <h3 className="text-lg font-medium text-white">The Memory Brain</h3>
+            <h3 className="text-lg font-medium text-white">The Memory Engine</h3>
             <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-sans">
               Every person, place, and event you mention gets connected automatically — you never tag or organize anything. Search a person's name and see everything you've ever said involving them, in order. Search an event and see everyone who was part of it. It looks like a map because that's what it is: a map of your life, built without you doing any of the mapping.
             </p>

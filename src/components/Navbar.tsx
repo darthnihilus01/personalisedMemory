@@ -58,11 +58,14 @@ export default function Navbar({
             <a href="#what-it-does" className="hover:text-white transition-colors" id="nav-what-it-does">
               What it does
             </a>
-            <a href="#incidents" className="hover:text-white transition-colors" id="nav-incidents">
-              One day
+            <a href="#events" className="hover:text-white transition-colors" id="nav-events">
+              Events &amp; context
             </a>
-            <a href="#brain" className="hover:text-white transition-colors" id="nav-brain">
-              The brain
+            <a href="#memory-engine" className="hover:text-white transition-colors" id="nav-memory-engine">
+              Memory engine
+            </a>
+            <a href="#over-time" className="hover:text-white transition-colors" id="nav-over-time">
+              Over time
             </a>
             <a href="#privacy" className="hover:text-white transition-colors" id="nav-privacy">
               Privacy
@@ -100,7 +103,7 @@ export default function Navbar({
             id="nav-btn-waitlist"
             className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/10 hover:bg-white/15 px-4 py-1.5 rounded-full border border-white/20 shadow-md backdrop-blur-md transition-all"
           >
-            <span>Join Waitlist</span>
+            <span>Join the waitlist</span>
             <ArrowRight className="w-3.5 h-3.5 text-white/70" />
           </button>
         </div>

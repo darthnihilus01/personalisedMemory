@@ -30,11 +30,11 @@ export default function WaitlistSection() {
         </div>
 
         <h2 className="text-4xl sm:text-6xl font-light text-white leading-tight tracking-tight mb-6">
-          Help build the future of memory.
+          Never lose the thread again.
         </h2>
 
         <p className="text-base sm:text-lg text-white/60 max-w-xl mx-auto mb-10 leading-relaxed">
-          We are selectively inviting founding users to shape the first Personal Memory Engine.
+          Join the waitlist for the Personal Memory Engine.
         </p>
 
         {/* Form Container */}
@@ -69,7 +69,7 @@ export default function WaitlistSection() {
                       <span className="w-3.5 h-3.5 rounded-full border-2 border-black border-t-transparent animate-spin" />
                     ) : (
                       <>
-                        <span>Join Waitlist</span>
+                        <span>Join the waitlist</span>
                         <ArrowRight className="w-3.5 h-3.5" />
                       </>
                     )}
@@ -103,7 +103,7 @@ export default function WaitlistSection() {
 
         {/* Footer Subtext */}
         <p className="text-xs font-mono text-white/40 tracking-wider">
-          Founding users will shape the first Personal Memory Engine.
+          Your life is full of moments. Memory keeps them connected.
         </p>
       </div>
     </section>

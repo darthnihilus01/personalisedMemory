@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mic, Users, Compass, Sparkles, Heart, Activity, Cpu } from "lucide-react";
+import { Mic, Users, Sparkles, Heart, Activity, type LucideIcon } from "lucide-react";
 
 interface NodeData {
   id: string;
   title: string;
   category: "Voice Note" | "Relationship" | "Project" | "Life Event" | "Insight" | "Goal";
-  icon: any;
+  icon: LucideIcon;
   x: number; // percentage
   y: number; // percentage
   connections: string[];
@@ -44,14 +44,14 @@ const NODES: NodeData[] = [
   },
   {
     id: "diary_oct14",
-    title: "Daily Diary — Oct 14",
+    title: "Memories — Oct 14",
     category: "Life Event",
     icon: Sparkles,
     x: 72,
     y: 28,
     connections: ["priya_lunch", "mom_call"],
     snippet: "Morning started slow, but lunch with Priya and the afternoon project review went great.",
-    timestamp: "Compiled at 11:00 PM",
+    timestamp: "Connected automatically",
     color: "#3b82f6", // blue
   },
   {
@@ -102,7 +102,7 @@ export default function LivingWorldModelCanvas() {
       <div className="absolute top-4 left-6 right-6 z-20 flex items-center justify-between pointer-events-none">
         <div className="flex items-center gap-2 bg-[#161522] px-3.5 py-1.5 rounded-full border border-white/10 text-xs text-white/70 font-mono">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="tracking-wide">LIVING WORLD MODEL • REAL-TIME GRAPH</span>
+          <span className="tracking-wide">MEMORY ENGINE • CONNECTED MEMORY</span>
         </div>
         <div className="hidden sm:flex items-center gap-4 text-[11px] font-mono text-slate-400">
           <span>7 Active Clusters</span>
@@ -202,7 +202,7 @@ export default function LivingWorldModelCanvas() {
               {activeNode.title}
             </h4>
             <p className="text-xs text-slate-300 leading-relaxed font-sans">
-              "{activeNode.snippet}"
+              &ldquo;{activeNode.snippet}&rdquo;
             </p>
           </motion.div>
         </AnimatePresence>

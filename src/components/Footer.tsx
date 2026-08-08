@@ -11,7 +11,7 @@ export default function Footer() {
             <span className="text-white/80 font-semibold">Memory Engine v1.0</span>
           </div>
           <span className="text-white/20">•</span>
-          <span className="text-white/40">Private, local-first memory journal</span>
+          <span className="text-white/40">Private, local-first memory</span>
         </div>
 
         {/* Links */}
@@ -19,11 +19,14 @@ export default function Footer() {
           <a href="#what-it-does" className="hover:text-white transition-colors">
             What it does
           </a>
-          <a href="#incidents" className="hover:text-white transition-colors">
-            One day
+          <a href="#events" className="hover:text-white transition-colors">
+            Events &amp; context
           </a>
-          <a href="#brain" className="hover:text-white transition-colors">
-            The brain
+          <a href="#memory-engine" className="hover:text-white transition-colors">
+            Memory engine
+          </a>
+          <a href="#over-time" className="hover:text-white transition-colors">
+            Over time
           </a>
           <a href="#privacy" className="hover:text-white transition-colors">
             Privacy

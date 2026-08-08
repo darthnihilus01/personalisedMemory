@@ -1,14 +1,24 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { Mic, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mic, Sparkles, Link2 } from "lucide-react";
 
 const EXAMPLE_TEXT =
-  "Hey journal — today I hosted a get-together with my friends. It was really fun, we hadn't all been in the same room in months.";
+  "Just got out of a meeting with Marcus. We decided to push the Atlas launch by two weeks. Honestly, I'm relieved.";
+
+const EXTRACTED = ["Marcus", "Atlas", "Launch", "Decision", "Relief"];
+
+const CONNECTION_CHAIN = [
+  "Marcus",
+  "Atlas",
+  "Previous meetings",
+  "Previous decisions",
+];
 
 export default function WhatItDoes() {
   const [typed, setTyped] = useState(0);
+  const [extracted, setExtracted] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -19,13 +29,29 @@ export default function WhatItDoes() {
         }
         return prev + 1;
       });
-    }, 28);
+    }, 26);
     return () => clearInterval(interval);
   }, []);
 
+  const typingDone = typed >= EXAMPLE_TEXT.length;
+
+  useEffect(() => {
+    if (!typingDone) return;
+    const interval = setInterval(() => {
+      setExtracted((prev) => {
+        if (prev >= EXTRACTED.length) {
+          clearInterval(interval);
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, 350);
+    return () => clearInterval(interval);
+  }, [typingDone]);
+
   return (
     <section id="what-it-does" className="py-24 md:py-32 relative bg-[#09090b] border-t border-white/[0.06]">
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -53,8 +79,10 @@ export default function WhatItDoes() {
               <Mic className="w-4 h-4 relative" />
             </span>
             <div className="flex flex-col">
-              <span className="text-xs font-mono text-white/80">Voice note</span>
-              <span className="text-[11px] font-mono text-white/40">Transcribing…</span>
+              <span className="text-xs font-mono text-white/80">You said</span>
+              <span className="text-[11px] font-mono text-white/40">
+                {typingDone ? "Captured" : "Listening…"}
+              </span>
             </div>
           </div>
 
@@ -64,19 +92,70 @@ export default function WhatItDoes() {
               <span className="inline-block w-[2px] h-[1.1em] bg-amber-300/80 align-middle ml-0.5 animate-pulse" />
             )}
           </p>
-        </motion.div>
 
-        {/* One plain line */}
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-8 text-center text-lg sm:text-xl text-slate-300/90 leading-relaxed font-normal"
-        >
-          You talk. It gets cleaned up, saved, and added to your memory
-          journal — automatically.
-        </motion.p>
+          {/* What the engine keeps */}
+          <AnimatePresence>
+            {typingDone && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                transition={{ duration: 0.4 }}
+                className="overflow-hidden"
+              >
+                <div className="pt-5 mt-5 border-t border-white/[0.08]">
+                  <span className="text-[10px] font-mono text-white/40 uppercase tracking-wider block mb-3">
+                    Kept from that moment
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {EXTRACTED.map((item, idx) => (
+                      <AnimatePresence key={item}>
+                        {idx < extracted && (
+                          <motion.span
+                            initial={{ opacity: 0, scale: 0.85 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.25 }}
+                            className="px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/15 text-xs font-mono text-white/85"
+                          >
+                            {item}
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
+                    ))}
+                  </div>
+
+                  {/* Connection visual */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                    className="mt-7 pt-5 border-t border-white/[0.08]"
+                  >
+                    <p className="text-sm sm:text-base text-slate-300/90 leading-relaxed font-normal mb-4">
+                      It doesn&apos;t just save what you said. It connects it
+                      to what you already remember.
+                    </p>
+                    <div className="flex flex-col items-start gap-1.5">
+                      {CONNECTION_CHAIN.map((item, idx) => (
+                        <div key={item} className="flex flex-col gap-1.5">
+                          <div className="flex items-center gap-2.5">
+                            <span className="w-2 h-2 rounded-full bg-amber-400/80" />
+                            <span className="text-xs font-mono text-amber-100/90">{item}</span>
+                            {idx === CONNECTION_CHAIN.length - 1 && (
+                              <Link2 className="w-3.5 h-3.5 text-emerald-400/80" />
+                            )}
+                          </div>
+                          {idx < CONNECTION_CHAIN.length - 1 && (
+                            <span className="ml-[3px] h-4 w-px bg-white/15" />
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );

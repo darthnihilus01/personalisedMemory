@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mic, ChevronDown, Layout } from "lucide-react";
+import { Mic, ChevronDown } from "lucide-react";
 
 interface HeroSectionProps {
   onScrollToWaitlist: () => void;
-  onOpenWorkspace: () => void;
+  onScrollToContent: () => void;
 }
 
-export default function HeroSection({ onScrollToWaitlist, onOpenWorkspace }: HeroSectionProps) {
+export default function HeroSection({ onScrollToWaitlist, onScrollToContent }: HeroSectionProps) {
   return (
     <section className="relative pt-36 pb-24 md:pt-48 md:pb-32 overflow-hidden radial-glow-hero">
       {/* Background Subtle Ambient Glow */}
@@ -20,11 +20,11 @@ export default function HeroSection({ onScrollToWaitlist, onOpenWorkspace }: Her
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="text-5xl sm:text-7xl md:text-8xl font-light tracking-tight text-white leading-[1.05] mb-8 font-sans"
+          className="text-5xl sm:text-6xl md:text-7xl font-light tracking-tight text-white leading-[1.08] mb-8 font-sans"
         >
-          Talk.{" "}
+          Never lose the thread{" "}
           <span className="font-serif italic font-normal text-gradient-purple">
-            It remembers.
+            of your life.
           </span>
         </motion.h1>
 
@@ -35,12 +35,12 @@ export default function HeroSection({ onScrollToWaitlist, onOpenWorkspace }: Her
           transition={{ duration: 0.7, delay: 0.15 }}
           className="text-base sm:text-lg text-slate-300/80 font-normal leading-relaxed max-w-2xl mx-auto mb-14"
         >
-          A personal memory journal that captures your life as you live it and
-          structurally maps it — so you can reflect on your decisions and see
-          how you&apos;ve evolved.
+          A personal memory engine that connects the people, moments,
+          decisions, and stories that make up your life — so you never have to
+          reconstruct the context again.
         </motion.p>
 
-        {/* Mic button visual */}
+        {/* Mic visual */}
         <motion.button
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -58,7 +58,7 @@ export default function HeroSection({ onScrollToWaitlist, onOpenWorkspace }: Her
           </span>
         </motion.button>
 
-        {/* CTAs */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -67,20 +67,19 @@ export default function HeroSection({ onScrollToWaitlist, onOpenWorkspace }: Her
         >
           <button
             onClick={onScrollToWaitlist}
-            id="hero-cta-scroll"
+            id="hero-cta-waitlist"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 btn-white-glow font-medium px-8 py-3.5 rounded-full text-sm"
           >
-            <span>See how it works</span>
+            <span>Join the waitlist</span>
             <ChevronDown className="w-4 h-4 text-black/70" />
           </button>
 
           <button
-            onClick={onOpenWorkspace}
-            id="hero-cta-try"
+            onClick={onScrollToContent}
+            id="hero-cta-content"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/[0.06] hover:bg-white/10 text-white font-mono text-xs px-6 py-3.5 rounded-full border border-white/15 transition-all"
           >
-            <Layout className="w-4 h-4 text-purple-400" />
-            <span>Try the workspace</span>
+            <span>See how it works</span>
           </button>
         </motion.div>
       </div>
