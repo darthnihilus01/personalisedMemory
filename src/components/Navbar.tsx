@@ -1,17 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { BookOpen, ArrowRight, Layout } from "lucide-react";
+import { ArrowRight, Layout } from "lucide-react";
 
 interface NavbarProps {
-  onOpenManifesto: () => void;
   onScrollToWaitlist: () => void;
   viewMode: "landing" | "workspace";
   onToggleViewMode: (mode: "landing" | "workspace") => void;
 }
 
 export default function Navbar({
-  onOpenManifesto,
   onScrollToWaitlist,
   viewMode,
   onToggleViewMode,
@@ -57,17 +55,17 @@ export default function Navbar({
         {/* Navigation Links matching reference image */}
         {viewMode === "landing" ? (
           <nav className="hidden lg:flex items-center gap-8 text-xs font-medium text-slate-300/80">
-            <a href="#story" className="hover:text-white transition-colors" id="nav-story">
-              The Story
+            <a href="#what-it-does" className="hover:text-white transition-colors" id="nav-what-it-does">
+              What it does
             </a>
-            <a href="#world-model" className="hover:text-white transition-colors" id="nav-world-model">
-              World Model
+            <a href="#incidents" className="hover:text-white transition-colors" id="nav-incidents">
+              One day
             </a>
-            <a href="#philosophy" className="hover:text-white transition-colors" id="nav-philosophy">
-              Philosophy
+            <a href="#brain" className="hover:text-white transition-colors" id="nav-brain">
+              The brain
             </a>
-            <a href="#reasoning" className="hover:text-white transition-colors" id="nav-questions">
-              Context vs Search
+            <a href="#privacy" className="hover:text-white transition-colors" id="nav-privacy">
+              Privacy
             </a>
           </nav>
         ) : (
@@ -95,15 +93,6 @@ export default function Navbar({
           >
             <Layout className="w-3.5 h-3.5" />
             <span>{viewMode === "landing" ? "Product Mode" : "Overview Mode"}</span>
-          </button>
-
-          <button
-            onClick={onOpenManifesto}
-            id="nav-btn-manifesto"
-            className="hidden sm:flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-slate-300 hover:text-white px-3.5 py-1.5 rounded-full border border-white/15 hover:border-purple-400/40 transition-all"
-          >
-            <BookOpen className="w-3.5 h-3.5 text-purple-400" />
-            <span>Manifesto</span>
           </button>
 
           <button

@@ -105,6 +105,20 @@
   background: rgba(192, 132, 252, 0.4);
 }
 
+/* Slow pulse rings for mic visual */
+@keyframes pulse-ring-slow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-ring-slow 3s ease-in-out infinite;
+}
+
+.animate-pulse-slower {
+  animation: pulse-ring-slow 4.5s ease-in-out infinite;
+}
+
 /* Grid Background */
 .grid-bg-quiet {
   background-size: 36px 36px;
