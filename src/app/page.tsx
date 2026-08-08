@@ -10,48 +10,69 @@ import PhilosophySection from "@/components/PhilosophySection";
 import FutureQuestions from "@/components/FutureQuestions";
 import WaitlistSection from "@/components/WaitlistSection";
 import ManifestoModal from "@/components/ManifestoModal";
+import ProductWorkspace from "@/components/ProductWorkspace";
 import Footer from "@/components/Footer";
 
 export default function Home() {
   const [manifestoOpen, setManifestoOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<"landing" | "workspace">("landing");
 
   const scrollToWaitlist = () => {
-    const element = document.getElementById("waitlist");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    if (viewMode !== "landing") {
+      setViewMode("landing");
+      setTimeout(() => {
+        const element = document.getElementById("waitlist");
+        if (element) element.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      const element = document.getElementById("waitlist");
+      if (element) element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col bg-[#060709] text-white selection:bg-purple-900/50 selection:text-purple-100 overflow-x-hidden">
-      {/* Top Fixed Header */}
+    <div className="relative min-h-screen flex flex-col bg-[#09090b] text-white selection:bg-amber-500/20 selection:text-amber-100 overflow-x-hidden">
+      {/* Navbar with View Switcher */}
       <Navbar
         onOpenManifesto={() => setManifestoOpen(true)}
         onScrollToWaitlist={scrollToWaitlist}
+        viewMode={viewMode}
+        onToggleViewMode={(mode) => setViewMode(mode)}
       />
 
-      {/* Main Landing Sections */}
-      <main className="flex-grow">
-        {/* Section 1: Hero with Dynamic Canvas */}
-        <HeroSection onScrollToWaitlist={scrollToWaitlist} />
+      {/* Main Content */}
+      <main className="flex-grow pt-16">
+        {viewMode === "landing" ? (
+          <>
+            {/* Hero Section */}
+            <HeroSection
+              onScrollToWaitlist={scrollToWaitlist}
+              onOpenWorkspace={() => setViewMode("workspace")}
+            />
 
-        {/* Section 2: Scroll Story Narrative */}
-        <ScrollStory />
+            {/* Scroll Story Narrative */}
+            <ScrollStory />
 
-        {/* Section 3: The Living World Model Pipeline */}
-        <MemoryEngineDiagram />
+            {/* Living World Model Architecture Pipeline */}
+            <MemoryEngineDiagram />
 
-        {/* Section 4: Technical Architecture & PRD Physics */}
-        <TechArchitecture />
+            {/* Technical Architecture & PRD Physics */}
+            <TechArchitecture />
 
-        {/* Section 5: Product Philosophy */}
-        <PhilosophySection />
+            {/* Product Philosophy */}
+            <PhilosophySection />
 
-        {/* Section 6: Reasoning vs Search Paradigm */}
-        <FutureQuestions />
+            {/* Contextual Reasoning Engine vs Flat Search */}
+            <FutureQuestions />
 
-        {/* Section 7: Founding Waitlist */}
-        <WaitlistSection />
+            {/* Founding Waitlist Access */}
+            <WaitlistSection />
+          </>
+        ) : (
+          <div className="pt-8 pb-16">
+            <ProductWorkspace />
+          </div>
+        )}
       </main>
 
       {/* Footer */}

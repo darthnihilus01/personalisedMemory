@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mic, Users, Compass, Sparkles, Heart, Activity, Cpu } from "lucide-react";
 
@@ -20,15 +20,15 @@ interface NodeData {
 const NODES: NodeData[] = [
   {
     id: "atlas",
-    title: "Atlas Project Shift",
+    title: "Atlas Architecture Shift",
     category: "Project",
     icon: Compass,
     x: 48,
     y: 35,
     connections: ["marcus", "memo_vision", "series_a"],
-    snippet: "Decided to pivot from linear tasks to context graphs after Marcus highlighted user drift.",
+    snippet: "Decided to pivot from linear task lists into a quiet context model after Marcus highlighted user drift.",
     timestamp: "2 hours ago • Audio Memo",
-    color: "#a855f7", // purple
+    color: "#d4a373", // warm stone
   },
   {
     id: "marcus",
@@ -40,7 +40,7 @@ const NODES: NodeData[] = [
     connections: ["atlas", "tokyo_talk"],
     snippet: "Relationship deepened over 3 years. Shared focus on privacy-first offline models.",
     timestamp: "Continuous World Model update",
-    color: "#ec4899", // pink
+    color: "#f4f4f5", // zinc white
   },
   {
     id: "memo_vision",
@@ -50,9 +50,9 @@ const NODES: NodeData[] = [
     x: 72,
     y: 28,
     connections: ["atlas", "philosophy_time"],
-    snippet: "'Humans don't lose memories. They lose context.' Recorded while walking home.",
+    snippet: "'Humans don't lose memories. They lose context.' Recorded walking home.",
     timestamp: "Yesterday at 11:42 PM",
-    color: "#3b82f6", // blue
+    color: "#a1a1aa", // muted zinc
   },
   {
     id: "tokyo_talk",
@@ -64,7 +64,7 @@ const NODES: NodeData[] = [
     connections: ["marcus", "philosophy_time"],
     snippet: "Walks through Nezu Museum grounds. Shifted view on organic, non-linear software.",
     timestamp: "Nov 2025 • 8 Linked Memories",
-    color: "#f59e0b", // amber
+    color: "#d4a373",
   },
   {
     id: "philosophy_time",
@@ -76,7 +76,7 @@ const NODES: NodeData[] = [
     connections: ["memo_vision", "tokyo_talk", "sarah"],
     snippet: "Synthesis: Search retrieves words. Reasoning over living context retrieves true intent.",
     timestamp: "Evolving Synthesis",
-    color: "#10b981", // emerald
+    color: "#e4e4e7",
   },
   {
     id: "sarah",
@@ -88,7 +88,7 @@ const NODES: NodeData[] = [
     connections: ["philosophy_time", "memo_vision"],
     snippet: "Discussed family oral histories and how memory fades without continuous narrative context.",
     timestamp: "3 days ago • Call Transcript",
-    color: "#f43f5e", // rose
+    color: "#f4f4f5",
   },
   {
     id: "series_a",
@@ -100,31 +100,25 @@ const NODES: NodeData[] = [
     connections: ["atlas"],
     snippet: "Synthesized product promise: 'Never lose context again.'",
     timestamp: "Updated Today",
-    color: "#6366f1", // indigo
+    color: "#a1a1aa",
   },
 ];
 
 export default function LivingWorldModelCanvas() {
   const [activeNodeId, setActiveNodeId] = useState<string>("atlas");
-  const [isHovered, setIsHovered] = useState(false);
-
   const activeNode = NODES.find((n) => n.id === activeNodeId) || NODES[0];
 
   return (
-    <div className="relative w-full h-[480px] sm:h-[580px] rounded-3xl glass-panel border border-white/10 overflow-hidden shadow-2xl grid-bg group">
-      {/* Background glow centers */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-
-      {/* Header bar overlay */}
+    <div className="relative w-full h-[460px] sm:h-[540px] rounded-2xl bg-[#0d0d10] border border-white/10 overflow-hidden shadow-xl grid-bg-quiet group">
+      {/* Quiet Header bar overlay */}
       <div className="absolute top-4 left-6 right-6 z-20 flex items-center justify-between pointer-events-none">
-        <div className="flex items-center gap-2.5 bg-black/40 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10 text-xs text-white/70 font-mono">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span>LIVING WORLD MODEL • REAL-TIME GRAPH</span>
+        <div className="flex items-center gap-2 bg-[#141418] px-3 py-1 rounded-full border border-white/10 text-xs text-white/60 font-mono">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400/90" />
+          <span>LIVING WORLD MODEL • ORGANIC GRAPH</span>
         </div>
         <div className="hidden sm:flex items-center gap-4 text-[11px] font-mono text-white/40">
-          <span>7 Active Clusters</span>
-          <span>1,420 Linked Context Nodes</span>
+          <span>Recency Edge Decay Active</span>
+          <span>7 Connected Clusters</span>
         </div>
       </div>
 
@@ -138,31 +132,17 @@ export default function LivingWorldModelCanvas() {
               activeNodeId === node.id || activeNodeId === targetId;
 
             return (
-              <g key={`${node.id}-${targetId}`}>
-                <line
-                  x1={`${node.x}%`}
-                  y1={`${node.y}%`}
-                  x2={`${targetNode.x}%`}
-                  y2={`${targetNode.y}%`}
-                  stroke={isHighlighted ? "#c084fc" : "rgba(255,255,255,0.1)"}
-                  strokeWidth={isHighlighted ? "1.75" : "1"}
-                  strokeDasharray={isHighlighted ? "none" : "3 3"}
-                  className="transition-all duration-500"
-                />
-                {isHighlighted && (
-                  <circle
-                    r="2.5"
-                    fill="#e9d5ff"
-                    className="animate-pulse"
-                  >
-                    <animateMotion
-                      path={`M ${node.x * 4} ${node.y * 4} L ${targetNode.x * 4} ${targetNode.y * 4}`}
-                      dur="3s"
-                      repeatCount="indefinite"
-                    />
-                  </circle>
-                )}
-              </g>
+              <line
+                key={`${node.id}-${targetId}`}
+                x1={`${node.x}%`}
+                y1={`${node.y}%`}
+                x2={`${targetNode.x}%`}
+                y2={`${targetNode.y}%`}
+                stroke={isHighlighted ? "#d4a373" : "rgba(255,255,255,0.08)"}
+                strokeWidth={isHighlighted ? "1.5" : "1"}
+                strokeDasharray={isHighlighted ? "none" : "2 2"}
+                className="transition-all duration-300"
+              />
             );
           })
         )}
@@ -182,38 +162,25 @@ export default function LivingWorldModelCanvas() {
               onMouseEnter={() => setActiveNodeId(node.id)}
               style={{ left: `${node.x}%`, top: `${node.y}%` }}
               id={`node-${node.id}`}
-              className="absolute -translate-x-1/2 -translate-y-1/2 group/node focus:outline-none"
+              className="absolute -translate-x-1/2 -translate-y-1/2 focus:outline-none"
             >
-              <div className="relative flex items-center justify-center">
-                {/* Active Outer Pulsing Ring */}
-                {isActive && (
-                  <motion.div
-                    layoutId="activeGlow"
-                    className="absolute -inset-3 rounded-full blur-sm"
-                    style={{ backgroundColor: `${node.color}40` }}
-                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                  />
-                )}
-
-                {/* Node Pill / Icon */}
+              <div
+                className={`relative flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all duration-200 ${
+                  isActive
+                    ? "bg-white/15 text-white border-white/40 scale-105"
+                    : isConnected
+                    ? "bg-white/10 text-white/90 border-white/20"
+                    : "bg-[#121216] text-white/50 border-white/10 hover:border-white/25 hover:text-white"
+                }`}
+              >
                 <div
-                  className={`relative flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all duration-300 ${
-                    isActive
-                      ? "bg-white/15 text-white border-white/40 shadow-lg shadow-purple-500/20 scale-110"
-                      : isConnected
-                      ? "bg-white/10 text-white/90 border-white/20 scale-105"
-                      : "bg-black/60 text-white/50 border-white/10 hover:border-white/30 hover:text-white"
-                  }`}
-                >
-                  <div
-                    className="w-2.5 h-2.5 rounded-full shrink-0"
-                    style={{ backgroundColor: node.color }}
-                  />
-                  <Icon className="w-3.5 h-3.5 shrink-0 opacity-80" />
-                  <span className="text-xs font-medium whitespace-nowrap">
-                    {node.title}
-                  </span>
-                </div>
+                  className="w-2 h-2 rounded-full shrink-0"
+                  style={{ backgroundColor: node.color }}
+                />
+                <Icon className="w-3.5 h-3.5 shrink-0 opacity-70" />
+                <span className="text-xs font-mono whitespace-nowrap">
+                  {node.title}
+                </span>
               </div>
             </button>
           );
@@ -225,30 +192,22 @@ export default function LivingWorldModelCanvas() {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeNode.id}
-            initial={{ opacity: 0, y: 12, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.98 }}
-            transition={{ duration: 0.25 }}
-            className="p-4 rounded-2xl bg-[#090b10]/90 backdrop-blur-xl border border-white/15 shadow-2xl"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="p-4 rounded-xl bg-[#141418] border border-white/15 shadow-xl space-y-2"
           >
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <span
-                  className="px-2 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider font-semibold text-white/90"
-                  style={{ backgroundColor: `${activeNode.color}30`, borderColor: activeNode.color }}
-                >
-                  {activeNode.category}
-                </span>
-                <span className="text-[11px] font-mono text-white/40">
-                  {activeNode.timestamp}
-                </span>
-              </div>
-              <span className="text-[10px] font-mono text-purple-300/80">
-                {activeNode.connections.length} Connected Threads
+            <div className="flex items-center justify-between">
+              <span className="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-medium bg-white/10 text-white/80">
+                {activeNode.category}
+              </span>
+              <span className="text-[11px] font-mono text-white/40">
+                {activeNode.timestamp}
               </span>
             </div>
 
-            <h4 className="text-sm font-semibold text-white mb-1 flex items-center gap-2">
+            <h4 className="text-sm font-medium text-white">
               {activeNode.title}
             </h4>
             <p className="text-xs text-white/70 leading-relaxed font-sans">
@@ -258,10 +217,10 @@ export default function LivingWorldModelCanvas() {
         </AnimatePresence>
       </div>
 
-      {/* Interactive Helper Text */}
-      <div className="absolute bottom-4 right-6 hidden sm:flex items-center gap-2 text-[11px] font-mono text-white/40 pointer-events-none">
-        <Sparkles className="w-3.5 h-3.5 text-purple-400 animate-spin" style={{ animationDuration: "8s" }} />
-        <span>Hover or tap nodes to explore living context</span>
+      {/* Helper text */}
+      <div className="absolute bottom-4 right-6 hidden sm:flex items-center gap-1.5 text-[11px] font-mono text-white/40 pointer-events-none">
+        <Sparkles className="w-3.5 h-3.5 text-amber-400/80" />
+        <span>Click or hover nodes to inspect narrative context</span>
       </div>
     </div>
   );
