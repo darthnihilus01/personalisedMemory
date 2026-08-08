@@ -66,6 +66,13 @@ export default function Navbar({ onOpenManifesto, onScrollToWaitlist }: NavbarPr
             World Model
           </a>
           <a
+            href="#architecture"
+            className="hover:text-white transition-colors duration-200"
+            id="nav-architecture"
+          >
+            Architecture
+          </a>
+          <a
             href="#philosophy"
             className="hover:text-white transition-colors duration-200"
             id="nav-philosophy"

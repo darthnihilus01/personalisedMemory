@@ -35,6 +35,9 @@ export default function Footer({ onOpenManifesto }: FooterProps) {
           <a href="#world-model" className="hover:text-white transition-colors">
             World Model
           </a>
+          <a href="#architecture" className="hover:text-white transition-colors">
+            Architecture
+          </a>
           <a href="#reasoning" className="hover:text-white transition-colors">
             Reasoning
           </a>

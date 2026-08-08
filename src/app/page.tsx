@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ScrollStory from "@/components/ScrollStory";
 import MemoryEngineDiagram from "@/components/MemoryEngineDiagram";
+import TechArchitecture from "@/components/TechArchitecture";
 import PhilosophySection from "@/components/PhilosophySection";
 import FutureQuestions from "@/components/FutureQuestions";
 import WaitlistSection from "@/components/WaitlistSection";
@@ -40,13 +41,16 @@ export default function Home() {
         {/* Section 3: The Living World Model Pipeline */}
         <MemoryEngineDiagram />
 
-        {/* Section 4: Product Philosophy */}
+        {/* Section 4: Technical Architecture & PRD Physics */}
+        <TechArchitecture />
+
+        {/* Section 5: Product Philosophy */}
         <PhilosophySection />
 
-        {/* Section 5: Reasoning vs Search Paradigm */}
+        {/* Section 6: Reasoning vs Search Paradigm */}
         <FutureQuestions />
 
-        {/* Section 6: Founding Waitlist */}
+        {/* Section 7: Founding Waitlist */}
         <WaitlistSection />
       </main>
 
