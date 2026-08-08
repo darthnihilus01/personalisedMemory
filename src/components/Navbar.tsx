@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { BookOpen, ArrowRight, Sparkles, Layout } from "lucide-react";
+import { BookOpen, ArrowRight, Layout } from "lucide-react";
 
 interface NavbarProps {
   onOpenManifesto: () => void;
@@ -30,91 +30,89 @@ export default function Navbar({
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "py-3 bg-[#09090b]/90 backdrop-blur-md border-b border-white/[0.08] shadow-lg shadow-black/50"
+          ? "py-3 bg-[#0b0a12]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-2xl shadow-black/60"
           : "py-5 bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        {/* Brand Mark */}
+        {/* Brand Mark matching reference image */}
         <button
           onClick={() => onToggleViewMode("landing")}
           className="flex items-center gap-3 group text-left"
           id="nav-logo"
         >
-          <div className="w-7 h-7 rounded-full bg-white/10 border border-white/15 flex items-center justify-center transition-all group-hover:border-white/30">
-            <span className="w-2 h-2 rounded-full bg-amber-400/90" />
+          <div className="relative w-8 h-8 rounded-full bg-white/[0.05] border border-white/15 flex items-center justify-center transition-all group-hover:border-purple-500/50">
+            <span className="w-2.5 h-2.5 rounded-full bg-purple-400 animate-pulse" />
           </div>
           <div className="flex flex-col">
-            <span className="text-xs font-semibold tracking-wider uppercase text-white/90 group-hover:text-white transition-colors">
+            <span className="text-xs font-semibold tracking-wider uppercase text-white group-hover:text-purple-300 transition-colors">
               Memory Engine
             </span>
-            <span className="text-[10px] tracking-widest text-white/40 font-mono uppercase">
-              Personal World Model
+            <span className="text-[10px] tracking-widest text-slate-400 font-mono uppercase">
+              World Model v1.0
             </span>
           </div>
         </button>
 
-        {/* View Mode Switcher (Landing vs Interactive Workspace) */}
-        <div className="flex items-center p-1 rounded-xl bg-[#121215] border border-white/[0.08]">
-          <button
-            onClick={() => onToggleViewMode("landing")}
-            className={`px-3 py-1 rounded-lg text-xs font-mono transition-all ${
-              viewMode === "landing"
-                ? "bg-white/10 text-white font-medium shadow-sm"
-                : "text-white/50 hover:text-white"
-            }`}
-          >
-            Overview
-          </button>
-          <button
-            onClick={() => onToggleViewMode("workspace")}
-            className={`px-3 py-1 rounded-lg text-xs font-mono transition-all flex items-center gap-1.5 ${
-              viewMode === "workspace"
-                ? "bg-white/10 text-white font-medium shadow-sm"
-                : "text-white/50 hover:text-white"
-            }`}
-          >
-            <Layout className="w-3 h-3 text-amber-400/90" />
-            <span>Product View</span>
-          </button>
-        </div>
-
-        {/* Navigation Links (Visible in landing mode) */}
-        {viewMode === "landing" && (
-          <nav className="hidden lg:flex items-center gap-7 text-xs font-mono text-white/60">
+        {/* Navigation Links matching reference image */}
+        {viewMode === "landing" ? (
+          <nav className="hidden lg:flex items-center gap-8 text-xs font-medium text-slate-300/80">
             <a href="#story" className="hover:text-white transition-colors" id="nav-story">
-              Story
+              The Story
             </a>
             <a href="#world-model" className="hover:text-white transition-colors" id="nav-world-model">
               World Model
             </a>
-            <a href="#architecture" className="hover:text-white transition-colors" id="nav-architecture">
-              Architecture
-            </a>
             <a href="#philosophy" className="hover:text-white transition-colors" id="nav-philosophy">
               Philosophy
             </a>
+            <a href="#reasoning" className="hover:text-white transition-colors" id="nav-questions">
+              Context vs Search
+            </a>
           </nav>
+        ) : (
+          <div className="flex items-center p-1 rounded-xl bg-[#12111a] border border-white/10">
+            <button
+              onClick={() => onToggleViewMode("landing")}
+              className="px-3.5 py-1 rounded-lg text-xs font-mono text-slate-300 hover:text-white"
+            >
+              Overview & Story
+            </button>
+            <button
+              onClick={() => onToggleViewMode("workspace")}
+              className="px-3.5 py-1 rounded-lg text-xs font-mono bg-purple-500/20 text-purple-200 border border-purple-500/40"
+            >
+              Interactive Product
+            </button>
+          </div>
         )}
 
-        {/* Action Buttons */}
+        {/* Action Buttons matching reference image */}
         <div className="flex items-center gap-3">
+          <button
+            onClick={() => onToggleViewMode(viewMode === "landing" ? "workspace" : "landing")}
+            className="hidden sm:flex items-center gap-1.5 text-xs font-mono text-purple-300 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 hover:bg-purple-500/20 transition-all"
+          >
+            <Layout className="w-3.5 h-3.5" />
+            <span>{viewMode === "landing" ? "Product Mode" : "Overview Mode"}</span>
+          </button>
+
           <button
             onClick={onOpenManifesto}
             id="nav-btn-manifesto"
-            className="hidden sm:flex items-center gap-1.5 text-xs font-mono text-white/70 hover:text-white px-3.5 py-1.5 rounded-full border border-white/10 hover:border-white/20 transition-all"
+            className="hidden sm:flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-slate-300 hover:text-white px-3.5 py-1.5 rounded-full border border-white/15 hover:border-purple-400/40 transition-all"
           >
-            <BookOpen className="w-3.5 h-3.5 text-amber-400/80" />
+            <BookOpen className="w-3.5 h-3.5 text-purple-400" />
             <span>Manifesto</span>
           </button>
 
           <button
             onClick={onScrollToWaitlist}
             id="nav-btn-waitlist"
-            className="inline-flex items-center gap-1.5 text-xs font-mono text-black bg-white hover:bg-zinc-200 px-4 py-1.5 rounded-full transition-all"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-white/10 hover:bg-white/15 px-4 py-1.5 rounded-full border border-white/20 shadow-md backdrop-blur-md transition-all"
           >
-            <span>Waitlist</span>
-            <ArrowRight className="w-3 h-3 text-black/70" />
+            <span>Join Waitlist</span>
+            <ArrowRight className="w-3.5 h-3.5 text-white/70" />
           </button>
         </div>
       </div>

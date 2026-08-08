@@ -28,7 +28,7 @@ const NODES: NodeData[] = [
     connections: ["marcus", "memo_vision", "series_a"],
     snippet: "Decided to pivot from linear task lists into a quiet context model after Marcus highlighted user drift.",
     timestamp: "2 hours ago • Audio Memo",
-    color: "#d4a373", // warm stone
+    color: "#c084fc", // purple accent
   },
   {
     id: "marcus",
@@ -40,7 +40,7 @@ const NODES: NodeData[] = [
     connections: ["atlas", "tokyo_talk"],
     snippet: "Relationship deepened over 3 years. Shared focus on privacy-first offline models.",
     timestamp: "Continuous World Model update",
-    color: "#f4f4f5", // zinc white
+    color: "#ec4899", // pink
   },
   {
     id: "memo_vision",
@@ -52,7 +52,7 @@ const NODES: NodeData[] = [
     connections: ["atlas", "philosophy_time"],
     snippet: "'Humans don't lose memories. They lose context.' Recorded walking home.",
     timestamp: "Yesterday at 11:42 PM",
-    color: "#a1a1aa", // muted zinc
+    color: "#3b82f6", // blue
   },
   {
     id: "tokyo_talk",
@@ -64,7 +64,7 @@ const NODES: NodeData[] = [
     connections: ["marcus", "philosophy_time"],
     snippet: "Walks through Nezu Museum grounds. Shifted view on organic, non-linear software.",
     timestamp: "Nov 2025 • 8 Linked Memories",
-    color: "#d4a373",
+    color: "#f59e0b", // amber
   },
   {
     id: "philosophy_time",
@@ -76,7 +76,7 @@ const NODES: NodeData[] = [
     connections: ["memo_vision", "tokyo_talk", "sarah"],
     snippet: "Synthesis: Search retrieves words. Reasoning over living context retrieves true intent.",
     timestamp: "Evolving Synthesis",
-    color: "#e4e4e7",
+    color: "#34d399", // mint
   },
   {
     id: "sarah",
@@ -88,7 +88,7 @@ const NODES: NodeData[] = [
     connections: ["philosophy_time", "memo_vision"],
     snippet: "Discussed family oral histories and how memory fades without continuous narrative context.",
     timestamp: "3 days ago • Call Transcript",
-    color: "#f4f4f5",
+    color: "#f43f5e", // rose
   },
   {
     id: "series_a",
@@ -100,7 +100,7 @@ const NODES: NodeData[] = [
     connections: ["atlas"],
     snippet: "Synthesized product promise: 'Never lose context again.'",
     timestamp: "Updated Today",
-    color: "#a1a1aa",
+    color: "#818cf8", // indigo
   },
 ];
 
@@ -109,16 +109,16 @@ export default function LivingWorldModelCanvas() {
   const activeNode = NODES.find((n) => n.id === activeNodeId) || NODES[0];
 
   return (
-    <div className="relative w-full h-[460px] sm:h-[540px] rounded-2xl bg-[#0d0d10] border border-white/10 overflow-hidden shadow-xl grid-bg-quiet group">
-      {/* Quiet Header bar overlay */}
+    <div className="relative w-full h-[460px] sm:h-[540px] rounded-2xl bg-[#0e0d16] border border-white/10 overflow-hidden shadow-2xl grid-bg-quiet group">
+      {/* Header bar overlay matching reference image */}
       <div className="absolute top-4 left-6 right-6 z-20 flex items-center justify-between pointer-events-none">
-        <div className="flex items-center gap-2 bg-[#141418] px-3 py-1 rounded-full border border-white/10 text-xs text-white/60 font-mono">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-400/90" />
-          <span>LIVING WORLD MODEL • ORGANIC GRAPH</span>
+        <div className="flex items-center gap-2 bg-[#161522] px-3.5 py-1.5 rounded-full border border-white/10 text-xs text-white/70 font-mono">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="tracking-wide">LIVING WORLD MODEL • REAL-TIME GRAPH</span>
         </div>
-        <div className="hidden sm:flex items-center gap-4 text-[11px] font-mono text-white/40">
-          <span>Recency Edge Decay Active</span>
-          <span>7 Connected Clusters</span>
+        <div className="hidden sm:flex items-center gap-4 text-[11px] font-mono text-slate-400">
+          <span>7 Active Clusters</span>
+          <span>1,420 Linked Context Nodes</span>
         </div>
       </div>
 
@@ -138,9 +138,9 @@ export default function LivingWorldModelCanvas() {
                 y1={`${node.y}%`}
                 x2={`${targetNode.x}%`}
                 y2={`${targetNode.y}%`}
-                stroke={isHighlighted ? "#d4a373" : "rgba(255,255,255,0.08)"}
+                stroke={isHighlighted ? "#c084fc" : "rgba(255,255,255,0.08)"}
                 strokeWidth={isHighlighted ? "1.5" : "1"}
-                strokeDasharray={isHighlighted ? "none" : "2 2"}
+                strokeDasharray={isHighlighted ? "none" : "3 3"}
                 className="transition-all duration-300"
               />
             );
@@ -167,10 +167,10 @@ export default function LivingWorldModelCanvas() {
               <div
                 className={`relative flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all duration-200 ${
                   isActive
-                    ? "bg-white/15 text-white border-white/40 scale-105"
+                    ? "bg-white/15 text-white border-purple-400/50 scale-105 shadow-lg shadow-purple-500/20"
                     : isConnected
                     ? "bg-white/10 text-white/90 border-white/20"
-                    : "bg-[#121216] text-white/50 border-white/10 hover:border-white/25 hover:text-white"
+                    : "bg-[#141320] text-slate-300 border-white/10 hover:border-purple-400/30 hover:text-white"
                 }`}
               >
                 <div
@@ -196,13 +196,16 @@ export default function LivingWorldModelCanvas() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="p-4 rounded-xl bg-[#141418] border border-white/15 shadow-xl space-y-2"
+            className="p-4 rounded-xl bg-[#141320] border border-purple-500/20 shadow-2xl space-y-2"
           >
             <div className="flex items-center justify-between">
-              <span className="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-medium bg-white/10 text-white/80">
+              <span
+                className="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-medium text-purple-200"
+                style={{ backgroundColor: `${activeNode.color}25` }}
+              >
                 {activeNode.category}
               </span>
-              <span className="text-[11px] font-mono text-white/40">
+              <span className="text-[11px] font-mono text-slate-400">
                 {activeNode.timestamp}
               </span>
             </div>
@@ -210,7 +213,7 @@ export default function LivingWorldModelCanvas() {
             <h4 className="text-sm font-medium text-white">
               {activeNode.title}
             </h4>
-            <p className="text-xs text-white/70 leading-relaxed font-sans">
+            <p className="text-xs text-slate-300 leading-relaxed font-sans">
               "{activeNode.snippet}"
             </p>
           </motion.div>
@@ -218,8 +221,8 @@ export default function LivingWorldModelCanvas() {
       </div>
 
       {/* Helper text */}
-      <div className="absolute bottom-4 right-6 hidden sm:flex items-center gap-1.5 text-[11px] font-mono text-white/40 pointer-events-none">
-        <Sparkles className="w-3.5 h-3.5 text-amber-400/80" />
+      <div className="absolute bottom-4 right-6 hidden sm:flex items-center gap-1.5 text-[11px] font-mono text-slate-400 pointer-events-none">
+        <Sparkles className="w-3.5 h-3.5 text-purple-400" />
         <span>Click or hover nodes to inspect narrative context</span>
       </div>
     </div>
