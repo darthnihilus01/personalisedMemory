@@ -19,60 +19,60 @@ interface ComparisonItem {
 
 const COMPARISONS: ComparisonItem[] = [
   {
-    id: "marcus",
-    category: "Relationship Evolution",
-    oldQuery: "When did I meet Marcus?",
-    oldResult: "Found 1 calendar invite: 'Coffee with Marcus - March 14, 2023'",
-    engineQuery: "How has my relationship with Marcus evolved?",
+    id: "friendship",
+    category: "Friendship Over Time",
+    oldQuery: "When did I last see Priya?",
+    oldResult: "Found 3 entries mentioning 'Priya': Oct 12, Nov 4, Jan 19.",
+    engineQuery: "How has my friendship with Priya changed since she moved cities?",
     engineReasoning: {
       synthesis:
-        "Your dynamic shifted from cautious technical collaborators in 2023 to deep strategic alignment during the November 2025 Tokyo trip. Key pivot: In Voice Memo #42, Marcus challenged your linear roadmap, prompting the Memory Engine paradigm.",
+        "You talk less frequently (dropping from weekly dinners to a 45-minute monthly Sunday call), but conversations are significantly longer and deeper. In your last 3 voice notes, you noted feeling closer despite the distance, especially after supporting each other through her career transition.",
       sources: [
-        "March 2023 Coffee Transcript",
-        "Nov 2025 Tokyo Architecture Walk Memo",
-        "14 Co-authored Strategic Notes",
+        "Monthly Sunday Catch-ups",
+        "Oct 12 Visit Reflection",
+        "3 Voice Notes across Fall entries",
       ],
-      insight: "Trust rating & strategic synergy evolved to 95% alignment.",
+      insight: "Communication volume dropped ~60%, but emotional depth and mutual support increased.",
     },
   },
   {
-    id: "atlas",
-    category: "Project & Life Shifts",
-    oldQuery: "Find launch notes",
-    oldResult: "Found 18 files with keyword 'launch': launch_v1_draft.doc, notes.txt...",
-    engineQuery: "What changed me during the Atlas project?",
+    id: "work-stress",
+    category: "Work Stress",
+    oldQuery: "Find my meeting notes from last month",
+    oldResult: "Found 18 files with keyword 'meeting': 1on1_notes.txt, standup_oct.doc, sprint_retro.md...",
+    engineQuery: "What's actually been stressing me out about work lately?",
     engineReasoning: {
       synthesis:
-        "The Atlas project forced a fundamental shift from productivity metrics to personal autonomy. After 3 midnight voice notes recorded during burnout, you abandoned feature bloat in favor of a quiet background world model.",
+        "Across 9 voice notes over the last 6 weeks, your primary stress isn't the workload itself—it's waiting on cross-team approvals and feeling out of sync with product priorities. You mentioned feeling energized during solo build days, but drained on Tuesdays and Thursdays after alignment meetings.",
       sources: [
-        "August 2025 Midnight Voice Memo",
-        "Atlas Roadmap V2 Deletion Log",
-        "Reflective Journal Entry #88",
+        "Weekly Tuesday Reflection Memos",
+        "Sprint Retro Voice Log",
+        "Nov 14 Evening Note",
       ],
-      insight: "Shifted core motivation from external metrics to internal clarity.",
+      insight: "Bottlenecked approvals—not technical workload—is the single recurring drain.",
     },
   },
   {
-    id: "sarah",
-    category: "Subtle Human Context",
-    oldQuery: "Where is the gift list?",
-    oldResult: "No matching documents found for 'gift list'.",
-    engineQuery: "What subtle preferences has Sarah mentioned across all our walks?",
+    id: "family",
+    category: "Family & Subtle Context",
+    oldQuery: "When did I last call my mom?",
+    oldResult: "No matching entries found for 'call mom'.",
+    engineQuery: "What has my mom been going through the last few months?",
     engineReasoning: {
       synthesis:
-        "Sarah mentioned 3 key preferences over 8 audio memos: vintage Japanese ceramics (noted during Nezu Museum walk), rare print typography books, and filter coffee roast preferences from SF.",
+        "You never kept a dedicated note about your mom, but in passing across 7 daily entries you mentioned: she had physical therapy for her knee in September, started volunteering at the local library, and was anxious about Aunt Linda's move in November.",
       sources: [
-        "SF Walk Audio Memo • Oct 2025",
-        "Family Sunday Call Transcript",
-        "Nezu Museum Audio Note",
+        "Sunday Drive Voice Memo",
+        "September Family Call Reflection",
+        "Post-Dinner Voice Note #22",
       ],
-      insight: "Prefers experiences & artisan craft over generic material gifts.",
+      insight: "Recovered 3 major life updates mentioned naturally in passing across 7 entries.",
     },
   },
 ];
 
 export default function FutureQuestions() {
-  const [activeId, setActiveId] = useState<string>("marcus");
+  const [activeId, setActiveId] = useState<string>("friendship");
   const activeComparison = COMPARISONS.find((c) => c.id === activeId) || COMPARISONS[0];
 
   return (

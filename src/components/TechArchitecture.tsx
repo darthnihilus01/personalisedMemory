@@ -23,61 +23,61 @@ interface FeatureCard {
 const PRD_FEATURES: FeatureCard[] = [
   {
     id: "entity-resolution",
-    badge: "PRD Spec 3.3 • Entity Graph",
-    title: "Zero-Tag Entity Resolution",
-    subtitle: "Automatic deduplication across years of conversation",
+    badge: "Effortless Organization",
+    title: "Automatic People & Place Connections",
+    subtitle: "Connects everyone and everything without folders or manual tagging",
     icon: GitMerge,
     description:
-      "Manual tagging always fails. The engine automatically runs Named Entity Recognition (NER) and fuzzy context disambiguation—resolving 'Marcus', 'M', and 'co-founder' to the same canonical graph entity without asking you to organize a single folder.",
+      "Manual tagging always fails. Every person, place, and event you mention gets connected automatically — you never tag or organize anything. If you mention 'Priya', 'P', or 'my friend from lunch', it knows it's the same Priya, linking every memory without you lifting a finger.",
     prdSpecs: [
-      { label: "Entity Matcher", value: "Fuzzy alias mapping + contextual co-occurrence" },
-      { label: "Disambiguation", value: "Lightweight single-prompt resolution" },
-      { label: "User Overhead", value: "0 manual tags, zero folders" },
+      { label: "People & Places", value: "Automatically recognized from natural speech" },
+      { label: "Nickname Linking", value: "Connects first names, nicknames, and context" },
+      { label: "Manual Work", value: "0 tags, 0 folders, 0 organizing" },
     ],
     interactiveDemo: { type: "entity" },
   },
   {
     id: "security-physics",
-    badge: "PRD Spec 7.0 • Privacy Physics",
-    title: "Private-by-Physics Architecture",
-    subtitle: "Local on-device ASR & per-user KMS vector isolation",
+    badge: "Privacy First",
+    title: "Private by Design",
+    subtitle: "Voice transcription happens on your device • 100% private memory",
     icon: ShieldCheck,
     description:
-      "Privacy is built as architectural physics, not policy promises. Raw speech audio is transcribed using on-device Whisper models before leaving your device. Vector stores are partitioned into isolated per-user namespaces with hardware KMS encryption keys.",
+      "Your personal thoughts and life reflections belong to you alone. Voice notes are transcribed locally on your device, your private memories are encrypted with dedicated keys, and your words are never used to train public AI models.",
     prdSpecs: [
-      { label: "On-Device ASR", value: "Local Whisper speech-to-text" },
-      { label: "Key Management", value: "Per-user hardware KMS keys" },
-      { label: "Model Training", value: "0% user content used for training" },
+      { label: "Voice Processing", value: "Transcribed locally on your device" },
+      { label: "Data Encryption", value: "Private hardware-level encryption keys" },
+      { label: "AI Training", value: "0% of your diary is ever used for model training" },
     ],
     interactiveDemo: { type: "security" },
   },
   {
     id: "writing-fingerprint",
-    badge: "PRD Spec 3.6 • Style Compiler",
-    title: "Writing Style Fingerprint",
-    subtitle: "Compilation that sounds like you, not generic AI prose",
+    badge: "Daily Compilation",
+    title: "Compiled in Your Exact Voice",
+    subtitle: "Cleaned up into a daily entry that sounds like you wrote it",
     icon: PenTool,
     description:
-      "A background compilation service aggregates fragmented daily audio notes and compiles them into a cohesive diary entry. The engine learns your personal vocabulary fingerprint, sentence cadence, and phrasing over time.",
+      "At the end of each day, the app gathers your quick audio fragments and compiles them into a single, beautifully written diary page. It learns your unique phrasing, vocabulary, and rhythm — never making things up or sounding like generic AI.",
     prdSpecs: [
-      { label: "Compilation Job", value: "Automated end-of-day batch" },
-      { label: "Tone Adaptation", value: "Learned vocabulary & sentence length profile" },
-      { label: "Constraint", value: "100% Hallucination-free preservation" },
+      { label: "Daily Compilation", value: "Automatic end-of-day summary" },
+      { label: "Voice Matching", value: "Uses your real phrasing and vocabulary" },
+      { label: "Accuracy Guarantee", value: "Only includes facts you actually mentioned" },
     ],
     interactiveDemo: { type: "style" },
   },
   {
     id: "graph-physics",
-    badge: "PRD Spec 4.0 • Memory Brain",
-    title: "Force-Directed Graph Physics",
-    subtitle: "Obsidian-style layout with recency edge-fading",
+    badge: "The Memory Brain",
+    title: "The Memory Brain (Visual Life Map)",
+    subtitle: "A map of your life, built without you doing any of the mapping",
     icon: Layers,
     description:
-      "Inspired by force-directed physics layouts, nodes represent entities while weighted edges reflect mention frequency and emotional co-occurrence. Older, unrenewed connections gracefully fade over time, ensuring your graph reflects your current life.",
+      "The Memory Brain. Every person, place, and event you mention gets connected automatically — you never tag or organize anything. Search a person's name and see everything you've ever said involving them, in order. Search an event and see everyone who was part of it. It looks like a map because that's what it is: a map of your life, built without you doing any of the mapping.\n\ne.g., Search 'Priya' → every lunch, every conversation, every mention of her, going back as far as you've been using the app.",
     prdSpecs: [
-      { label: "Graph Engine", value: "Force-directed physics with draggable nodes" },
-      { label: "Edge Weight", value: "Frequency + Recency temporal decay" },
-      { label: "Zoom Planes", value: "Whole-life → Time-windowed → Local entity" },
+      { label: "Visual Memory Map", value: "Connects people, milestones, and places" },
+      { label: "Recency Focus", value: "Current relationships and active projects stay centered" },
+      { label: "Search Anything", value: "Look up any person to see your full history together" },
     ],
     interactiveDemo: { type: "physics" },
   },
@@ -97,22 +97,21 @@ export default function TechArchitecture() {
         <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-20">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-white/10 text-xs font-mono uppercase tracking-widest text-purple-400 mb-4">
             <Cpu className="w-3.5 h-3.5" />
-            <span>Technical Architecture Specs</span>
+            <span>Behind the Technology</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-light text-white leading-tight tracking-tight mb-6">
-            Invisible sophistication.{" "}
-            <span className="font-serif italic text-gradient-purple block sm:inline">
-              Zero manual overhead.
+            Engineered for clarity,{" "}
+            <span className="font-serif italic text-purple-300 block sm:inline">
+              built for absolute privacy.
             </span>
           </h2>
-          <p className="text-base sm:text-lg text-white/60 leading-relaxed font-normal">
-            If a memory system requires manual tagging, folder management, or keyword indexing, it has failed.
-            Here is how the engine operates behind the scenes.
+          <p className="text-base text-white/60 leading-relaxed font-normal">
+            Every feature is designed so you can talk naturally while the app does the heavy lifting in the background.
           </p>
         </div>
 
-        {/* Navigation Tabs */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        {/* Tab Navigation */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-12">
           {PRD_FEATURES.map((feature) => {
             const Icon = feature.icon;
             const isActive = feature.id === activeTabId;
@@ -120,41 +119,28 @@ export default function TechArchitecture() {
               <button
                 key={feature.id}
                 onClick={() => setActiveTabId(feature.id)}
-                id={`tech-tab-${feature.id}`}
-                className={`p-5 rounded-2xl text-left border transition-all duration-300 flex flex-col justify-between ${
+                id={`tab-feature-${feature.id}`}
+                className={`p-4 rounded-xl text-left transition-all border ${
                   isActive
-                    ? "bg-white/[0.08] border-purple-500/50 shadow-lg shadow-purple-950/30 scale-[1.02]"
-                    : "glass-panel border-white/[0.08] hover:border-white/20 hover:bg-white/[0.03]"
+                    ? "bg-white/[0.08] border-white/30 shadow-lg scale-[1.02]"
+                    : "bg-white/[0.02] border-white/10 hover:bg-white/[0.04] text-white/70"
                 }`}
               >
-                <div className="flex items-center justify-between mb-4">
-                  <div
-                    className={`w-9 h-9 rounded-xl flex items-center justify-center border ${
-                      isActive
-                        ? "bg-purple-500 text-white border-purple-400"
-                        : "bg-white/[0.05] text-white/60 border-white/10"
-                    }`}
-                  >
-                    <Icon className="w-4 h-4" />
-                  </div>
-                  {isActive && (
-                    <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
-                  )}
-                </div>
-                <div>
-                  <span className="text-[10px] font-mono text-purple-400 block mb-1">
+                <div className="flex items-center gap-2.5 mb-2">
+                  <Icon className={`w-4 h-4 ${isActive ? "text-purple-400" : "text-white/40"}`} />
+                  <span className="text-[10px] font-mono text-purple-300 uppercase tracking-widest">
                     {feature.badge}
                   </span>
-                  <h3 className="text-sm font-semibold text-white">
-                    {feature.title}
-                  </h3>
+                </div>
+                <div className={`text-sm font-medium ${isActive ? "text-white" : "text-white/80"}`}>
+                  {feature.title}
                 </div>
               </button>
             );
           })}
         </div>
 
-        {/* Feature Interactive Breakdown Card */}
+        {/* Feature Detail Inspector Card */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeFeature.id}
@@ -162,26 +148,32 @@ export default function TechArchitecture() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.3 }}
-            className="glass-panel p-8 sm:p-12 rounded-3xl border border-white/15 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+            className="panel-quiet p-8 sm:p-12 rounded-3xl border border-white/15 bg-[#0b0d13] shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
           >
-            {/* Left specs detail */}
+            {/* Left Content */}
             <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-xs font-mono text-purple-300">
+              <div className="inline-flex items-center gap-2 text-xs font-mono text-purple-400">
+                <activeFeature.icon className="w-4 h-4" />
                 <span>{activeFeature.badge}</span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-light text-white leading-snug">
-                {activeFeature.subtitle}
-              </h3>
-              <p className="text-sm sm:text-base text-white/70 leading-relaxed font-sans">
+
+              <div>
+                <h3 className="text-2xl sm:text-3xl font-light text-white mb-2">
+                  {activeFeature.title}
+                </h3>
+                <p className="text-sm font-mono text-white/50">{activeFeature.subtitle}</p>
+              </div>
+
+              <p className="text-sm text-white/80 leading-relaxed font-sans whitespace-pre-line">
                 {activeFeature.description}
               </p>
 
-              {/* PRD Specs List */}
-              <div className="space-y-3 pt-4 border-t border-white/10">
+              {/* Specs List */}
+              <div className="space-y-2 pt-2 border-t border-white/[0.08]">
                 {activeFeature.prdSpecs.map((spec, i) => (
-                  <div key={i} className="flex items-center justify-between text-xs font-mono">
-                    <span className="text-white/40">{spec.label}</span>
-                    <span className="text-purple-300 font-medium">{spec.value}</span>
+                  <div key={i} className="flex items-center justify-between text-xs py-1">
+                    <span className="font-mono text-white/50">{spec.label}</span>
+                    <span className="font-mono text-purple-200 text-right">{spec.value}</span>
                   </div>
                 ))}
               </div>
@@ -193,22 +185,22 @@ export default function TechArchitecture() {
                 {activeFeature.interactiveDemo.type === "entity" && (
                   <div className="space-y-3">
                     <div className="text-xs font-mono text-white/40 uppercase tracking-widest flex items-center justify-between">
-                      <span>Alias Normalization Pipeline</span>
-                      <span className="text-emerald-400">Auto-Resolved</span>
+                      <span>Automatic People Connection</span>
+                      <span className="text-emerald-400">Auto-Linked</span>
                     </div>
                     <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10 text-xs font-mono text-white/70">
-                      Raw Transcript Mentions: "M", "Marcus from work", "Amit", "co-founder"
+                      Raw Mentions: "Priya", "P", "my friend from lunch"
                     </div>
                     <div className="flex items-center justify-center py-1">
                       <ArrowUpRight className="w-4 h-4 text-purple-400 rotate-90" />
                     </div>
                     <div className="p-4 rounded-xl bg-purple-950/40 border border-purple-500/40 text-xs font-mono text-purple-200 space-y-1">
                       <div className="flex items-center justify-between font-bold">
-                        <span>Canonical Entity ID: #ENT-8492</span>
-                        <span className="text-[10px] bg-purple-500/20 px-2 py-0.5 rounded text-purple-300">PERSON</span>
+                        <span>Connected Person Profile</span>
+                        <span className="text-[10px] bg-purple-500/20 px-2 py-0.5 rounded text-purple-300">FRIEND</span>
                       </div>
-                      <div>Canonical Name: Marcus (Co-founder)</div>
-                      <div className="text-white/50 text-[11px]">Aliases: ["M", "Marcus", "co-founder"] • 48 linked fragments</div>
+                      <div>Priya (Close Friend)</div>
+                      <div className="text-white/50 text-[11px]">All mentions linked • 14 conversations across 2 years</div>
                     </div>
                   </div>
                 )}
@@ -216,21 +208,21 @@ export default function TechArchitecture() {
                 {activeFeature.interactiveDemo.type === "security" && (
                   <div className="space-y-3">
                     <div className="text-xs font-mono text-white/40 uppercase tracking-widest flex items-center justify-between">
-                      <span>Defense-In-Depth Security Pipeline</span>
+                      <span>Private Architecture</span>
                       <span className="text-emerald-400">Encrypted</span>
                     </div>
                     <div className="space-y-2">
                       <div className="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-xs font-mono text-emerald-200 flex items-center gap-2">
                         <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                        <span>On-Device Whisper ASR: 0 bytes of raw voice leave device</span>
+                        <span>On-Device Audio Transcription: Spoken audio stays on your phone</span>
                       </div>
                       <div className="p-3 rounded-xl bg-purple-950/30 border border-purple-500/30 text-xs font-mono text-purple-200 flex items-center gap-2">
                         <Lock className="w-4 h-4 text-purple-400" />
-                        <span>Hardware KMS Key: AES-256 Per-User Vector Namespace</span>
+                        <span>Encrypted Storage: Protected by your private device keys</span>
                       </div>
                       <div className="p-3 rounded-xl bg-blue-950/30 border border-blue-500/30 text-xs font-mono text-blue-200 flex items-center gap-2">
                         <EyeOff className="w-4 h-4 text-blue-400" />
-                        <span>Architectural Guarantee: Zero Model Fine-Tuning on User Content</span>
+                        <span>Privacy Guarantee: Zero user memories used for AI model training</span>
                       </div>
                     </div>
                   </div>
@@ -239,17 +231,17 @@ export default function TechArchitecture() {
                 {activeFeature.interactiveDemo.type === "style" && (
                   <div className="space-y-3">
                     <div className="text-xs font-mono text-white/40 uppercase tracking-widest flex items-center justify-between">
-                      <span>End-of-Day Style Compilation</span>
-                      <span className="text-purple-400">Learned Tone Profile</span>
+                      <span>End-of-Day Diary Compilation</span>
+                      <span className="text-purple-400">Your Voice</span>
                     </div>
                     <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10 text-xs font-mono text-white/60">
-                      Raw Audio Fragments (3): Spoken at 8 AM, 2 PM, 11 PM
+                      Raw Voice Notes (3): Spoken at 9 AM, 1:30 PM, 6:45 PM
                     </div>
                     <div className="p-4 rounded-xl bg-gradient-to-br from-purple-950/30 to-black border border-purple-500/30 text-xs text-white/90 font-serif italic leading-relaxed">
-                      "November 14th — A quiet breakthrough on the architecture. Marcus and I realized that filing systems are dead. We spent the walk through Nezu discussing how memory should feel organic, like Obsidian graph physics."
+                      "Today started a bit rough — woke up late and missed the gym again. Had lunch with Priya and she told me she's finally quitting her job, which made me really happy for her. My meeting with my manager went well in the afternoon, and I got good feedback on the project."
                     </div>
                     <div className="text-[10px] font-mono text-emerald-400">
-                      ✓ Style Match: 98.4% vocabulary fingerprint alignment
+                      ✓ Cleaned up and compiled without losing your actual words
                     </div>
                   </div>
                 )}
@@ -257,25 +249,28 @@ export default function TechArchitecture() {
                 {activeFeature.interactiveDemo.type === "physics" && (
                   <div className="space-y-3">
                     <div className="text-xs font-mono text-white/40 uppercase tracking-widest flex items-center justify-between">
-                      <span>Obsidian-Style Force Physics</span>
-                      <span className="text-amber-400">Recency Edge Fading</span>
+                      <span>Visual Life Map</span>
+                      <span className="text-amber-400">The Memory Brain</span>
                     </div>
                     <div className="p-4 rounded-xl bg-black/60 border border-white/10 space-y-2">
                       <div className="flex items-center justify-between text-xs font-mono">
-                        <span className="text-white">Marcus (Co-founder)</span>
-                        <span className="text-purple-400">Weight: 98 • Active Edge</span>
+                        <span className="text-white">Priya (Close Friend)</span>
+                        <span className="text-purple-400">14 Linked Memories • Active</span>
                       </div>
                       <div className="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
                         <div className="w-[95%] h-full bg-purple-500 rounded-full" />
                       </div>
 
                       <div className="flex items-center justify-between text-xs font-mono pt-2">
-                        <span className="text-white/50">Old Client Project (2023)</span>
-                        <span className="text-white/30">Weight: 12 • Faded Edge</span>
+                        <span className="text-white/70">Team Project Milestone</span>
+                        <span className="text-purple-400/80">6 Linked Memories • Recent</span>
                       </div>
                       <div className="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
-                        <div className="w-[15%] h-full bg-white/20 rounded-full" />
+                        <div className="w-[65%] h-full bg-purple-400/60 rounded-full" />
                       </div>
+                    </div>
+                    <div className="text-[11px] font-mono text-amber-300/90 pt-1">
+                      Search "Priya" → every lunch, conversation, and mention in order.
                     </div>
                   </div>
                 )}

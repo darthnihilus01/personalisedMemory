@@ -19,93 +19,81 @@ interface NodeData {
 
 const NODES: NodeData[] = [
   {
-    id: "atlas",
-    title: "Atlas Architecture Shift",
-    category: "Project",
-    icon: Compass,
+    id: "priya_lunch",
+    title: "Lunch with Priya",
+    category: "Voice Note",
+    icon: Mic,
     x: 48,
     y: 35,
-    connections: ["marcus", "memo_vision", "series_a"],
-    snippet: "Decided to pivot from linear task lists into a quiet context model after Marcus highlighted user drift.",
-    timestamp: "2 hours ago • Audio Memo",
+    connections: ["priya", "career_pivot", "diary_oct14"],
+    snippet: "Priya told me she's finally quitting her job to start her business. Really happy for her.",
+    timestamp: "Today at 1:30 PM • 45s memo",
     color: "#c084fc", // purple accent
   },
   {
-    id: "marcus",
-    title: "Marcus (Co-founder)",
+    id: "priya",
+    title: "Priya (Close Friend)",
     category: "Relationship",
     icon: Users,
     x: 25,
     y: 45,
-    connections: ["atlas", "tokyo_talk"],
-    snippet: "Relationship deepened over 3 years. Shared focus on privacy-first offline models.",
-    timestamp: "Continuous World Model update",
+    connections: ["priya_lunch", "career_pivot"],
+    snippet: "14 conversations linked across 2 years. Regular catch-ups and support through career changes.",
+    timestamp: "Connected automatically",
     color: "#ec4899", // pink
   },
   {
-    id: "memo_vision",
-    title: "Late Night Memo #42",
-    category: "Voice Note",
-    icon: Mic,
+    id: "diary_oct14",
+    title: "Daily Diary — Oct 14",
+    category: "Life Event",
+    icon: Sparkles,
     x: 72,
     y: 28,
-    connections: ["atlas", "philosophy_time"],
-    snippet: "'Humans don't lose memories. They lose context.' Recorded walking home.",
-    timestamp: "Yesterday at 11:42 PM",
+    connections: ["priya_lunch", "mom_call"],
+    snippet: "Morning started slow, but lunch with Priya and the afternoon project review went great.",
+    timestamp: "Compiled at 11:00 PM",
     color: "#3b82f6", // blue
   },
   {
-    id: "tokyo_talk",
-    title: "Tokyo Architecture Retreat",
-    category: "Life Event",
-    icon: Sparkles,
-    x: 18,
-    y: 72,
-    connections: ["marcus", "philosophy_time"],
-    snippet: "Walks through Nezu Museum grounds. Shifted view on organic, non-linear software.",
-    timestamp: "Nov 2025 • 8 Linked Memories",
-    color: "#f59e0b", // amber
-  },
-  {
-    id: "philosophy_time",
-    title: "Context vs Search",
-    category: "Insight",
-    icon: Cpu,
-    x: 55,
-    y: 78,
-    connections: ["memo_vision", "tokyo_talk", "sarah"],
-    snippet: "Synthesis: Search retrieves words. Reasoning over living context retrieves true intent.",
-    timestamp: "Evolving Synthesis",
-    color: "#34d399", // mint
-  },
-  {
-    id: "sarah",
-    title: "Sarah (Sister)",
+    id: "mom_call",
+    title: "Sunday Call with Mom",
     category: "Relationship",
     icon: Heart,
     x: 82,
     y: 65,
-    connections: ["philosophy_time", "memo_vision"],
-    snippet: "Discussed family oral histories and how memory fades without continuous narrative context.",
-    timestamp: "3 days ago • Call Transcript",
+    connections: ["diary_oct14", "mom"],
+    snippet: "Mom sounded really relaxed talking about her knee recovery and library volunteering.",
+    timestamp: "Last Sunday • 2 min reflection",
     color: "#f43f5e", // rose
   },
   {
-    id: "series_a",
-    title: "Founding Story Arc",
+    id: "career_pivot",
+    title: "Career & Ambitions",
     category: "Goal",
     icon: Activity,
-    x: 78,
-    y: 82,
-    connections: ["atlas"],
-    snippet: "Synthesized product promise: 'Never lose context again.'",
+    x: 18,
+    y: 72,
+    connections: ["priya", "priya_lunch"],
+    snippet: "Tracking long-term work milestones and feedback from team reviews.",
     timestamp: "Updated Today",
-    color: "#818cf8", // indigo
+    color: "#f59e0b", // amber
+  },
+  {
+    id: "mom",
+    title: "Mom (Family Core)",
+    category: "Relationship",
+    icon: Heart,
+    x: 55,
+    y: 78,
+    connections: ["mom_call"],
+    snippet: "28 conversations recorded. Weekly check-ins and family updates.",
+    timestamp: "Family Core",
+    color: "#34d399", // mint
   },
 ];
 
 export default function LivingWorldModelCanvas() {
-  const [activeNodeId, setActiveNodeId] = useState<string>("atlas");
+  const [activeNodeId, setActiveNodeId] = useState<string>("priya_lunch");
   const activeNode = NODES.find((n) => n.id === activeNodeId) || NODES[0];
 
   return (

@@ -22,83 +22,83 @@ const STAGES: PipelineStage[] = [
     id: "voice",
     name: "Voice Notes",
     icon: Mic,
-    description: "Raw unstructured spoken thoughts, audio memos, and casual call transcripts.",
+    description: "Casual spoken thoughts, commute reflections, and quick audio memos captured in the moment.",
     exampleData: {
-      raw: "3 min audio memo: 'Discussed Atlas pivot with Marcus walking in SF.'",
-      transformation: "On-Device Whisper ASR + self-correction pass",
-      modelState: "Extracted: Marcus (Person), Atlas (Project), Pivot (Decision)",
+      raw: "30-sec memo: 'Had lunch with Priya, she told me she is quitting her job.'",
+      transformation: "On-device transcription + live self-correction",
+      modelState: "Extracted: Priya (Person), Career Change (Topic), Lunch (Event)",
     },
     color: "#f4f4f5",
   },
   {
     id: "memories",
-    name: "Memories",
+    name: "Connected Memories",
     icon: Brain,
-    description: "Atomic contextual nodes anchored with temporal, spatial, and emotional metadata.",
+    description: "Individual moments automatically linked with dates, people, and how you were feeling.",
     exampleData: {
-      raw: "Isolated event node created: SF Walk • Pivot Thesis • Nov 2025",
-      transformation: "Cross-referencing with past project notes",
-      modelState: "Contextual Node #1,482 mapped into memory graph",
+      raw: "Entry saved: Lunch with Priya • Tuesday afternoon",
+      transformation: "Connecting to earlier mentions of Priya from past entries",
+      modelState: "Linked to 14 past conversations and memories with Priya",
     },
     color: "#d4a373",
   },
   {
     id: "relationships",
-    name: "Relationships",
+    name: "People & Relationships",
     icon: Heart,
-    description: "Evolving dynamics with people—how trust, shared work, and connections change over years.",
+    description: "Follows how friendships, family connections, and work relationships evolve over months and years.",
     exampleData: {
-      raw: "Marcus profile updated: Co-founder • Shared 3-year vision",
-      transformation: "Tracking alignment shifts across 40+ conversations",
-      modelState: "Relationship Model: Deep alignment on product philosophy",
+      raw: "Priya profile updated with career transition notes",
+      transformation: "Connecting 2 years of coffee chats, moving cities, and new projects",
+      modelState: "Timeline: Transitioned from co-worker in 2023 to close confidant",
     },
     color: "#e4e4e7",
   },
   {
     id: "projects",
-    name: "Projects",
+    name: "Work & Ambitions",
     icon: Briefcase,
-    description: "Living focus areas that link deadlines, vision shifts, and technical choices.",
+    description: "Follows the real story behind your projects, career shifts, and personal goals.",
     exampleData: {
-      raw: "Atlas Project graph updated with pivot parameters",
-      transformation: "Re-indexing architecture notes under new paradigm",
-      modelState: "Project Atlas: Shifted focus to Context Reasoner",
+      raw: "Mentioned: 'Meeting with manager went well, got good project feedback'",
+      transformation: "Linking feedback to project goals discussed 3 weeks ago",
+      modelState: "Goal Progress: Positive team review & milestone cleared",
     },
     color: "#a1a1aa",
   },
   {
     id: "life_events",
-    name: "Life Events",
+    name: "Life Chapters",
     icon: Calendar,
-    description: "Milestones that anchor major personal and professional chapters.",
+    description: "Milestones that mark major transitions in your life over time.",
     exampleData: {
-      raw: "Chapter Marker: 'The Great Architectural Pivot of 2025'",
-      transformation: "Synthesizing career trajectory across 24 months",
-      modelState: "Life Narrative: Milestone 4 of 12 cataloged",
+      raw: "Milestone: 'Moving into the new apartment next week'",
+      transformation: "Connecting packing reflections, neighborhood walks, and moving day",
+      modelState: "Life Chapter: New City & Home Transition cataloged",
     },
     color: "#d4a373",
   },
   {
     id: "world_model",
-    name: "Living World Model",
+    name: "The Memory Brain",
     icon: Orbit,
-    description: "The core continuous engine—a unified, self-updating graph of your existence.",
+    description: "Every person, place, and event you mention gets connected automatically — you never tag or organize anything. Search a person's name and see everything you've ever said involving them, in order. Search an event and see everyone who was part of it. It looks like a map because that's what it is: a map of your life, built without you doing any of the mapping.",
     exampleData: {
-      raw: "Whole-life state vector recalculation",
-      transformation: "Unifying work, personal relationships, and personal thesis",
-      modelState: "World Model v1.0: 100% Contextually Synchronized",
+      raw: "Search 'Priya'",
+      transformation: "Traversing all linked memories, lunches, and voice notes across your history",
+      modelState: "Result: Every lunch, conversation, and mention of her in order, going back as far as you've used the app",
     },
     color: "#f4f4f5",
   },
   {
     id: "insights",
-    name: "Insights",
+    name: "Conversational Recall",
     icon: Lightbulb,
-    description: "Deep contextual reasoning—answering non-obvious questions about your life.",
+    description: "Ask natural questions about your life and get synthesized answers grounded in your own past words.",
     exampleData: {
-      raw: "Prompt: 'What changed me during the Atlas project?'",
-      transformation: "Reasoning across voice memos, meetings, and notes",
-      modelState: "Insight: 'You prioritized autonomy over linear growth.'",
+      raw: "Question: 'How has my friendship with Priya changed since she moved?'",
+      transformation: "Synthesizing memories, call frequency, and emotional depth",
+      modelState: "Answer: 'You talk less often, but your conversations are significantly deeper.'",
     },
     color: "#d4a373",
   },
@@ -115,16 +115,16 @@ export default function MemoryEngineDiagram() {
         <div className="max-w-3xl mb-16 text-center mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono uppercase tracking-widest text-amber-300/80 mb-4">
             <Orbit className="w-3.5 h-3.5" />
-            <span>Architecture Pipeline</span>
+            <span>The Memory Brain</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-light text-white leading-tight tracking-tight mb-6">
-            Instead of remembering conversations,{" "}
+            Instead of searching through files,{" "}
             <span className="font-serif italic text-amber-200/90 block sm:inline">
-              it remembers your world.
+              it remembers your life as it happens.
             </span>
           </h2>
-          <p className="text-base text-white/60 leading-relaxed font-normal">
-            No rigid tags. No manual folders. Unstructured life inputs flow continuously into an evolving world model.
+          <p className="text-base text-white/60 leading-relaxed font-normal max-w-2xl mx-auto">
+            Every person, place, and event you mention gets connected automatically — you never tag or organize anything.
           </p>
         </div>
 

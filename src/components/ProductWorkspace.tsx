@@ -19,36 +19,36 @@ interface MemoryItem {
 const MEMORY_FEED: MemoryItem[] = [
   {
     id: "mem-1",
-    title: "Atlas Architecture Shift & Autonomy Thesis",
+    title: "Lunch with Priya — Career Transition",
     category: "Voice Note",
-    timestamp: "Today at 2:14 PM • 3 min audio",
-    people: ["Marcus"],
-    summary: "Recorded walking through SF. Decided to pivot Atlas from a task list into a quiet background memory model. Realized filing folders rots memory.",
-    rawQuote: "We shouldn't ask users to tag or organize anything. Memory should just sit quietly in the background and connect their life.",
-    inference: "Shifted core product philosophy from productivity tracking to organic identity modeling.",
-    tags: ["Atlas Project", "Product Philosophy", "Autonomy"],
+    timestamp: "Today at 1:30 PM • 45s audio",
+    people: ["Priya"],
+    summary: "Quick memo after lunch. Priya told me she's finally quitting her job to start her own business. Really excited for her.",
+    rawQuote: "Just had lunch with Priya, and she told me she's finally quitting her job. Really happy for her.",
+    inference: "Major career update for Priya; marked for long-term friendship follow-up.",
+    tags: ["Priya", "Career Shift", "Friendship"],
   },
   {
     id: "mem-2",
-    title: "Daily Compilation — Nov 14, 2025",
+    title: "Daily Diary Page — Tuesday, Oct 14",
     category: "Compiled Entry",
-    timestamp: "Yesterday • End-of-Day Batch",
-    people: ["Marcus", "Sarah"],
-    summary: "Morning coffee with Sarah discussing family oral history. Afternoon product review with Marcus. Realigned co-founder vision around privacy-first offline models.",
-    rawQuote: "Sarah mentioned vintage Japanese ceramics during our walk. Marcus challenged my linear roadmap.",
-    inference: "Co-founder alignment increased to 95%. Relationship arc entering high-trust phase.",
-    tags: ["Daily Synthesis", "Marcus", "Sarah"],
+    timestamp: "Yesterday • End-of-Day Entry",
+    people: ["Priya", "Mom"],
+    summary: "Started a bit rough waking up late. Had lunch with Priya celebrating her news. Afternoon project review with team went smoothly, followed by a quick check-in call with Mom.",
+    rawQuote: "Mom mentioned her knee physical therapy is going well. Team gave great feedback on the project.",
+    inference: "Mood shifted from sluggish morning to energized and upbeat afternoon.",
+    tags: ["Daily Synthesis", "Priya", "Mom"],
   },
   {
     id: "mem-3",
-    title: "Tokyo Architecture Retreat & Nezu Gardens",
-    category: "Project Pivot",
-    timestamp: "2 weeks ago • Nov 2025",
-    people: ["Marcus"],
-    summary: "Reflections on Japanese organic spatial layout. Realized software interfaces should feel like composed quiet gardens rather than frantic SaaS dashboards.",
-    rawQuote: "The museum grounds don't force paths. You wander through natural spatial connections.",
-    inference: "Directly inspired the force-directed memory graph layout.",
-    tags: ["Tokyo Retreat", "Design Principles"],
+    title: "Sunday Phone Call with Mom",
+    category: "Voice Note",
+    timestamp: "Last Sunday • 2 min reflection",
+    people: ["Mom"],
+    summary: "Mom shared updates about volunteering at the neighborhood library and Aunt Linda's move.",
+    rawQuote: "Mom sounded really relaxed talking about her new weekend volunteering schedule.",
+    inference: "Family life updates captured naturally in passing without dedicated note-taking.",
+    tags: ["Family Core", "Mom", "Updates"],
   },
 ];
 
@@ -65,30 +65,31 @@ interface PersonProfile {
 
 const PEOPLE_DATA: PersonProfile[] = [
   {
-    id: "marcus",
-    name: "Marcus",
-    role: "Co-founder & Product Lead",
-    coOccurrences: 48,
-    lastMentioned: "Today at 2:14 PM",
-    trustScore: "95% High Alignment",
-    narrativeArc: "Evolved from cautious technical collaborator in 2023 to deep strategic co-founder. Pivotal moment occurred during the SF walk when Marcus challenged the linear roadmap.",
+    id: "priya",
+    name: "Priya",
+    role: "Close Friend",
+    coOccurrences: 14,
+    lastMentioned: "Today at 1:30 PM",
+    trustScore: "Close Friend",
+    narrativeArc: "Regular catch-ups over coffee and walks. Transitioned from former co-worker in 2023 to close confidant through career changes and city moves.",
     recentMemories: [
-      "Atlas Architecture Shift & Autonomy Thesis",
-      "Tokyo Architecture Retreat & Nezu Gardens",
-      "Series A Vision Alignment Session",
+      "Lunch with Priya — Career Transition",
+      "Monthly Sunday Phone Catch-up",
+      "Oct 12 Weekend Visit",
     ],
   },
   {
-    id: "sarah",
-    name: "Sarah",
-    role: "Sister & Design Advisor",
-    coOccurrences: 18,
-    lastMentioned: "Yesterday at 9:30 AM",
+    id: "mom",
+    name: "Mom",
+    role: "Family Core",
+    coOccurrences: 28,
+    lastMentioned: "Sunday at 6:00 PM",
     trustScore: "Family Core",
-    narrativeArc: "Frequent walks discussing family oral history, design aesthetics, and rare print typography. Prefers quiet experiences over material gifts.",
+    narrativeArc: "Weekly Sunday calls and passing reflections on knee recovery, library volunteering, and family updates.",
     recentMemories: [
-      "SF Walk & Japanese Ceramics Discussion",
-      "Family Memory Archive Conversation",
+      "Sunday Phone Call with Mom",
+      "September Family Check-in",
+      "Knee Physical Therapy Update",
     ],
   },
 ];
@@ -103,7 +104,7 @@ export default function ProductWorkspace() {
   const [recordingSuccess, setRecordingSuccess] = useState(false);
 
   // Conversational Recall State
-  const [query, setQuery] = useState("How has my relationship with Marcus changed over 3 years?");
+  const [query, setQuery] = useState("How has my friendship with Priya changed since she moved cities?");
   const [searched, setSearched] = useState(true);
 
   const handleStartRecord = () => {
@@ -162,7 +163,7 @@ export default function ProductWorkspace() {
                 : "text-white/50 hover:text-white"
             }`}
           >
-            Memory Graph
+            The Memory Brain
           </button>
           <button
             onClick={() => setActiveTab("reasoning")}
@@ -188,18 +189,18 @@ export default function ProductWorkspace() {
             </div>
             {isRecording ? (
               <span className="text-xs font-mono text-red-300 animate-pulse">
-                Listening... "Recorded walking through SF..."
+                Listening... "Just had lunch with Priya... she's quitting her job..."
               </span>
             ) : recordingSuccess ? (
               <span className="text-xs font-mono text-emerald-400 flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                Added to memory • Resolved Marcus & Atlas Project
+                Added to memory • Resolved Priya (Friend) & Career Transition
               </span>
             ) : (
               <input
                 type="text"
                 readOnly
-                placeholder="Say it. We'll remember."
+                placeholder="Say it messy. We'll clean it up and connect it."
                 onClick={handleStartRecord}
                 className="w-full bg-transparent text-xs text-white/80 placeholder-white/40 focus:outline-none cursor-pointer"
               />
@@ -309,10 +310,15 @@ export default function ProductWorkspace() {
 
       {/* VIEW 3: MEMORY GRAPH */}
       {activeTab === "graph" && (
-        <div className="panel-quiet p-6 rounded-2xl max-w-4xl mx-auto text-center space-y-6">
-          <div className="flex items-center justify-between border-b border-white/[0.08] pb-4 text-xs font-mono">
-            <span className="text-white/60">OBSIDIAN-STYLE FORCE GRAPH</span>
-            <span className="text-amber-400/90">Recency Edge Fading Active</span>
+        <div className="panel-quiet p-6 sm:p-8 rounded-2xl max-w-4xl mx-auto text-center space-y-6">
+          <div className="space-y-2 text-left pb-4 border-b border-white/[0.08]">
+            <h3 className="text-lg font-medium text-white">The Memory Brain</h3>
+            <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-sans">
+              Every person, place, and event you mention gets connected automatically — you never tag or organize anything. Search a person's name and see everything you've ever said involving them, in order. Search an event and see everyone who was part of it. It looks like a map because that's what it is: a map of your life, built without you doing any of the mapping.
+            </p>
+            <p className="text-xs font-mono text-amber-300/90 pt-1">
+              e.g., Search "Priya" → every lunch, every conversation, every mention of her, going back as far as you've been using the app.
+            </p>
           </div>
 
           <div className="relative h-80 rounded-xl bg-[#09090b] border border-white/10 flex items-center justify-center overflow-hidden">
@@ -323,22 +329,18 @@ export default function ProductWorkspace() {
               <line x1="50%" y1="35%" x2="50%" y2="75%" stroke="rgba(255,255,255,0.15)" strokeWidth="1" strokeDasharray="3 3" />
             </svg>
 
-            <div className="relative z-10 flex items-center justify-around w-full px-12">
+            <div className="relative z-10 flex items-center justify-around w-full px-8">
               <div className="p-3 rounded-full bg-white/10 border border-white/20 text-xs font-mono text-white">
-                Marcus (Co-founder)
+                Priya (Close Friend)
               </div>
               <div className="p-4 rounded-full bg-amber-500/20 border border-amber-500/40 text-xs font-mono text-amber-200">
-                Atlas Project Shift
+                Career Transition
               </div>
               <div className="p-3 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-white/50">
-                Tokyo Retreat
+                Mom (Family)
               </div>
             </div>
           </div>
-
-          <p className="text-xs text-white/60 font-sans max-w-md mx-auto">
-            Nodes represent people, projects, and events. Edges reflect mention frequency and decay gracefully over time unless reinforced.
-          </p>
         </div>
       )}
 
@@ -357,7 +359,7 @@ export default function ProductWorkspace() {
               onClick={() => setSearched(true)}
               className="px-4 py-1.5 rounded-lg bg-white/10 text-white font-mono text-xs hover:bg-white/15"
             >
-              Reason
+              Ask
             </button>
           </div>
 
@@ -370,7 +372,7 @@ export default function ProductWorkspace() {
 
               <div className="space-y-4 font-sans text-sm text-white/90 leading-relaxed">
                 <p>
-                  Your relationship with Marcus evolved from technical collaboration in early 2023 to deep strategic alignment during the November 2025 Tokyo trip.
+                  You talk less frequently (dropping from weekly dinners to a 45-minute monthly Sunday call), but conversations are significantly longer and deeper. In your last 3 voice notes, you noted feeling closer despite the distance, especially after supporting each other through her career transition.
                 </p>
               </div>
 
@@ -383,9 +385,9 @@ export default function ProductWorkspace() {
                 <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs font-mono space-y-1">
                   <div className="flex items-center gap-2 text-white/60">
                     <span className="px-1.5 py-0.5 rounded bg-white/10 text-[10px] text-white">USER SAID</span>
-                    <span>Audio Memo #42 • SF Walk</span>
+                    <span>Audio Memo #14 • Lunch Catch-up</span>
                   </div>
-                  <p className="text-white/90 italic">"Marcus challenged my linear roadmap and urged me to build an organic memory model."</p>
+                  <p className="text-white/90 italic">"Just had lunch with Priya, and she told me she's finally quitting her job. Really happy for her."</p>
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs font-mono space-y-1">
@@ -393,7 +395,7 @@ export default function ProductWorkspace() {
                     <span className="px-1.5 py-0.5 rounded bg-amber-500/20 text-[10px] text-amber-200">ENGINE INFERENCE</span>
                     <span>Synthesis</span>
                   </div>
-                  <p className="text-amber-100/90">Co-founder trust index reached 95% following the Atlas architectural alignment.</p>
+                  <p className="text-amber-100/90">Communication volume dropped ~60%, but emotional depth and mutual support increased.</p>
                 </div>
               </div>
             </div>
