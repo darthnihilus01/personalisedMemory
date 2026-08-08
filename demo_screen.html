@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MINDSET - The Memory Engine</title>
+<!-- Fonts and Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#d4e4fa",
+                        "inverse-surface": "#d4e4fa",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed": "#191c1f",
+                        "primary-fixed": "#7df4ff",
+                        "on-primary-container": "#006970",
+                        "on-secondary-fixed-variant": "#44474b",
+                        "background": "#051424",
+                        "primary": "#dbfcff",
+                        "on-tertiary-container": "#605e5e",
+                        "inverse-primary": "#006970",
+                        "surface-container-low": "#0d1c2d",
+                        "on-background": "#d4e4fa",
+                        "outline-variant": "#3b494b",
+                        "primary-fixed-dim": "#00dbe9",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-high": "#1c2b3c",
+                        "surface": "#051424",
+                        "on-surface-variant": "#b9cacb",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#004f54",
+                        "secondary-fixed": "#e1e2e7",
+                        "secondary-fixed-dim": "#c5c6cb",
+                        "surface-container-lowest": "#010f1f",
+                        "surface-container": "#122131",
+                        "secondary": "#c5c6cb",
+                        "inverse-on-surface": "#233143",
+                        "surface-variant": "#273647",
+                        "tertiary-container": "#dcd9d8",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "on-tertiary": "#313030",
+                        "tertiary": "#f9f5f5",
+                        "on-primary": "#00363a",
+                        "outline": "#849495",
+                        "secondary-container": "#44474b",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "on-secondary-container": "#b3b5ba",
+                        "surface-tint": "#00dbe9",
+                        "primary-container": "#00f0ff",
+                        "tertiary-fixed-dim": "#c9c6c5",
+                        "surface-bright": "#2c3a4c",
+                        "surface-container-highest": "#273647",
+                        "on-secondary": "#2e3134",
+                        "surface-dim": "#051424",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#002022",
+                        "tertiary-fixed": "#e5e2e1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "section-gap": "120px",
+                        "gutter": "24px",
+                        "container-max": "1200px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-sm": ["Inter"],
+                        "headline-xl": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "label-mono": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "500" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "headline-xl": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom Styles for Glows and Animations */
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            overflow-x: hidden;
+        }
+
+        .bg-glow {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.05) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .node-line {
+            position: absolute;
+            background-color: theme('colors.primary-container');
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .pulse-glow {
+            animation: pulseGlow 3s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.05); border-color: rgba(255, 255, 255, 0.1); }
+            100% { box-shadow: 0 0 40px rgba(0, 240, 255, 0.15); border-color: theme('colors.primary-container'); }
+        }
+
+        .typing-indicator span {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: theme('colors.primary-container');
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        .data-chip {
+            transition: all 0.3s ease;
+        }
+        .data-chip:hover {
+            background-color: rgba(0, 240, 255, 0.1);
+            color: theme('colors.primary-container');
+            border-color: theme('colors.primary-container');
+        }
+    </style>
+</head>
+<body class="relative min-h-screen selection:bg-primary-container selection:text-background font-body-md text-body-md antialiased">
+<!-- Atmospheric Glow -->
+<div class="bg-glow fixed top-0 left-0 w-full h-full"></div>
+<!-- Top Navigation (Web) -->
+<header class="hidden md:flex justify-between items-center px-gutter py-4 w-full z-50 fixed top-0 bg-surface/10 backdrop-blur-2xl border-b border-white/10">
+<div class="font-headline-lg tracking-tighter text-primary-container">MINDSET</div>
+<nav class="flex gap-8">
+<a class="text-primary-container border-b border-primary-container pb-1 font-label-mono text-label-mono hover:text-primary-container transition-colors duration-300" href="#">Home</a>
+<a class="text-on-surface-variant pb-1 font-label-mono text-label-mono hover:text-primary-container transition-colors duration-300" href="#">People</a>
+<a class="text-on-surface-variant pb-1 font-label-mono text-label-mono hover:text-primary-container transition-colors duration-300" href="#">World</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="scale-95 transition-transform duration-200 text-on-surface-variant hover:text-primary-container">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+</button>
+<img alt="User profile" class="w-8 h-8 rounded-full border border-white/10 object-cover" data-alt="A small circular avatar placeholder image with a dark, sophisticated tech aesthetic. It features a subtle electric blue glow around a minimalist geometric representation of a user profile. High-end, precise engineering style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQlQVVPqiJt_LFDh4HQXW0QVeqy_j4OnPp8Z2Q6A1N58S5srtX-lGWTHT9s4wI6sHKe-iFnIbwi776Ar2sDWxbHXnX8aKNrA8XbRpGHPetuISoYJt_qX8kANnyrhYnYphEm5I_DjLD-34KbbxDqRrv3ncxYynnuj-F6bM4WUcSBDjZkwbsxuzVofYNrGW4gzocRLnTGlN4x16rq0XfMcmpgc726t69wsn_-f77VNl_ZV6PH0bniC2-"/>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="relative z-10 pt-[120px] pb-section-gap px-gutter max-w-container-max mx-auto flex flex-col gap-section-gap">
+<!-- Section Header -->
+<section class="text-center max-w-3xl mx-auto flex flex-col gap-6 items-center">
+<h2 class="font-headline-xl text-headline-xl text-on-background">Everything you tell it <br/> <span class="text-primary-container">becomes part of your story.</span></h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">MINDSET doesn't just record; it comprehends. It links people, projects, and decisions automatically, building a deeply personal knowledge graph over time.</p>
+</section>
+<!-- Complex Interactive Demo Section -->
+<section class="relative flex flex-col lg:flex-row gap-8 w-full">
+<!-- Voice Input Column -->
+<div class="flex-1 flex flex-col gap-8 z-10 relative">
+<!-- Input Module -->
+<div class="glass-panel rounded-xl p-8 flex flex-col gap-6 relative pulse-glow backdrop-blur-3xl border-primary-container/30">
+<!-- Absolute glow for active state -->
+<div class="absolute -inset-1 bg-primary-container/20 blur-xl rounded-xl z-[-1] opacity-50"></div>
+<div class="flex items-center justify-between"><div class="flex items-center gap-3"><div class="flex items-center gap-1 h-4"><span class="w-1 h-2 bg-primary-container animate-pulse"></span><span class="w-1 h-4 bg-primary-container animate-pulse" style="animation-delay: 0.2s"></span><span class="w-1 h-3 bg-primary-container animate-pulse" style="animation-delay: 0.4s"></span><span class="w-1 h-2 bg-primary-container animate-pulse" style="animation-delay: 0.1s"></span></div><div class="flex flex-col"><span class="font-label-mono text-[10px] text-primary-container uppercase tracking-widest leading-none">Listening...</span><span class="font-label-mono text-[8px] text-primary-container/40 uppercase tracking-tighter mt-1">System Status: Processing</span></div></div><div class="flex flex-col items-end"><div class="typing-indicator flex items-center"><span></span><span></span><span></span></div><span class="font-label-mono text-[8px] text-primary-container/40 mt-1">EPOCH: 1715.42</span></div></div>
+<div class="font-body-md text-body-md text-on-background leading-relaxed text-lg min-h-[100px]">
+                        "Just got out of a meeting with <span class="text-primary-container border-b border-primary-container/30 pb-0.5 cursor-pointer">Marcus</span>. We're pushing <span class="text-primary-container border-b border-primary-container/30 pb-0.5 cursor-pointer">Atlas</span> two weeks. Honestly, I'm <span class="text-primary-container border-b border-primary-container/30 pb-0.5 cursor-pointer">relieved</span>."
+                    </div>
+<div class="flex gap-4 items-center border-t border-white/5 pt-4">
+<button class="font-label-mono text-label-mono text-background bg-on-background px-4 py-2 rounded-full hover:bg-white transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="stop_circle">stop_circle</span> Stop Recording
+                         </button>
+</div>
+</div>
+<!-- Recognition Stream -->
+<div class="flex flex-col gap-4 pl-4 border-l border-white/10 relative mt-4">
+<!-- Connecting line to input -->
+<div class="absolute -top-12 left-[-1px] w-px h-12 bg-gradient-to-b from-primary-container to-white/10"></div>
+<div class="font-label-mono text-label-mono text-on-surface-variant flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-xs" data-icon="data_object">data_object</span>
+<span>Extracting Entities</span>
+</div>
+<div class="flex flex-wrap gap-3">
+<div class="data-chip rounded-full px-4 py-1.5 border border-white/10 font-label-mono text-label-mono text-on-surface-variant cursor-pointer flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span> Marcus (Person)
+                        </div>
+<div class="data-chip rounded-full px-4 py-1.5 border border-white/10 font-label-mono text-label-mono text-on-surface-variant cursor-pointer flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span> Atlas (Project)
+                        </div>
+<div class="data-chip rounded-full px-4 py-1.5 border border-white/10 font-label-mono text-label-mono text-on-surface-variant cursor-pointer flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span> Decision (Delay)
+                        </div>
+<div class="data-chip rounded-full px-4 py-1.5 border border-white/10 font-label-mono text-label-mono text-on-surface-variant cursor-pointer flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span> Emotion (Relief)
+                        </div>
+</div>
+</div>
+</div>
+<!-- Knowledge Graph Column -->
+<div class="flex-[1.5] relative z-10 flex flex-col pt-12 lg:pt-0">
+<!-- Abstract connector lines between columns (visible on desktop) -->
+<svg class="absolute top-1/2 -left-16 w-32 h-64 -translate-y-1/2 pointer-events-none hidden lg:block" preserveaspectratio="none"><defs><lineargradient id="flowGradient" x1="0%" x2="100%" y1="0%" y2="0%"><stop offset="0%" stop-color="rgba(0, 240, 255, 0)"></stop><stop offset="50%" stop-color="rgba(0, 240, 255, 0.6)"></stop><stop offset="100%" stop-color="rgba(0, 240, 255, 0)"></stop></lineargradient></defs><path d="M 0,120 C 50,120 50,40 120,40" fill="none" stroke="rgba(0, 240, 255, 0.1)" stroke-width="1"></path><path d="M 0,120 C 50,120 50,40 120,40" fill="none" stroke="url(#flowGradient)" stroke-dasharray="20 100" stroke-width="1.5"><animate attributename="stroke-dashoffset" dur="3s" from="120" repeatcount="indefinite" to="0"></animate></path><path d="M 0,120 C 50,120 50,200 120,200" fill="none" stroke="rgba(0, 240, 255, 0.1)" stroke-width="1"></path><path d="M 0,120 C 50,120 50,200 120,200" fill="none" stroke="url(#flowGradient)" stroke-dasharray="20 100" stroke-width="1.5"><animate attributename="stroke-dashoffset" dur="4s" from="120" repeatcount="indefinite" to="0"></animate></path></svg>
+<div class="font-label-mono text-label-mono text-on-surface-variant flex items-center gap-2 mb-8 ml-8">
+<span class="material-symbols-outlined text-xs" data-icon="hub">hub</span>
+<span>Synthesizing Context</span>
+</div>
+<!-- Bento Grid for Memory Context -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative">
+<!-- Marcus Context Node -->
+<div class="glass-panel rounded-lg p-6 flex flex-col gap-4 col-span-1 transform transition-transform hover:scale-[1.02] cursor-default border-primary-container/30">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-white/10 flex items-center justify-center text-primary-container font-label-mono">M</div>
+<div>
+<h4 class="font-headline-lg text-body-md text-on-background">Marcus Thorne</h4>
+<span class="font-label-mono text-label-mono text-on-surface-variant text-[10px]">Lead Developer</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary-container text-sm" data-icon="link">link</span>
+<div class="absolute -top-2 -right-2 font-label-mono text-[8px] text-primary-container/30 tracking-tighter">LINK_ESTABLISHED // 0x4F2</div></div>
+<div class="bg-surface-container-low rounded p-3 border border-white/5 font-body-sm text-body-sm text-on-surface-variant italic">
+                            "Last convo (3w ago): Marcus expressed concern about backend scalability for Atlas."
+                        </div>
+</div>
+<!-- Atlas Context Node -->
+<div class="glass-panel rounded-lg p-6 flex flex-col gap-4 col-span-1 transform transition-transform hover:scale-[1.02] cursor-default border-primary-container/30">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container bg-primary-container/10 p-2 rounded-full" data-icon="rocket_launch">rocket_launch</span>
+<div>
+<h4 class="font-headline-lg text-body-md text-on-background">Project Atlas</h4>
+<span class="font-label-mono text-label-mono text-on-surface-variant text-[10px]">Active Initiative</span>
+</div>
+</div>
+<div class="absolute -top-2 -right-2 font-label-mono text-[8px] text-primary-container/30 tracking-tighter">COORD: 42.36N / 71.05W</div></div>
+<div class="bg-surface-container-low rounded p-3 border border-white/5 font-body-sm text-body-sm text-on-surface-variant flex flex-col gap-2">
+<div class="flex items-center justify-between text-[11px] font-label-mono">
+<span>Original Launch</span>
+<span class="line-through opacity-50">Oct 12</span>
+</div>
+<div class="flex items-center justify-between text-[11px] font-label-mono text-primary-container">
+<span>New Target</span>
+<span>Oct 26 (+14d)</span>
+</div>
+</div>
+</div>
+<!-- Insight Node (Spans 2 columns) -->
+<div class="glass-panel rounded-lg p-6 flex flex-col gap-4 col-span-1 md:col-span-2 mt-4 bg-gradient-to-br from-surface-container/50 to-surface-container-lowest border-t-primary-container/50 bg-surface-container-lowest border-l border-primary-container/20">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary-container" data-icon="auto_awesome" data-weight="fill">auto_awesome</span>
+<h4 class="font-label-mono text-label-mono text-primary-container uppercase tracking-widest">System Inference</h4>
+</div>
+<p class="font-body-md text-body-md text-on-background">
+                            The decision to delay <strong class="font-medium text-white">Atlas</strong> aligns with <strong class="font-medium text-white">Marcus's</strong> previous technical concerns. Your recorded emotion (<em class="text-primary-container">Relief</em>) suggests this delay resolves a significant unspoken pressure point.
+                        </p>
+<div class="mt-4 flex gap-3">
+<button class="px-4 py-2 rounded-full border border-white/10 font-label-mono text-label-mono text-on-surface hover:bg-white/5 transition-colors">View Atlas Timeline</button>
+<button class="px-4 py-2 rounded-full border border-white/10 font-label-mono text-label-mono text-on-surface hover:bg-white/5 transition-colors">Analyze Team Morale</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell (Mobile) -->
+<nav class="fixed bottom-0 w-full rounded-t-xl bg-surface/5 backdrop-blur-3xl border-t border-white/5 shadow-[0_-20px_40px_rgba(0,240,255,0.05)] z-50 flex justify-around items-center px-4 pb-6 pt-3 md:hidden">
+<a class="flex flex-col items-center justify-center text-primary-container bg-primary-container/10 rounded-full px-4 py-1 scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="home" data-weight="fill" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-mono text-[10px] mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 hover:bg-white/5 transition-all px-4 py-1 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-mono text-[10px] mt-1">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 hover:bg-white/5 transition-all px-4 py-1 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+<span class="font-label-mono text-[10px] mt-1">Capture</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 hover:bg-white/5 transition-all px-4 py-1 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+<span class="font-label-mono text-[10px] mt-1">Model</span>
+</a>
+</nav>
+</body></html>

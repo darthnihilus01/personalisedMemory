@@ -22,7 +22,7 @@ export default function WaitlistSection() {
   };
 
   return (
-    <section id="waitlist" className="py-24 md:py-36 relative bg-[#09090b] border-t border-white/[0.06]">
+    <section id="waitlist" className="py-24 md:py-36 relative bg-transparent border-t border-white/[0.06]">
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono uppercase tracking-widest text-amber-300/80 mb-6">
           <ShieldCheck className="w-3.5 h-3.5" />
@@ -49,7 +49,7 @@ export default function WaitlistSection() {
                 onSubmit={handleSubmit}
                 className="relative"
               >
-                <div className="flex flex-col sm:flex-row items-center gap-2 p-1.5 rounded-full bg-[#121215] border border-white/15 focus-within:border-white/30 transition-all">
+                <div className="flex flex-col sm:flex-row items-center gap-2 p-1.5 rounded-full bg-white/[0.02] backdrop-blur-md border border-white/10 focus-within:border-white/30 transition-all">
                   <input
                     type="email"
                     required

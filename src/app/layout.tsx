@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Newsreader } from "next/font/google";
+import { Inter, Geist_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
@@ -56,9 +56,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} dark antialiased scroll-smooth`}
+      className={`${inter.variable} ${geistMono.variable} ${newsreader.variable} dark antialiased scroll-smooth`}
     >
-      <body className="bg-[#060709] text-gray-100 min-h-screen flex flex-col font-sans bg-noise selection:bg-purple-900/40 selection:text-purple-200">
+      <body className="bg-[#050505] text-gray-100 min-h-screen flex flex-col font-sans bg-noise selection:bg-blue-500/30 selection:text-white" style={{ fontFamily: "var(--font-inter), sans-serif" }}>
         {children}
       </body>
     </html>

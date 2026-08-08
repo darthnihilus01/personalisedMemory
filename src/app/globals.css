@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-inter);
+}
+
 @layer base {
   :root {
     --bg-primary: #0b0a12;
@@ -66,7 +70,9 @@
 }
 
 .panel-quiet {
-  background: var(--bg-surface);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-subtle);
   border-radius: 16px;
 }
@@ -76,7 +82,7 @@
 }
 
 .panel-quiet-hover:hover {
-  background: var(--bg-hover);
+  background: rgba(255, 255, 255, 0.04);
   border-color: var(--border-purple);
   box-shadow: 0 0 25px rgba(168, 85, 247, 0.1);
 }
