@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Syncopate } from "next/font/google";
+import { motion } from "framer-motion";
 import CaptureDemo from "@/components/CaptureDemo";
 import FinalCTA from "@/components/FinalCTA";
 import WaitlistSection from "@/components/WaitlistSection";
@@ -179,20 +180,38 @@ export default function Home() {
         {/* ── HERO ── */}
         <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
           <div className="w-full max-w-5xl mx-auto text-center flex flex-col items-center pb-42 pt-36 relative z-10">
-            <h1 className="font-display text-[44px] md:text-[52px] lg:text-[64px] text-gradient-headline leading-[1.05] mb-6 max-w-[976px] tracking-tight">
+            <motion.h1 
+              initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="font-display text-[44px] md:text-[52px] lg:text-[64px] text-gradient-headline leading-[1.05] mb-6 max-w-[976px] tracking-tight"
+            >
               turn your life into a continuously evolving memory system.
-            </h1>
-            <p className="text-[15px] md:text-[17px] tracking-wide text-zinc-400 font-normal mb-20">
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="text-[15px] md:text-[17px] tracking-wide text-zinc-400 font-normal mb-20"
+            >
               humans lose context, <span className="text-cyan-300/90 font-medium drop-shadow-[0_0_12px_rgba(45,212,191,0.35)]">lattice doesn&apos;t.</span>
-            </p>
+            </motion.p>
           </div>
 
           {/* ── Hero Watermark ── */}
-          <div className="absolute bottom-[-2vw] left-1/2 -translate-x-1/2 w-[100vw] text-center pointer-events-none z-0">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute bottom-[-2vw] left-1/2 -translate-x-1/2 w-[100vw] text-center pointer-events-none z-0"
+          >
             <span className={`watermark-text ${syncopate.className}`}>
               Lattice
             </span>
-          </div>
+          </motion.div>
         </section>
 
         {/* ── Stage 1: Capture & Synthesis Demo ── */}

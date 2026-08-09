@@ -1,4 +1,5 @@
 import { Geist, Syncopate } from 'next/font/google';
+import { motion } from 'framer-motion';
 import styles from './waitlist.module.css';
 import WaitlistForm from './waitlist-form';
 
@@ -109,27 +110,53 @@ export default function WaitlistSection() {
       </div>
 
       <div className={styles.content}>
-        <div className={styles.badge}>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.8 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className={styles.badge}
+        >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
             <path d="M4 21V4a1 1 0 0 1 1-1h13.5a.5.5 0 0 1 .4.8L15 10l3.9 6.2a.5.5 0 0 1-.4.8H5a1 1 0 0 0-1 1Z" />
           </svg>
           Waitlist
-        </div>
+        </motion.div>
 
-        <h1 className={styles.headline}>Coming soon!</h1>
+        <motion.h1 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.8 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className={styles.headline}
+        >
+          Coming soon!
+        </motion.h1>
 
-        <section className={styles.card} aria-labelledby="waitlist-heading">
+        <motion.section 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className={styles.card} aria-labelledby="waitlist-heading"
+        >
           <h2 id="waitlist-heading">Join our waitlist!</h2>
           <p>Sign up for our newsletter to receive the latest updates and insights straight to your inbox.</p>
 
           <WaitlistForm />
-        </section>
+        </motion.section>
 
-        <p className={styles.footerText}>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className={styles.footerText}
+        >
           <span>© 2026 Waitlist</span>
           <span className={styles.dot} />
           <span>All rights reserved</span>
-        </p>
+        </motion.p>
       </div>
     </main>
   );
