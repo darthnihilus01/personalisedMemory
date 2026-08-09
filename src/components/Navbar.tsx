@@ -77,7 +77,7 @@ export default function Navbar({
               onClick={() => onToggleViewMode("landing")}
               className="px-3.5 py-1 rounded-lg text-xs font-mono text-slate-300 hover:text-white"
             >
-              Overview & Story
+              Overview &amp; Story
             </button>
             <button
               onClick={() => onToggleViewMode("workspace")}

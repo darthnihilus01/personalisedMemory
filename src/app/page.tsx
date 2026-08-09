@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";import CaptureDemo from "@/components/CaptureDemo";
+import { useState } from "react";
+import CaptureDemo from "@/components/CaptureDemo";
 import FinalCTA from "@/components/FinalCTA";
 import WaitlistSection from "@/components/WaitlistSection";
 
@@ -35,7 +36,7 @@ export default function Home() {
           </h1>
 
           <p className="text-[#a1a1aa] text-[15px] md:text-[17px] max-w-[620px] mx-auto mb-10 leading-[1.6] font-normal">
-            A Personal Memory Engine that turns conversations, events, people, decisions, and moments into a continuously evolving model of your world.
+            Humans lose context, we don&apos;t.
           </p>
         </main>
       </div>

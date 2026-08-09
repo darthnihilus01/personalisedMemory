@@ -107,8 +107,6 @@ export default function WaitlistSection() {
       <div className={`${styles.giantText} ${syncopate.className}`} aria-hidden="true">
         LORE AI
       </div>
-      <div className={`${styles.orb} ${styles.o1}`} aria-hidden="true" />
-      <div className={`${styles.orb} ${styles.o2}`} aria-hidden="true" />
 
       <div className={styles.content}>
         <div className={styles.badge}>

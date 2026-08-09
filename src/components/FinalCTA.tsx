@@ -306,25 +306,7 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
 
         </div>
 
-        {/* Footer Navigation */}
-        <footer className="w-full pt-16 border-t border-white/[0.06] mt-20 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <span className="text-sm font-semibold tracking-tight text-white">PERSONAL MEMORY ENGINE</span>
-            <span className="text-[10px] text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full font-mono">v1.0</span>
-          </div>
 
-          <div className="flex items-center gap-6 text-xs text-zinc-400">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">Twitter / X</a>
-            <a href="#" className="hover:text-white transition-colors">GitHub</a>
-            <a href="#waitlist" className="hover:text-white transition-colors">Waitlist</a>
-          </div>
-
-          <p className="text-xs text-zinc-600">
-            © {new Date().getFullYear()} Personal Memory Engine. All rights reserved.
-          </p>
-        </footer>
 
       </div>
     </motion.div>

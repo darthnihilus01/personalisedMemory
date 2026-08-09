@@ -71,12 +71,12 @@ export default function CaptureDemo({ onComplete }: CaptureDemoProps) {
 
   const showContext = phase === 'context';
 
-  // Camera viewport transforms for cinematic zoom/pan effect
+  // Cinematic camera effect: Zooms in heavily during capture, then resets for context
   const cameraVariants = {
     idle: { scale: 1, y: 0 },
-    typing: { scale: 1.15, y: 30 },
+    typing: { scale: 1.15, y: 15 },
     done: { scale: 1, y: 0 },
-    context: { scale: 1.06, y: -120 },
+    context: { scale: 1, y: 0 },
   };
 
   return (
@@ -155,15 +155,15 @@ export default function CaptureDemo({ onComplete }: CaptureDemoProps) {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs text-cyan-400 font-medium tracking-tight leading-none">
-                    {phase === 'typing' ? 'Listening...' : phase === 'idle' ? 'Ready' : 'Captured'}
+                    {phase === 'typing' ? 'Capturing…' : phase === 'idle' ? 'Ready' : 'Saved'}
                   </span>
-                  <span className="text-[11px] text-zinc-400 font-normal mt-0.5">
-                    System Status: {phase === 'typing' ? 'Processing' : phase === 'idle' ? 'Standby' : 'Complete'}
+                  <span className="text-[11px] text-zinc-500 font-normal mt-0.5">
+                    {phase === 'typing' ? 'Listening for entities' : phase === 'idle' ? 'Say something' : 'Memory updated'}
                   </span>
                 </div>
               </div>
 
-              <div className="flex flex-col items-end">
+              <div className="flex flex-col items-end gap-1">
                 {phase === 'typing' && (
                   <div className="flex items-center gap-1">
                     <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-bounce" />
@@ -171,7 +171,7 @@ export default function CaptureDemo({ onComplete }: CaptureDemoProps) {
                     <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
                   </div>
                 )}
-                <span className="text-[11px] text-zinc-500 font-normal">Epoch: 1715.42</span>
+                <span className="text-[11px] text-zinc-600 font-normal">just now</span>
               </div>
             </div>
 
@@ -209,8 +209,8 @@ export default function CaptureDemo({ onComplete }: CaptureDemoProps) {
             {showContext && (
               <motion.div
                 className="flex flex-col items-center w-full"
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease }}
               >
                 {/* Vertical Branch Line */}
