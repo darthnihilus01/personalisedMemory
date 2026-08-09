@@ -35,7 +35,12 @@ export default function Home() {
         }}
       >
         {/* We fix the inner SVG to 100vh so xMidYMid slice calculates from the exact hero viewport size, preventing it from shifting downwards! */}
-        <div className="w-full h-[100vh] relative">
+        <motion.div 
+          className="w-full h-[100vh] relative"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2.5, ease: "easeOut" }}
+        >
           <svg
             className="w-full h-full"
             style={{ overflow: 'visible' }}
@@ -137,7 +142,7 @@ export default function Home() {
             />
           </g>
         </svg>
-        </div>
+        </motion.div>
       </div>
 
       {/* Ambient glow – hero region */}
@@ -181,19 +186,17 @@ export default function Home() {
         <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
           <div className="w-full max-w-5xl mx-auto text-center flex flex-col items-center pb-42 pt-36 relative z-10">
             <motion.h1 
-              initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
               className="font-display text-[44px] md:text-[52px] lg:text-[64px] text-gradient-headline leading-[1.05] mb-6 max-w-[976px] tracking-tight"
             >
               turn your life into a continuously evolving memory system.
             </motion.h1>
             <motion.p 
-              initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
               className="text-[15px] md:text-[17px] tracking-wide text-zinc-400 font-normal mb-20"
             >
               humans lose context, <span className="text-cyan-300/90 font-medium drop-shadow-[0_0_12px_rgba(45,212,191,0.35)]">lattice doesn&apos;t.</span>
@@ -202,10 +205,9 @@ export default function Home() {
 
           {/* ── Hero Watermark ── */}
           <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
             className="absolute bottom-[-2vw] left-1/2 -translate-x-1/2 w-[100vw] text-center pointer-events-none z-0"
           >
             <span className={`watermark-text ${syncopate.className}`}>
