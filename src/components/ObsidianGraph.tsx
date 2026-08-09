@@ -40,14 +40,16 @@ function generateGraphData(width: number, height: number, targetCx: number) {
   // Group 1: Priya & California Burrito (Top Leftish)
   // Group 2: Marcus & Solstice Capital (Bottom Rightish)
   const mainEntities = [
-    { name: 'Priya', color: '#ec4899', x: targetCx - 140, y: cy - 90, offset: { x: -40, y: -20 } },
-    { name: 'California Burrito', color: '#f59e0b', x: targetCx - 70, y: cy - 140, offset: { x: 10, y: -20 } },
-    { name: 'Marcus', color: '#2dd4bf', x: targetCx + 80, y: cy + 100, offset: { x: 20, y: 20 } },
-    { name: 'Solstice Capital', color: '#38bdf8', x: targetCx + 160, y: cy + 50, offset: { x: 30, y: 10 } },
+    { name: 'Priya', color: '#ec4899', x: targetCx - 140, y: cy - 90, offset: { x: -15, y: -20 }, cluster: 0 },
+    { name: 'California Burrito', color: '#f59e0b', x: targetCx - 70, y: cy - 140, offset: { x: -45, y: -15 }, cluster: 0 },
+    { name: 'Sarah', color: '#a855f7', x: targetCx - 180, y: cy - 150, offset: { x: -15, y: -15 }, cluster: 0 },
+    { name: 'Marcus', color: '#2dd4bf', x: targetCx + 80, y: cy + 100, offset: { x: -20, y: 25 }, cluster: 2 },
+    { name: 'Solstice Capital', color: '#38bdf8', x: targetCx + 160, y: cy + 50, offset: { x: -35, y: 25 }, cluster: 2 },
+    { name: 'Alicia', color: '#10b981', x: targetCx + 220, y: cy + 120, offset: { x: -15, y: 20 }, cluster: 2 },
   ];
 
   for (let i = 0; i < nodeCount; i++) {
-    if (i < 4) {
+    if (i < mainEntities.length) {
       const data = mainEntities[i];
       nodes.push({
         id: `node-${i}`,
@@ -58,7 +60,7 @@ function generateGraphData(width: number, height: number, targetCx: number) {
         radius: 6.5,
         color: data.color,
         label: data.name,
-        cluster: i,
+        cluster: data.cluster,
         isMainEntity: true,
         entityName: data.name,
         labelOffset: data.offset,
@@ -90,14 +92,28 @@ function generateGraphData(width: number, height: number, targetCx: number) {
   // Links for main entities
   // 0 (Priya) <-> 1 (Burrito)
   edges.push({ source: 0, target: 1, isMainLink: true });
-  // 2 (Marcus) <-> 3 (Solstice)
-  edges.push({ source: 2, target: 3, isMainLink: true });
+  // 0 (Priya) <-> 2 (Sarah)
+  edges.push({ source: 0, target: 2, isMainLink: true });
+  // 3 (Marcus) <-> 4 (Solstice)
+  edges.push({ source: 3, target: 4, isMainLink: true });
+  // 4 (Solstice) <-> 5 (Alicia)
+  edges.push({ source: 4, target: 5, isMainLink: true });
+  // 3 (Marcus) <-> 5 (Alicia)
+  edges.push({ source: 3, target: 5, isMainLink: true });
+  
+  // Cross-scenario interlinks
+  // 0 (Priya) <-> 3 (Marcus)
+  edges.push({ source: 0, target: 3, isMainLink: true });
+  // 1 (Burrito) <-> 3 (Marcus)
+  edges.push({ source: 1, target: 3, isMainLink: true });
+  // 1 (Burrito) <-> 5 (Alicia)
+  edges.push({ source: 1, target: 5, isMainLink: true });
 
   // Ambient links (only within groups)
-  for (let i = 4; i < nodeCount; i++) {
+  for (let i = mainEntities.length; i < nodeCount; i++) {
     const maxEdges = 2;
     let created = 0;
-    for (let j = 4; j < nodeCount; j++) {
+    for (let j = mainEntities.length; j < nodeCount; j++) {
       if (i === j) continue;
       if (created >= maxEdges) break;
       
@@ -116,12 +132,12 @@ function generateGraphData(width: number, height: number, targetCx: number) {
   }
 
   // Connect ambient nodes loosely to their group's main entities
-  for (let i = 4; i < nodeCount; i++) {
+  for (let i = mainEntities.length; i < nodeCount; i++) {
     if (Math.random() > 0.92) {
       if (nodes[i].cluster === 0) {
-        edges.push({ source: i, target: Math.random() > 0.5 ? 0 : 1 });
+        edges.push({ source: i, target: Math.random() > 0.5 ? 0 : (Math.random() > 0.5 ? 1 : 2) });
       } else {
-        edges.push({ source: i, target: Math.random() > 0.5 ? 2 : 3 });
+        edges.push({ source: i, target: Math.random() > 0.5 ? 3 : (Math.random() > 0.5 ? 4 : 5) });
       }
     }
   }

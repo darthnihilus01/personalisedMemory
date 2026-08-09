@@ -47,9 +47,13 @@ const KNOWLEDGE_BASE: Record<string, EntityData> = {
     color: '#ec4899',
     connections: [
       { name: 'California Burrito', type: 'place', relation: 'Favorite spot together', count: 8, lastSeen: 'Aug 9, 2026', color: '#f59e0b' },
+      { name: 'Sarah', type: 'person', relation: 'College roommate', count: 4, lastSeen: 'Jul 12, 2026', color: '#a855f7' },
+      { name: 'Marcus', type: 'person', relation: 'Introduced him to Burrito', count: 1, lastSeen: 'Mar 2, 2026', color: '#2dd4bf' },
     ],
     citations: [
       { date: 'Aug 9, 2026', time: '7:20 PM', snippet: '"Caught up with Priya at California Burrito today. Didn\'t realize how much I\'d missed her until we were sitting there again — felt like no time had passed."', linkedEntities: ['California Burrito'] },
+      { date: 'Jul 12, 2026', time: '8:00 PM', snippet: '"Sarah texted that she and Priya are planning a trip to Austin next month. Might join them if work slows down."', linkedEntities: ['Sarah'] },
+      { date: 'Mar 2, 2026', time: '12:30 PM', snippet: '"Took Marcus to California Burrito. Priya was actually there getting takeout, so I introduced them. Funny worlds colliding."', linkedEntities: ['Marcus', 'California Burrito'] },
       { date: 'Jun 12, 2025', time: '9:15 PM', snippet: '"Priya called out of nowhere. She\'s moving back to the city next year. Can\'t believe it\'s been almost two years since we last hung out in person."', linkedEntities: [] },
       { date: 'Feb 14, 2025', time: '11:30 AM', snippet: '"Sent Priya a long voice note for her birthday. Rambled about college memories. She sent one back that made me laugh for ten minutes straight."', linkedEntities: [] },
       { date: 'Dec 25, 2024', time: '3:00 PM', snippet: '"Family dinner, then called Priya. We talked about the old apartment and how we used to order California Burrito at 2AM during finals."', linkedEntities: ['California Burrito'] },
@@ -69,13 +73,16 @@ const KNOWLEDGE_BASE: Record<string, EntityData> = {
     color: '#2dd4bf',
     connections: [
       { name: 'Solstice Capital', type: 'org', relation: 'Works at', count: 12, lastSeen: 'Aug 9, 2026', color: '#38bdf8' },
+      { name: 'Alicia', type: 'person', relation: 'Partner', count: 2, lastSeen: 'Aug 9, 2026', color: '#10b981' },
+      { name: 'Priya', type: 'person', relation: 'Met briefly', count: 1, lastSeen: 'Mar 2, 2026', color: '#ec4899' },
     ],
     citations: [
-      { date: 'Aug 9, 2026', time: '3:45 PM', snippet: '"Call with Marcus from Solstice Capital about the investment. Was nervous going in, but it went really well — feels like a weight lifted."', linkedEntities: ['Solstice Capital'] },
+      { date: 'Aug 9, 2026', time: '3:45 PM', snippet: '"Call with Marcus from Solstice Capital about the investment. Was nervous going in, but it went really well — feels like a weight lifted. Almost called him Alicia at the start."', linkedEntities: ['Solstice Capital', 'Alicia'] },
       { date: 'Aug 2, 2026', time: '10:00 AM', snippet: '"Prepping for the Marcus call next week. Revised the pitch deck again. Series A numbers looking solid. Need to nail the narrative."', linkedEntities: ['Solstice Capital'] },
       { date: 'Jul 15, 2026', time: '2:30 PM', snippet: '"Quick email from Marcus — they want to schedule a follow-up. This is the third touchpoint. Feeling cautiously optimistic."', linkedEntities: ['Solstice Capital'] },
       { date: 'May 28, 2026', time: '4:15 PM', snippet: '"Had a casual check-in with Marcus. He asked about our growth metrics. Sent him the dashboard link after."', linkedEntities: ['Solstice Capital'] },
-      { date: 'Jan 18, 2026', time: '11:00 AM', snippet: '"First meeting with Marcus at Solstice Capital. Intense but good energy. He asked the right questions. Could be a great partner."', linkedEntities: ['Solstice Capital'] },
+      { date: 'Mar 2, 2026', time: '12:30 PM', snippet: '"Took Marcus to California Burrito. Priya was actually there getting takeout, so I introduced them. Funny worlds colliding."', linkedEntities: ['Priya', 'California Burrito'] },
+      { date: 'Jan 18, 2026', time: '11:00 AM', snippet: '"First meeting with Marcus and Alicia at Solstice Capital. Intense but good energy. They asked the right questions. Could be a great partner."', linkedEntities: ['Solstice Capital', 'Alicia'] },
     ],
   },
   'california burrito': {
@@ -88,9 +95,13 @@ const KNOWLEDGE_BASE: Record<string, EntityData> = {
     color: '#f59e0b',
     connections: [
       { name: 'Priya', type: 'person', relation: 'Always goes together', count: 8, lastSeen: 'Aug 9, 2026', color: '#ec4899' },
+      { name: 'Marcus', type: 'person', relation: 'Brought him here once', count: 1, lastSeen: 'Mar 2, 2026', color: '#2dd4bf' },
+      { name: 'Alicia', type: 'person', relation: 'Client lunch', count: 1, lastSeen: 'Jan 18, 2026', color: '#10b981' },
     ],
     citations: [
       { date: 'Aug 9, 2026', time: '7:20 PM', snippet: '"Stopped by California Burrito with Priya. Our usual spot. The carne asada hasn\'t changed — neither has our friendship."', linkedEntities: ['Priya'] },
+      { date: 'Mar 2, 2026', time: '12:30 PM', snippet: '"Took Marcus to California Burrito. Priya was actually there getting takeout, so I introduced them. Funny worlds colliding."', linkedEntities: ['Priya', 'Marcus'] },
+      { date: 'Jan 18, 2026', time: '2:00 PM', snippet: '"After the intense meeting at Solstice Capital, we grabbed a quick lunch with Marcus and Alicia at California Burrito. She loved the al pastor."', linkedEntities: ['Alicia', 'Marcus'] },
       { date: 'Aug 22, 2024', time: '1:20 PM', snippet: '"Quick lunch at California Burrito. Wished Priya was here — it\'s really our place. Texted her a photo of the carne asada."', linkedEntities: ['Priya'] },
       { date: 'Jun 8, 2024', time: '8:00 PM', snippet: '"Priya and I grabbed dinner at California Burrito before she left. Bittersweet. She promised she\'d be back."', linkedEntities: ['Priya'] },
       { date: 'Mar 14, 2024', time: '4:30 PM', snippet: '"We snuck out of the rooftop party early to get burritos, obviously. The al pastor was insane."', linkedEntities: ['Priya'] },
@@ -106,18 +117,54 @@ const KNOWLEDGE_BASE: Record<string, EntityData> = {
     color: '#38bdf8',
     connections: [
       { name: 'Marcus', type: 'person', relation: 'Primary contact', count: 9, lastSeen: 'Aug 9, 2026', color: '#2dd4bf' },
+      { name: 'Alicia', type: 'person', relation: 'Partner', count: 2, lastSeen: 'Aug 9, 2026', color: '#10b981' },
     ],
     citations: [
       { date: 'Aug 9, 2026', time: '3:45 PM', snippet: '"Call with Marcus from Solstice Capital about the investment. Was nervous going in, but it went really well."', linkedEntities: ['Marcus'] },
       { date: 'Aug 2, 2026', time: '10:00 AM', snippet: '"Prepping for the Marcus call next week. Revised the pitch deck again. Series A numbers looking solid."', linkedEntities: ['Marcus'] },
       { date: 'Jul 15, 2026', time: '2:30 PM', snippet: '"Quick email from Marcus at Solstice — they want to schedule a follow-up. Third touchpoint."', linkedEntities: ['Marcus'] },
       { date: 'May 28, 2026', time: '4:15 PM', snippet: '"Casual check-in with Marcus. He asked about our growth metrics."', linkedEntities: ['Marcus'] },
-      { date: 'Jan 18, 2026', time: '11:00 AM', snippet: '"First meeting with Marcus at Solstice Capital. Intense but good energy."', linkedEntities: ['Marcus'] },
+      { date: 'Jan 18, 2026', time: '11:00 AM', snippet: '"First meeting with Marcus and Alicia at Solstice Capital. Intense but good energy."', linkedEntities: ['Marcus', 'Alicia'] },
+    ],
+  },
+  alicia: {
+    name: 'Alicia',
+    type: 'person',
+    subtitle: 'Partner at Solstice',
+    mentions: 4,
+    firstSeen: 'Jan 18, 2026',
+    lastSeen: 'Aug 9, 2026',
+    color: '#10b981',
+    connections: [
+      { name: 'Solstice Capital', type: 'org', relation: 'Firm', count: 4, lastSeen: 'Aug 9, 2026', color: '#38bdf8' },
+      { name: 'Marcus', type: 'person', relation: 'Colleague', count: 2, lastSeen: 'Aug 9, 2026', color: '#2dd4bf' },
+    ],
+    citations: [
+      { date: 'Aug 9, 2026', time: '3:45 PM', snippet: '"Call with Marcus from Solstice Capital. Alicia was supposed to join but she had a conflict. We ended up covering the Q3 roadmap anyway."', linkedEntities: ['Marcus', 'Solstice Capital'] },
+      { date: 'Mar 15, 2026', time: '2:00 PM', snippet: '"Alicia replied to my update email. Said they are keeping an eye on our Q2 numbers. Good sign."', linkedEntities: ['Solstice Capital'] },
+      { date: 'Jan 18, 2026', time: '11:00 AM', snippet: '"First meeting with Marcus and Alicia at Solstice Capital. She had really sharp questions about our go-to-market strategy. We grabbed lunch at California Burrito afterwards."', linkedEntities: ['Marcus', 'Solstice Capital', 'California Burrito'] },
+    ],
+  },
+  sarah: {
+    name: 'Sarah',
+    type: 'person',
+    subtitle: 'College Friend',
+    mentions: 12,
+    firstSeen: 'Nov 12, 2024',
+    lastSeen: 'Jul 12, 2026',
+    color: '#a855f7',
+    connections: [
+      { name: 'Priya', type: 'person', relation: 'College roommate', count: 4, lastSeen: 'Jul 12, 2026', color: '#ec4899' },
+    ],
+    citations: [
+      { date: 'Jul 12, 2026', time: '8:00 PM', snippet: '"Sarah texted that she and Priya are planning a trip to Austin next month. Might join them if work slows down."', linkedEntities: ['Priya'] },
+      { date: 'Jan 5, 2026', time: '1:00 PM', snippet: '"Grabbed coffee with Sarah. She\'s starting a new job next week."', linkedEntities: [] },
+      { date: 'Nov 12, 2024', time: '6:30 PM', snippet: '"Dinner with Sarah. We reminisced about the old days with Priya."', linkedEntities: ['Priya'] },
     ],
   },
 };
 
-const SEARCH_SUGGESTIONS = ['Priya', 'Marcus', 'California Burrito', 'Solstice Capital'];
+const SEARCH_SUGGESTIONS = ['Priya', 'Marcus', 'California Burrito', 'Solstice Capital', 'Alicia', 'Sarah'];
 const TYPING_SPEED = 120;
 
 interface FinalCTAProps {
@@ -244,10 +291,13 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: 'spring', stiffness: 60, damping: 20 }}
     >
+      {/* Restored Blue Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] h-[600px] bg-cyan-600/[0.06] blur-[160px] pointer-events-none rounded-full" />
+
       <div className="max-w-6xl mx-auto flex flex-col items-center relative z-10">
 
         <motion.h2
-          className="font-display w-full max-w-[1200px] text-[28px] sm:text-[40px] md:text-[48px] font-medium text-white leading-[1.1] tracking-tight mb-3 md:whitespace-nowrap text-center"
+          className="font-display w-full max-w-[1200px] text-[32px] sm:text-[48px] md:text-[56px] font-medium text-white leading-[1.1] tracking-tight mb-3 md:whitespace-nowrap text-center"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
@@ -255,7 +305,7 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
         </motion.h2>
 
         <motion.h3
-          className="font-display w-full max-w-[1200px] text-[28px] sm:text-[40px] md:text-[48px] font-medium leading-[1.1] tracking-tight text-zinc-400 mb-4 md:whitespace-nowrap text-center"
+          className="font-display w-full max-w-[1200px] text-[32px] sm:text-[48px] md:text-[56px] font-medium leading-[1.1] tracking-tight text-zinc-400 mb-4 md:whitespace-nowrap text-center"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
@@ -329,7 +379,7 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
             {activeEntity && (
               <motion.div
                 key={activeEntity.name}
-                className="absolute right-0 sm:right-4 top-14 z-40 w-full max-w-[420px] px-3 sm:px-0"
+                className="absolute right-0 sm:right-4 top-[140px] z-40 w-full max-w-[480px] px-3 sm:px-0"
                 initial={{ opacity: 0, x: 20, scale: 0.96 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
                 exit={{ opacity: 0, x: 10, scale: 0.98 }}
