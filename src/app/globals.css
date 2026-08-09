@@ -135,11 +135,13 @@
 .wave-group {
   animation: waveDrift 22s ease-in-out infinite alternate;
   transform-origin: 50% 50%;
+  will-change: transform;
 }
 
 .wave-group-slow {
   animation: waveDrift 30s ease-in-out infinite alternate;
   transform-origin: 50% 50%;
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {

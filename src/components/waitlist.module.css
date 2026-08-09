@@ -44,6 +44,7 @@
 .waveGroup {
   animation: waitlistDrift 22s ease-in-out infinite alternate;
   transform-origin: 50% 50%;
+  will-change: transform;
 }
 .waveGroup.slow {
   animation-duration: 30s;

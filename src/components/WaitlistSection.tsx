@@ -24,7 +24,7 @@ export default function WaitlistSection() {
     <main id="waitlist" className={`${styles.scene} ${geist.variable}`}>
       {/* Seamless blend gradient from the previous section */}
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#020308] to-transparent z-10 pointer-events-none" />
-      {/* Flowing light waves */}
+      {/* Flowing light waves — no SVG filters to keep animation on GPU */}
       <svg
         className={styles.waves}
         viewBox="0 0 1440 900"
@@ -44,65 +44,42 @@ export default function WaitlistSection() {
             <stop offset="70%" stopColor="#7dd3fc" stopOpacity={0.75} />
             <stop offset="100%" stopColor="#7dd3fc" stopOpacity={0} />
           </linearGradient>
-          <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="10" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-          <filter id="bigGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="22" />
-          </filter>
         </defs>
 
+        {/* Wave 1 — primary */}
         <g className={styles.waveGroup}>
           <path
             d="M-100,640 C160,585 300,700 500,650 C700,600 800,500 970,450 C1140,400 1320,320 1620,170"
             fill="none"
             stroke="url(#waveGrad)"
-            strokeWidth={26}
-            filter="url(#bigGlow)"
-            opacity={0.55}
-          />
-          <path
-            d="M-100,640 C160,585 300,700 500,650 C700,600 800,500 970,450 C1140,400 1320,320 1620,170"
-            fill="none"
-            stroke="url(#waveGrad)"
             strokeWidth={3.5}
-            filter="url(#softGlow)"
+            opacity={0.75}
           />
         </g>
 
+        {/* Wave 2 — secondary */}
         <g className={`${styles.waveGroup} ${styles.slow}`}>
           <path
             d="M-100,700 C190,650 330,760 540,705 C750,650 840,555 1010,500 C1180,445 1360,365 1650,240"
             fill="none"
             stroke="url(#waveGrad2)"
-            strokeWidth={20}
-            filter="url(#bigGlow)"
-            opacity={0.45}
-          />
-          <path
-            d="M-100,700 C190,650 330,760 540,705 C750,650 840,555 1010,500 C1180,445 1360,365 1650,240"
-            fill="none"
-            stroke="url(#waveGrad2)"
             strokeWidth={2.5}
-            filter="url(#softGlow)"
+            opacity={0.6}
           />
         </g>
 
+        {/* Wave 3 — thin accent */}
         <g className={styles.waveGroup} style={{ animationDelay: '-6s' }}>
           <path
             d="M-100,590 C170,540 290,650 470,600 C650,550 760,460 930,410 C1100,360 1280,290 1600,130"
             fill="none"
             stroke="url(#waveGrad)"
             strokeWidth={1.5}
-            filter="url(#softGlow)"
-            opacity={0.8}
+            opacity={0.45}
           />
         </g>
       </svg>
+
 
       {/* Giant background wordmark — letters spread edge-to-edge */}
       <div className={styles.giantText} aria-hidden="true">

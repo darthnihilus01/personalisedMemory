@@ -36,10 +36,10 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
     if (hasStarted.current || !isUnlocked) return;
     hasStarted.current = true;
 
-    // STEP 1: Pause 2.5 seconds on centered graph, then shift graph to left
+    // STEP 1: Pause 2 seconds on centered graph, then shift graph to left
     setTimeout(() => {
       setPhase('shifting_graph');
-    }, 2500);
+    }, 2000);
   }, [isUnlocked]);
 
   useEffect(() => {
@@ -47,9 +47,12 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) startSequence();
+        if (entry.isIntersecting) {
+          startSequence();
+          observer.disconnect();
+        }
       },
-      { threshold: 0.35 }
+      { threshold: 0.3 }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -132,9 +135,9 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
     <motion.div
       ref={sectionRef}
       className="w-full relative z-20 text-white pt-24 pb-16 px-6 overflow-hidden"
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 60 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.9, ease }}
+      transition={{ type: 'spring', stiffness: 55, damping: 18, mass: 1.1 }}
     >
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[500px] bg-cyan-600/[0.04] blur-[180px] pointer-events-none rounded-full" />
@@ -147,7 +150,7 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.1, ease }}
+          transition={{ type: 'spring', stiffness: 70, damping: 20, delay: 0.1 }}
         >
           Not another place to store your life.
         </motion.h2>
@@ -157,7 +160,7 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2, ease }}
+          transition={{ type: 'spring', stiffness: 70, damping: 20, delay: 0.22 }}
         >
           A memory that grows with it.
         </motion.h3>
@@ -170,12 +173,12 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
             {showSearchBar && (
               <motion.div
                 className="absolute top-4 left-1/2 -translate-x-1/2 z-40 w-full max-w-[480px] px-4"
-                initial={{ opacity: 0, y: -25, scale: 0.95 }}
+                initial={{ opacity: 0, y: -30, scale: 0.92 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.6, ease }}
+                exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 120, damping: 18 }}
               >
-                <div className="w-full bg-[#050914]/95 backdrop-blur-2xl border border-cyan-500/40 rounded-full p-2.5 pl-5 pr-3 shadow-[0_10px_40px_rgba(0,0,0,0.9)] flex items-center justify-between group">
+                <div className="w-full bg-[#050914] border border-cyan-500/40 rounded-full p-2.5 pl-5 pr-3 shadow-[0_10px_40px_rgba(0,0,0,0.9)] flex items-center justify-between group">
                   <div className="flex items-center gap-3 flex-1">
                     <Search className="w-4 h-4 text-cyan-400 animate-pulse" />
                     <div className="text-sm text-zinc-100 font-medium flex items-center">
@@ -199,12 +202,12 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
             {showResultsCard && (
               <motion.div
                 className="absolute right-2 sm:right-6 top-24 z-40 w-full max-w-[420px] px-4 sm:px-0"
-                initial={{ opacity: 0, x: 40, scale: 0.95 }}
+                initial={{ opacity: 0, x: 50, scale: 0.93 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, x: 40 }}
-                transition={{ duration: 0.5, ease }}
+                exit={{ opacity: 0, x: 40, scale: 0.96 }}
+                transition={{ type: 'spring', stiffness: 110, damping: 20 }}
               >
-                <div className="w-full bg-[#050914]/95 backdrop-blur-2xl border border-white/[0.12] rounded-2xl p-4 shadow-[0_25px_70px_rgba(0,0,0,0.95)] flex flex-col gap-2.5 relative overflow-hidden">
+                <div className="w-full bg-[#050914] border border-white/[0.12] rounded-2xl p-4 shadow-[0_25px_70px_rgba(0,0,0,0.95)] flex flex-col gap-2.5 relative overflow-hidden">
                   {/* Top Status Header */}
                   <div className="flex items-center justify-between px-2 pb-2 border-b border-white/[0.06] text-[11.5px] text-zinc-400 font-medium">
                     <span className="flex items-center gap-1.5 text-zinc-300">
@@ -218,9 +221,9 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
                   {revealedCount >= 1 && (
                     <motion.div
                       className="p-3.5 rounded-xl bg-white/[0.04] hover:bg-cyan-500/10 border border-white/[0.06] hover:border-cyan-500/30 transition-all flex items-center justify-between cursor-pointer group"
-                      initial={{ opacity: 0, y: 15, scale: 0.96 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      transition={{ duration: 0.4, ease }}
+                      initial={{ opacity: 0, x: 20, scale: 0.95 }}
+                      animate={{ opacity: 1, x: 0, scale: 1 }}
+                      transition={{ type: 'spring', stiffness: 150, damping: 20 }}
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-full bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-medium text-xs">
@@ -241,9 +244,9 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
                   {revealedCount >= 2 && (
                     <motion.div
                       className="p-3.5 rounded-xl bg-white/[0.04] hover:bg-sky-500/10 border border-white/[0.06] hover:border-sky-500/30 transition-all flex items-center justify-between cursor-pointer group"
-                      initial={{ opacity: 0, y: 15, scale: 0.96 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      transition={{ duration: 0.4, ease }}
+                      initial={{ opacity: 0, x: 20, scale: 0.95 }}
+                      animate={{ opacity: 1, x: 0, scale: 1 }}
+                      transition={{ type: 'spring', stiffness: 150, damping: 20 }}
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-full bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400 text-xs">
@@ -264,9 +267,9 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
                   {revealedCount >= 3 && (
                     <motion.div
                       className="p-3.5 rounded-xl bg-white/[0.04] hover:bg-teal-500/10 border border-white/[0.06] hover:border-teal-500/30 transition-all flex items-center justify-between cursor-pointer group"
-                      initial={{ opacity: 0, y: 15, scale: 0.96 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      transition={{ duration: 0.4, ease }}
+                      initial={{ opacity: 0, x: 20, scale: 0.95 }}
+                      animate={{ opacity: 1, x: 0, scale: 1 }}
+                      transition={{ type: 'spring', stiffness: 150, damping: 20 }}
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-full bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-teal-400 text-xs">
