@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Mic, Calendar, Link2 } from 'lucide-react';
+import { Mic, Calendar, Link2, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
@@ -71,8 +71,8 @@ const INSTANCES: Record<InstanceType, InstanceData> = {
   },
 };
 
-const TYPING_SPEED = 120;
-const PAUSE_BEFORE_TYPING = 400;
+const TYPING_SPEED = 80;
+const PAUSE_BEFORE_TYPING = 200;
 
 interface CaptureDemoProps {
   onComplete?: () => void;
@@ -148,6 +148,21 @@ export default function CaptureDemo({ onComplete }: CaptureDemoProps) {
     }
   }, [phase, wordIndex, data.words.length, onComplete, activeInstance]);
 
+  // Enter to skip
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Enter' && phase !== 'compiled') {
+        setPhase('compiled');
+        setWordIndex(data.words.length);
+        if (onComplete) {
+          onComplete();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [phase, data.words.length, onComplete]);
+
   const showCompiled = ['compiling', 'compiled'].includes(phase);
   const isFullyCompiled = phase === 'compiled';
 
@@ -165,13 +180,13 @@ export default function CaptureDemo({ onComplete }: CaptureDemoProps) {
       
       {/* ── SECTION HEADER ── */}
       <motion.section
-        className="text-center max-w-2xl mx-auto flex flex-col gap-3 items-center mb-10"
+        className="text-center max-w-[1200px] mx-auto flex flex-col gap-3 items-center mb-10"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.7, ease }}
       >
-        <h2 className="font-display text-[28px] md:text-[40px] font-medium text-white leading-[1.15] tracking-tight">
+        <h2 className="font-display w-full text-[32px] sm:text-[48px] md:text-[56px] font-medium text-white leading-[1.1] tracking-tight md:whitespace-nowrap">
           Everything you tell it <br className="hidden md:block" />
           <span className="text-zinc-400">becomes part of your story.</span>
         </h2>
@@ -179,6 +194,20 @@ export default function CaptureDemo({ onComplete }: CaptureDemoProps) {
           Talk naturally — stumble, correct yourself, ramble. Lattice listens through the noise and compiles your raw thoughts into clean, structured memory.
         </p>
       </motion.section>
+
+      {/* ── GLOBAL SKIP HINT ── */}
+      <AnimatePresence>
+        {!isFullyCompiled && (
+          <motion.div
+            className="fixed bottom-6 right-6 z-50 text-[10px] text-zinc-500 bg-black/40 px-3 py-1.5 rounded-full border border-white/[0.05] backdrop-blur-md flex items-center gap-1.5 pointer-events-none"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+          >
+            Press <span className="font-mono text-zinc-400 bg-white/[0.05] px-1 py-0.5 rounded">Enter</span> to skip
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ── INSTANCE TOGGLE ── */}
       <div className="flex justify-center mb-12 relative z-30">
@@ -344,6 +373,41 @@ export default function CaptureDemo({ onComplete }: CaptureDemoProps) {
 
         </div>
       </motion.div>
+
+      {/* ── FULL DAY COMPILED ENTRY (ALWAYS VISIBLE AT BOTTOM) ── */}
+      <AnimatePresence>
+        {isFullyCompiled && (
+          <motion.div 
+            className="w-full max-w-[800px] mx-auto mt-16 pb-12 z-20 relative"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease }}
+          >
+            <div className="w-full bg-[#0a0b10] border border-white/[0.06] rounded-2xl p-6 md:p-8 flex flex-col gap-4">
+              <div className="flex items-center justify-between border-b border-white/[0.04] pb-4 mb-2">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-zinc-400" />
+                  <h4 className="text-[13px] font-medium text-zinc-200 tracking-tight">Full Day Summary</h4>
+                </div>
+                <div className="flex items-center gap-2 text-zinc-500 text-[12px]">
+                  <Calendar className="w-3.5 h-3.5" /><span>Aug 9, 2026</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 flex-wrap">
+                <Link2 className="w-3.5 h-3.5 text-zinc-600" />
+                {['Marcus', 'Solstice Capital', 'Priya', 'California Burrito'].map((e) => (
+                  <span key={e} className="text-[11px] text-zinc-400 font-medium bg-white/[0.03] px-2 py-0.5 rounded border border-white/[0.05]">{e}</span>
+                ))}
+              </div>
+
+              <p className="text-[14px] md:text-[15px] text-zinc-300 leading-[1.7]">
+                &ldquo;Today started with a call with <strong className="font-medium text-zinc-100">Marcus</strong> from <strong className="font-medium text-zinc-100">Solstice Capital</strong> about the investment. I was honestly nervous going in, but it went really well — felt like a weight lifted. Later on, I caught up with <strong className="font-medium text-zinc-100">Priya</strong> after two years. We stopped by my favorite spot, <strong className="font-medium text-zinc-100">California Burrito</strong>, like always, and it hit me sitting there just how much I&apos;d missed her — no time had passed at all. Good day overall — relief on one end, and a reminder of how some friendships just don&apos;t change.&rdquo;
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

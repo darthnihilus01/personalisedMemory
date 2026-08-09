@@ -15,12 +15,14 @@ interface Node {
   isMainEntity?: boolean;
   entityName?: string;
   labelOffset?: { x: number; y: number };
+  currentAlpha?: number;
 }
 
 interface Edge {
   source: number;
   target: number;
   isMainLink?: boolean;
+  currentAlpha?: number;
 }
 
 interface ObsidianGraphProps {
@@ -238,17 +240,26 @@ export default function ObsidianGraph({ isShifted = false, revealedCount = 0, ac
           }
         }
 
+        let targetAlpha = 0;
+        if (isActiveLink && revealedCount > 0) {
+          targetAlpha = 0.8;
+        } else {
+          targetAlpha = 0.15;
+        }
+
+        e.currentAlpha = e.currentAlpha ?? targetAlpha;
+        e.currentAlpha += (targetAlpha - e.currentAlpha) * 0.08;
+
         if (isActiveLink && revealedCount > 0) {
           ctx.beginPath();
           ctx.moveTo(s.x, s.y);
           ctx.lineTo(t.x, t.y);
-          // Highlight connection color based on active entity
           const gradient = ctx.createLinearGradient(s.x, s.y, t.x, t.y);
           gradient.addColorStop(0, s.color);
           gradient.addColorStop(1, t.color);
           ctx.strokeStyle = gradient;
           ctx.lineWidth = 2.5;
-          ctx.globalAlpha = 0.8;
+          ctx.globalAlpha = e.currentAlpha;
           ctx.stroke();
         } else {
           ctx.beginPath();
@@ -256,7 +267,7 @@ export default function ObsidianGraph({ isShifted = false, revealedCount = 0, ac
           ctx.lineTo(t.x, t.y);
           ctx.strokeStyle = '#71717a';
           ctx.lineWidth = 0.8;
-          ctx.globalAlpha = 0.15;
+          ctx.globalAlpha = e.currentAlpha;
           ctx.stroke();
         }
       });
@@ -284,17 +295,28 @@ export default function ObsidianGraph({ isShifted = false, revealedCount = 0, ac
           }
         }
 
+        let targetAlpha = 0;
+        if (isHighlighted || isConnected) {
+          targetAlpha = 1;
+        } else if (n.isMainEntity) {
+          targetAlpha = activeEntity ? 0.2 : 0.8;
+        } else {
+          targetAlpha = activeEntity ? 0.1 : 0.3;
+        }
+
+        n.currentAlpha = n.currentAlpha ?? targetAlpha;
+        n.currentAlpha += (targetAlpha - n.currentAlpha) * 0.08;
+
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
 
         if (isHighlighted || isConnected) {
-          // Glow effect for active or connected entities
           const pulse = Math.sin(pulsePhaseRef.current) * 0.3 + 0.7;
           
           ctx.shadowColor = n.color;
-          ctx.shadowBlur = 15 * pulse;
+          ctx.shadowBlur = 15 * pulse * n.currentAlpha;
           ctx.fillStyle = n.color;
-          ctx.globalAlpha = 1;
+          ctx.globalAlpha = n.currentAlpha;
           ctx.fill();
 
           ctx.shadowBlur = 0;
@@ -302,33 +324,30 @@ export default function ObsidianGraph({ isShifted = false, revealedCount = 0, ac
           ctx.lineWidth = 1.5;
           ctx.stroke();
 
-          // Draw label
           if (n.label) {
             ctx.fillStyle = '#ffffff';
             ctx.font = '500 13px Inter, sans-serif';
-            ctx.globalAlpha = 0.9;
+            ctx.globalAlpha = n.currentAlpha * 0.9;
             const offX = n.labelOffset?.x || 0;
             const offY = n.labelOffset?.y || -15;
             ctx.fillText(n.label, n.x + offX, n.y + offY);
           }
         } else if (n.isMainEntity) {
-          // Main entity, but not active (dimmed)
           ctx.fillStyle = n.color;
-          ctx.globalAlpha = activeEntity ? 0.2 : 0.8;
+          ctx.globalAlpha = n.currentAlpha;
           ctx.fill();
 
           if (n.label && !activeEntity) {
             ctx.fillStyle = '#a1a1aa';
             ctx.font = '400 11px Inter, sans-serif';
-            ctx.globalAlpha = 0.5;
+            ctx.globalAlpha = n.currentAlpha * 0.5;
             const offX = n.labelOffset?.x || 0;
             const offY = n.labelOffset?.y || -12;
             ctx.fillText(n.label, n.x + offX, n.y + offY);
           }
         } else {
-          // Ambient node
           ctx.fillStyle = n.color;
-          ctx.globalAlpha = activeEntity ? 0.1 : 0.3;
+          ctx.globalAlpha = n.currentAlpha;
           ctx.fill();
         }
       });

@@ -165,7 +165,7 @@ const KNOWLEDGE_BASE: Record<string, EntityData> = {
 };
 
 const SEARCH_SUGGESTIONS = ['Priya', 'Marcus', 'California Burrito', 'Solstice Capital', 'Alicia', 'Sarah'];
-const TYPING_SPEED = 120;
+const TYPING_SPEED = 40;
 
 interface FinalCTAProps {
   isUnlocked?: boolean;
@@ -184,6 +184,8 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
   const [demoPhase, setDemoPhase] = useState<
     'centered_graph' | 'shifting_graph' | 'demo_typing' | 'demo_results' | 'interactive'
   >('centered_graph');
+  const [demoSequenceIdx, setDemoSequenceIdx] = useState(0);
+  const DEMO_SEQUENCE = ['Priya', 'Marcus', 'California Burrito'];
 
   const [demoTypedText, setDemoTypedText] = useState('');
   const hasStarted = useRef(false);
@@ -200,7 +202,7 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
   const startSequence = useCallback(() => {
     if (hasStarted.current || !isUnlocked) return;
     hasStarted.current = true;
-    setTimeout(() => setDemoPhase('shifting_graph'), 1500);
+    setTimeout(() => setDemoPhase('shifting_graph'), 800);
   }, [isUnlocked]);
 
   useEffect(() => {
@@ -223,29 +225,58 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
 
   useEffect(() => {
     if (demoPhase !== 'demo_typing') return;
-    const target = 'Priya';
+    const target = DEMO_SEQUENCE[demoSequenceIdx];
     if (demoTypedText.length < target.length) {
       const timer = setTimeout(() => setDemoTypedText(target.slice(0, demoTypedText.length + 1)), TYPING_SPEED);
       return () => clearTimeout(timer);
     } else {
       const timer = setTimeout(() => {
         setDemoPhase('demo_results');
-        setActiveEntity(KNOWLEDGE_BASE['priya']);
+        const key = target.toLowerCase();
+        setActiveEntity(KNOWLEDGE_BASE[key]);
       }, 300);
       return () => clearTimeout(timer);
     }
-  }, [demoPhase, demoTypedText]);
+  }, [demoPhase, demoTypedText, demoSequenceIdx]);
 
   useEffect(() => {
     if (demoPhase !== 'demo_results') return;
     const t1 = setTimeout(() => setShowDropNodes(true), 300);
     const t2 = setTimeout(() => setShowCitations(true), 800);
     const t3 = setTimeout(() => {
-      setDemoPhase('interactive');
-      setSearchQuery('Priya');
-      if (onComplete) setTimeout(onComplete, 400);
-    }, 1800);
+      if (demoSequenceIdx < DEMO_SEQUENCE.length - 1) {
+        setDemoTypedText('');
+        setShowDropNodes(false);
+        setShowCitations(false);
+        setDemoSequenceIdx(i => i + 1);
+        setDemoPhase('demo_typing');
+      } else {
+        setDemoPhase('interactive');
+        setSearchQuery(DEMO_SEQUENCE[DEMO_SEQUENCE.length - 1]);
+        if (onComplete) setTimeout(onComplete, 300);
+      }
+    }, 1200); // Wait 1.2 seconds viewing the results
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+  }, [demoPhase, demoSequenceIdx, onComplete]);
+
+  // Enter to skip
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Enter' && demoPhase !== 'interactive' && demoPhase !== 'centered_graph') {
+        const finalTarget = DEMO_SEQUENCE[DEMO_SEQUENCE.length - 1];
+        setDemoPhase('interactive');
+        setSearchQuery(finalTarget);
+        setDemoTypedText(finalTarget);
+        setActiveEntity(KNOWLEDGE_BASE[finalTarget.toLowerCase()]);
+        setShowDropNodes(true);
+        setShowCitations(true);
+        if (onComplete) {
+          onComplete();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [demoPhase, onComplete]);
 
   const handleSearch = useCallback((query: string) => {
@@ -313,7 +344,7 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
         </motion.h3>
 
         <motion.p
-          className="text-zinc-500 text-[14px] md:text-[15px] max-w-lg leading-[1.6] text-center mb-12"
+          className="text-zinc-500 text-[14px] md:text-[15px] max-w-lg leading-[1.6] text-center mb-12 font-medium tracking-tight"
           initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
@@ -362,7 +393,7 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
                   <div className="w-full bg-[#0a0b10] border border-white/[0.08] rounded-xl p-2.5 pl-4 pr-3 shadow-sm flex items-center justify-between">
                     <div className="flex items-center gap-3 flex-1">
                       <Search className="w-4 h-4 text-zinc-400" />
-                      <div className="text-sm text-zinc-200 font-medium flex items-center">
+                      <div className="text-sm text-zinc-200 font-medium flex items-center tracking-tight">
                         <span>{demoTypedText}</span>
                         {demoPhase === 'demo_typing' && <span className="inline-block w-[1.5px] h-[1em] bg-zinc-400 animate-pulse ml-0.5" />}
                       </div>
@@ -385,7 +416,7 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
                 exit={{ opacity: 0, x: 10, scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 100, damping: 18 }}
               >
-                <div className="w-full bg-[#0a0b10]/95 backdrop-blur-md border border-white/[0.08] rounded-xl shadow-lg flex flex-col relative overflow-hidden max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-white/10">
+                <div className="w-full bg-[#0a0b10]/95 backdrop-blur-md border border-white/[0.08] rounded-xl shadow-lg flex flex-col relative overflow-hidden max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 font-sans tracking-tight">
 
                   {/* HEADER */}
                   <div className="p-4 pb-3 border-b border-white/[0.04] sticky top-0 bg-[#0a0b10]/95 backdrop-blur-md z-10">
@@ -395,8 +426,8 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
                           {getEntityIcon(activeEntity.type)}
                         </div>
                         <div>
-                          <h4 className="text-[15px] font-medium text-zinc-100">{activeEntity.name}</h4>
-                          <span className="text-[11px] text-zinc-500">{activeEntity.subtitle}</span>
+                          <h4 className="text-[16px] font-medium text-zinc-100">{activeEntity.name}</h4>
+                          <span className="text-[12px] text-zinc-500 font-medium">{activeEntity.subtitle}</span>
                         </div>
                       </div>
                       <Bookmark className="w-3.5 h-3.5 text-zinc-600 hover:text-zinc-300 cursor-pointer transition-colors" />
@@ -439,8 +470,8 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
                                   {getEntityIcon(conn.type)}
                                 </div>
                                 <div className="flex flex-col">
-                                  <span className="text-[12px] font-medium text-zinc-300 group-hover:text-white transition-colors">{conn.name}</span>
-                                  <span className="text-[10px] text-zinc-500">{conn.relation}</span>
+                                  <span className="text-[13px] font-medium text-zinc-300 group-hover:text-white transition-colors">{conn.name}</span>
+                                  <span className="text-[11px] text-zinc-500">{conn.relation}</span>
                                 </div>
                               </div>
                               <ChevronRight className="w-3.5 h-3.5 text-zinc-600 group-hover:text-zinc-400 transition-colors" />
@@ -521,31 +552,19 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
           </div>
         </div>
 
-        {/* ── FULL DAY COMPILED ENTRY (ALWAYS VISIBLE AT BOTTOM) ── */}
-        <div className="w-full max-w-[800px] mt-16 pb-12">
-          <div className="w-full bg-[#0a0b10] border border-white/[0.06] rounded-2xl p-6 md:p-8 flex flex-col gap-4">
-            <div className="flex items-center justify-between border-b border-white/[0.04] pb-4 mb-2">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-zinc-400" />
-                <h4 className="text-[13px] font-medium text-zinc-200 tracking-tight">Full Day Summary</h4>
-              </div>
-              <div className="flex items-center gap-2 text-zinc-500 text-[12px]">
-                <Calendar className="w-3.5 h-3.5" /><span>Aug 9, 2026</span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 flex-wrap">
-              <Link2 className="w-3.5 h-3.5 text-zinc-600" />
-              {['Marcus', 'Solstice Capital', 'Priya', 'California Burrito'].map((e) => (
-                <span key={e} className="text-[11px] text-zinc-400 font-medium bg-white/[0.03] px-2 py-0.5 rounded border border-white/[0.05]">{e}</span>
-              ))}
-            </div>
-
-            <p className="text-[14px] md:text-[15px] text-zinc-300 leading-[1.7]">
-              &ldquo;Today started with a call with <strong className="font-medium text-zinc-100">Marcus</strong> from <strong className="font-medium text-zinc-100">Solstice Capital</strong> about the investment. I was honestly nervous going in, but it went really well — felt like a weight lifted. Later on, I caught up with <strong className="font-medium text-zinc-100">Priya</strong> after two years. We stopped by my favorite spot, <strong className="font-medium text-zinc-100">California Burrito</strong>, like always, and it hit me sitting there just how much I&apos;d missed her — no time had passed at all. Good day overall — relief on one end, and a reminder of how some friendships just don&apos;t change.&rdquo;
-            </p>
-          </div>
-        </div>
+        {/* ── SKIP HINT (Absolute to section bottom) ── */}
+        <AnimatePresence>
+          {showSearchBar && !isInteractive && (
+            <motion.div
+              className="absolute bottom-6 right-6 z-50 text-[10px] text-zinc-500 bg-black/40 px-3 py-1.5 rounded-full border border-white/[0.05] backdrop-blur-md flex items-center gap-1.5 pointer-events-none"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+            >
+              Press <span className="font-mono text-zinc-400 bg-white/[0.05] px-1 py-0.5 rounded">Enter</span> to skip
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       </div>
     </motion.div>
