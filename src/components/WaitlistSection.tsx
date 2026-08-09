@@ -104,9 +104,11 @@ export default function WaitlistSection() {
         </g>
       </svg>
 
-      {/* Giant background wordmark */}
-      <div className={`${styles.giantText} font-display`} aria-hidden="true">
-        Waitlist
+      {/* Giant background wordmark — letters spread edge-to-edge */}
+      <div className={styles.giantText} aria-hidden="true">
+        {'LATTICE'.split('').map((char, i) => (
+          <span key={i}>{char}</span>
+        ))}
       </div>
 
       <div className={styles.content}>

@@ -59,14 +59,16 @@
 /* ---------- Giant background wordmark ---------- */
 .giantText {
   position: absolute;
-  bottom: -4.5vw;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 0;
+  left: 0;
+  right: 0;
   width: 100vw;
-  text-align: center;
-  font-size: clamp(8rem, 19vw, 24rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 2vw;
+  font-size: clamp(6rem, 15vw, 20rem);
   font-weight: 700;
-  letter-spacing: -0.05em;
   line-height: 1;
   white-space: nowrap;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.03) 100%);
@@ -76,6 +78,7 @@
   user-select: none;
   z-index: 1;
 }
+
 
 .orb {
   position: absolute;
