@@ -4,11 +4,13 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import CaptureDemo from "@/components/CaptureDemo";
 import FinalCTA from "@/components/FinalCTA";
+import MCPDemo from "@/components/MCPDemo";
 import WaitlistSection from "@/components/WaitlistSection";
 
 export default function Home() {
   const [demoCompleted, setDemoCompleted] = useState(false);
   const [graphCompleted, setGraphCompleted] = useState(false);
+  const [mcpCompleted, setMcpCompleted] = useState(false);
 
   return (
     <div className="relative bg-[#020308] text-white overflow-x-hidden font-sans selection:bg-cyan-500/30 min-h-screen">
@@ -88,8 +90,11 @@ export default function Home() {
         {/* ── Stage 2: Knowledge Graph ── */}
         <FinalCTA isUnlocked={demoCompleted} onComplete={() => setGraphCompleted(true)} />
 
-        {/* ── Stage 3: Waitlist ── */}
-        {graphCompleted && <WaitlistSection />}
+        {/* ── Stage 3: MCP Demo ── */}
+        <MCPDemo isUnlocked={graphCompleted} onComplete={() => setMcpCompleted(true)} />
+
+        {/* ── Stage 4: Waitlist ── */}
+        {mcpCompleted && <WaitlistSection />}
       </div>
     </div>
   );
