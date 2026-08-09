@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Zap, Search, User, Rocket, MessageSquare, ChevronRight, Sparkles } from 'lucide-react';
+import { Search, User, Rocket, MessageSquare, ChevronRight, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ObsidianGraph from './ObsidianGraph';
 
@@ -140,18 +140,6 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[500px] bg-cyan-600/[0.04] blur-[180px] pointer-events-none rounded-full" />
 
       <div className="max-w-6xl mx-auto flex flex-col items-center relative z-10">
-
-        {/* Top Tag */}
-        <motion.div
-          className="text-xs text-cyan-400 font-medium tracking-tight mb-4 flex items-center gap-2 bg-cyan-500/10 px-3.5 py-1.5 rounded-full border border-cyan-500/20"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease }}
-        >
-          <Zap className="w-3.5 h-3.5" />
-          <span>PERSONAL KNOWLEDGE GRAPH</span>
-        </motion.div>
 
         {/* Main Headlines */}
         <motion.h2
