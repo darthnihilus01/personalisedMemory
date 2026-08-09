@@ -22,10 +22,11 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "Personal Memory Engine — Never Lose the Thread of Your Life",
+  title: "Lattice — Personal Memory Engine",
   description:
     "Never lose the thread of your life. A personal memory engine that connects the people, moments, decisions, and stories that make up your life.",
   keywords: [
+    "Lattice",
     "Personal Memory Engine",
     "Memory",
     "Context",
@@ -35,15 +36,15 @@ export const metadata: Metadata = {
     "Relationships",
   ],
   openGraph: {
-    title: "Personal Memory Engine — Never Lose the Thread of Your Life",
+    title: "Lattice — Personal Memory Engine",
     description:
       "Never lose the thread of your life. A personal memory engine that connects the people, moments, decisions, and stories that make up your life.",
     type: "website",
-    siteName: "Personal Memory Engine",
+    siteName: "Lattice",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Personal Memory Engine",
+    title: "Lattice",
     description: "Never lose the thread of your life.",
   },
 };

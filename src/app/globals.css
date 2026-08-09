@@ -37,8 +37,11 @@
     color: var(--text-primary);
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     overflow-x: hidden;
-    selection-background-color: rgba(45, 212, 191, 0.3);
-    selection-color: #ffffff;
+  }
+
+  ::selection {
+    background-color: rgba(45, 212, 191, 0.3);
+    color: #ffffff;
   }
 }
 
@@ -51,12 +54,14 @@
 .text-gradient-cyan {
   background: linear-gradient(135deg, #99f6e4 0%, #2dd4bf 50%, #38bdf8 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-headline {
   background: linear-gradient(180deg, #ffffff 15%, #8a94a8 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
