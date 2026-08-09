@@ -12,128 +12,116 @@ interface Node {
   color: string;
   label: string;
   cluster: number;
-  isMatch?: boolean;
-  matchIndex?: number;
+  isMainEntity?: boolean;
+  entityName?: string;
   labelOffset?: { x: number; y: number };
 }
 
 interface Edge {
   source: number;
   target: number;
-  isMatchLink?: boolean;
-  linkMatchCount?: number;
+  isMainLink?: boolean;
 }
 
 interface ObsidianGraphProps {
   isShifted?: boolean;
-  revealedCount?: number; // 0, 1, 2, or 3 results revealed
+  revealedCount?: number;
+  activeEntity?: string;
 }
 
 function generateGraphData(width: number, height: number, targetCx: number) {
   const nodes: Node[] = [];
   const edges: Edge[] = [];
-  const nodeCount = 420;
-
-  const clusterColors = [
-    '#ffffff', // White (Core)
-    '#2dd4bf', // Teal cluster (Marcus)
-    '#ec4899', // Pink/Magenta cluster
-    '#eab308', // Yellow cluster
-    '#14b8a6', // Dark Teal cluster (Backend Scalability)
-    '#38bdf8', // Sky Blue cluster (Project Atlas)
-    '#71717a', // Muted grey satellites
-  ];
-
-  const labels = [
-    'Marcus Thorne', 'Project Atlas', 'Backend Scalability', 'System Inference',
-    'Relief (Emotion)', 'Q4 Technical Specs', 'Team Morale', 'Memory Graph',
-    'Database Architecture', 'Coffee Chat', 'Weekly Sync', 'Aura Engine',
-    'React Query Hooks', 'Turbopack Config', 'Vector Embedding', 'Context Synthesis',
-  ];
+  const nodeCount = 380;
 
   const cy = height / 2;
 
-  // Well-spaced positions for 3 matched nodes
-  const matchPositions = [
-    { x: targetCx - 160, y: cy + 110, color: '#2dd4bf', label: 'Marcus Thorne', offset: { x: -110, y: 22 } },
-    { x: targetCx - 130, y: cy - 120, color: '#38bdf8', label: 'Project Atlas', offset: { x: -100, y: -24 } },
-    { x: targetCx + 150, y: cy - 30, color: '#14b8a6', label: 'Backend Scalability', offset: { x: 18, y: -16 } },
+  // The 4 main isolated entities
+  // Group 1: Priya & California Burrito (Top Leftish)
+  // Group 2: Marcus & Solstice Capital (Bottom Rightish)
+  const mainEntities = [
+    { name: 'Priya', color: '#ec4899', x: targetCx - 140, y: cy - 90, offset: { x: -40, y: -20 } },
+    { name: 'California Burrito', color: '#f59e0b', x: targetCx - 70, y: cy - 140, offset: { x: 10, y: -20 } },
+    { name: 'Marcus', color: '#2dd4bf', x: targetCx + 80, y: cy + 100, offset: { x: 20, y: 20 } },
+    { name: 'Solstice Capital', color: '#38bdf8', x: targetCx + 160, y: cy + 50, offset: { x: 30, y: 10 } },
   ];
 
   for (let i = 0; i < nodeCount; i++) {
-    const isMatch = i === 0 || i === 1 || i === 2;
-
-    if (isMatch) {
-      const matchData = matchPositions[i];
+    if (i < 4) {
+      const data = mainEntities[i];
       nodes.push({
         id: `node-${i}`,
-        x: matchData.x,
-        y: matchData.y,
-        vx: (Math.random() - 0.5) * 0.06,
-        vy: (Math.random() - 0.5) * 0.06,
-        radius: 6,
-        color: matchData.color,
-        label: matchData.label,
-        cluster: i + 1,
-        isMatch: true,
-        matchIndex: i + 1,
-        labelOffset: matchData.offset,
+        x: data.x,
+        y: data.y,
+        vx: (Math.random() - 0.5) * 0.04,
+        vy: (Math.random() - 0.5) * 0.04,
+        radius: 6.5,
+        color: data.color,
+        label: data.name,
+        cluster: i,
+        isMainEntity: true,
+        entityName: data.name,
+        labelOffset: data.offset,
       });
       continue;
     }
 
-    let clusterIndex = 0;
-    if (i < 35) clusterIndex = 0;
-    else if (i < 120) clusterIndex = 1;
-    else if (i < 200) clusterIndex = 2;
-    else if (i < 260) clusterIndex = 3;
-    else if (i < 310) clusterIndex = 4;
-    else if (i < 360) clusterIndex = 5;
-    else clusterIndex = 6;
-
-    const angle = (clusterIndex / 6) * Math.PI * 2;
-    const clusterDist = clusterIndex === 0 ? 0 : 85 + Math.random() * 140;
-    const clusterX = targetCx + Math.cos(angle) * clusterDist;
-    const clusterY = cy + Math.sin(angle) * clusterDist;
-
-    const r = (Math.random() * Math.random()) * 200;
+    // Generate random ambient nodes clustered around the two groups
+    const isGroup1 = Math.random() > 0.5;
+    const centerX = isGroup1 ? targetCx - 100 : targetCx + 120;
+    const centerY = isGroup1 ? cy - 110 : cy + 70;
+    
+    const r = (Math.random() * Math.random()) * 220;
     const a = Math.random() * Math.PI * 2;
-
-    const x = clusterX + Math.cos(a) * r;
-    const y = clusterY + Math.sin(a) * r;
-
-    const radius = i < 18 ? 4.5 + Math.random() * 2.5 : 1.2 + Math.random() * 1.8;
 
     nodes.push({
       id: `node-${i}`,
-      x,
-      y,
-      vx: (Math.random() - 0.5) * 0.12,
-      vy: (Math.random() - 0.5) * 0.12,
-      radius,
-      color: clusterColors[clusterIndex],
-      label: labels[i % labels.length],
-      cluster: clusterIndex,
-      isMatch: false,
+      x: centerX + Math.cos(a) * r,
+      y: centerY + Math.sin(a) * r,
+      vx: (Math.random() - 0.5) * 0.1,
+      vy: (Math.random() - 0.5) * 0.1,
+      radius: Math.random() > 0.95 ? 3 : 1.5,
+      color: '#71717a', // muted grey
+      label: '',
+      cluster: isGroup1 ? 0 : 2,
     });
   }
 
-  // Highlight links from central entity (Marcus) outward to linked entities (No triangle!)
-  edges.push({ source: 0, target: 1, isMatchLink: true, linkMatchCount: 2 });
-  edges.push({ source: 0, target: 2, isMatchLink: true, linkMatchCount: 3 });
+  // Links for main entities
+  // 0 (Priya) <-> 1 (Burrito)
+  edges.push({ source: 0, target: 1, isMainLink: true });
+  // 2 (Marcus) <-> 3 (Solstice)
+  edges.push({ source: 2, target: 3, isMainLink: true });
 
-  for (let i = 0; i < nodeCount; i++) {
-    const maxEdges = i < 20 ? 12 : 3;
+  // Ambient links (only within groups)
+  for (let i = 4; i < nodeCount; i++) {
+    const maxEdges = 2;
     let created = 0;
-    for (let j = i + 1; j < nodeCount; j++) {
+    for (let j = 4; j < nodeCount; j++) {
+      if (i === j) continue;
       if (created >= maxEdges) break;
-      const dx = nodes[i].x - nodes[j].x;
-      const dy = nodes[i].y - nodes[j].y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
+      
+      // Only link if they are in the same general area
+      if (nodes[i].cluster === nodes[j].cluster) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
 
-      if (dist < 70 && Math.random() > 0.25) {
-        edges.push({ source: i, target: j });
-        created++;
+        if (dist < 50 && Math.random() > 0.7) {
+          edges.push({ source: i, target: j });
+          created++;
+        }
+      }
+    }
+  }
+
+  // Connect ambient nodes loosely to their group's main entities
+  for (let i = 4; i < nodeCount; i++) {
+    if (Math.random() > 0.92) {
+      if (nodes[i].cluster === 0) {
+        edges.push({ source: i, target: Math.random() > 0.5 ? 0 : 1 });
+      } else {
+        edges.push({ source: i, target: Math.random() > 0.5 ? 2 : 3 });
       }
     }
   }
@@ -141,26 +129,12 @@ function generateGraphData(width: number, height: number, targetCx: number) {
   return { nodes, edges };
 }
 
-export default function ObsidianGraph({ isShifted = false, revealedCount = 0 }: ObsidianGraphProps) {
+export default function ObsidianGraph({ isShifted = false, revealedCount = 0, activeEntity }: ObsidianGraphProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [hoveredNode, setHoveredNode] = useState<{ label: string; color: string; x: number; y: number } | null>(null);
-  const [matchedPositions, setMatchedPositions] = useState<
-    { id: string; label: string; color: string; x: number; y: number; offset: { x: number; y: number } }[]
-  >([]);
   const graphDataRef = useRef<{ nodes: Node[]; edges: Edge[] } | null>(null);
   const currentOffsetX = useRef(0);
   const pulsePhaseRef = useRef(0);
-
-  // Smooth dimming alpha state for non-matched nodes (1.0 down to 0.35 smoothly)
-  const dimAlphaRef = useRef(1);
-
-  // Smooth line draw progress state for each match edge (0.0 to 1.0)
-  const edgeProgressRef = useRef<{ [key: string]: number }>({
-    '0-1': 0,
-    '0-2': 0,
-    '1-2': 0,
-  });
 
   const initCanvas = useCallback(() => {
     const container = containerRef.current;
@@ -199,151 +173,147 @@ export default function ObsidianGraph({ isShifted = false, revealedCount = 0 }: 
       const dpr = window.devicePixelRatio || 1;
       const width = canvas.width / dpr;
       const height = canvas.height / dpr;
+      const data = graphDataRef.current;
+      if (!data) return;
 
-      pulsePhaseRef.current += 0.025;
-      const pulseScale = 1 + Math.sin(pulsePhaseRef.current) * 0.15;
+      const targetOffsetX = isShifted ? -200 : 0;
+      currentOffsetX.current += (targetOffsetX - currentOffsetX.current) * 0.08;
 
-      const targetOffset = isShifted ? -width * 0.18 : 0;
-      currentOffsetX.current += (targetOffset - currentOffsetX.current) * 0.04;
+      pulsePhaseRef.current += 0.03;
 
-      // Smooth dimming transition for non-matched nodes
-      const targetDimAlpha = revealedCount > 0 ? 0.35 : 1;
-      dimAlphaRef.current += (targetDimAlpha - dimAlphaRef.current) * 0.05;
-
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.save();
       ctx.scale(dpr, dpr);
-      ctx.clearRect(0, 0, width, height);
+      ctx.translate(currentOffsetX.current, 0);
 
-      const data = graphDataRef.current;
-      if (!data) {
-        ctx.restore();
-        animId = requestAnimationFrame(render);
-        return;
-      }
-
-      const { nodes, edges } = data;
-      const offsetX = currentOffsetX.current;
-
-      // Update node positions
-      nodes.forEach((n) => {
-        if (!n) return;
+      // Update nodes
+      data.nodes.forEach((n) => {
         n.x += n.vx;
         n.y += n.vy;
 
-        if (n.y < 30 || n.y > height - 30) n.vy *= -1;
+        // Soft boundaries
+        const padding = 100;
+        if (n.x < padding) n.vx += 0.01;
+        if (n.x > width - padding) n.vx -= 0.01;
+        if (n.y < padding) n.vy += 0.01;
+        if (n.y > height - padding) n.vy -= 0.01;
+
+        // Friction and speed limits
+        n.vx *= 0.98;
+        n.vy *= 0.98;
+        
+        const speed = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
+        if (speed > 0.5) {
+          n.vx = (n.vx / speed) * 0.5;
+          n.vy = (n.vy / speed) * 0.5;
+        }
       });
 
-      // Update smooth line growth progress
-      const targetProg01 = revealedCount >= 2 ? 1 : 0;
-      const targetProg02 = revealedCount >= 3 ? 1 : 0;
-      const targetProg12 = revealedCount >= 3 ? 1 : 0;
+      // Draw edges
+      ctx.lineWidth = 1;
+      data.edges.forEach((e) => {
+        const s = data.nodes[e.source];
+        const t = data.nodes[e.target];
 
-      edgeProgressRef.current['0-1'] += (targetProg01 - edgeProgressRef.current['0-1']) * 0.06;
-      edgeProgressRef.current['0-2'] += (targetProg02 - edgeProgressRef.current['0-2']) * 0.06;
-      edgeProgressRef.current['1-2'] += (targetProg12 - edgeProgressRef.current['1-2']) * 0.06;
+        let isActiveLink = false;
+        if (e.isMainLink && activeEntity) {
+          if (s.entityName === activeEntity || t.entityName === activeEntity) {
+            isActiveLink = true;
+          }
+        }
 
-      // Track positions of currently revealed match nodes
-      const activeMatches = [nodes[0], nodes[1], nodes[2]]
-        .filter((n): n is Node => Boolean(n) && (n.matchIndex || 0) <= revealedCount)
-        .map((n) => ({
-          id: n.id,
-          label: n.label,
-          color: n.color,
-          x: n.x + offsetX,
-          y: n.y,
-          offset: n.labelOffset || { x: 20, y: -20 },
-        }));
-      setMatchedPositions(activeMatches);
-
-      // Draw background normal edges
-      edges.forEach((e) => {
-        if (e.isMatchLink) return;
-        const source = nodes[e.source];
-        const target = nodes[e.target];
-        if (!source || !target) return;
-
-        ctx.lineWidth = 0.4;
-        ctx.strokeStyle = `rgba(255, 255, 255, ${0.08 * dimAlphaRef.current})`;
-        ctx.beginPath();
-        ctx.moveTo(source.x + offsetX, source.y);
-        ctx.lineTo(target.x + offsetX, target.y);
-        ctx.stroke();
-      });
-
-      // Render ultra-subtle 1.2px filament connecting lines (Star branch layout: 0 -> 1 and 0 -> 2)
-      const matchEdgeKeys = [
-        { key: '0-1', source: nodes[0], target: nodes[1], color: '#38bdf8' },
-        { key: '0-2', source: nodes[0], target: nodes[2], color: '#14b8a6' },
-      ];
-
-      matchEdgeKeys.forEach(({ key, source, target, color }) => {
-        if (!source || !target) return;
-        const prog = edgeProgressRef.current[key];
-        if (prog < 0.01) return;
-
-        const x1 = source.x + offsetX;
-        const y1 = source.y;
-        const x2 = target.x + offsetX;
-        const y2 = target.y;
-
-        const currX = x1 + (x2 - x1) * prog;
-        const currY = y1 + (y2 - y1) * prog;
-
-        // Ultra-clean 1.2px filament line stroke
-        ctx.lineWidth = 1.2;
-        ctx.strokeStyle = `rgba(147, 197, 253, ${0.75 * prog})`;
-        ctx.shadowColor = color;
-        ctx.shadowBlur = 8 * prog;
-
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(currX, currY);
-        ctx.stroke();
-        ctx.shadowBlur = 0;
-
-        // Subtle particle travelling along the line
-        if (prog > 0.5) {
-          const t = (pulsePhaseRef.current * 0.6) % 1;
-          const px = x1 + (x2 - x1) * t;
-          const py = y1 + (y2 - y1) * t;
-
+        if (isActiveLink && revealedCount > 0) {
           ctx.beginPath();
-          ctx.arc(px, py, 2, 0, Math.PI * 2);
-          ctx.fillStyle = '#ffffff';
-          ctx.shadowColor = color;
-          ctx.shadowBlur = 6;
-          ctx.fill();
-          ctx.shadowBlur = 0;
+          ctx.moveTo(s.x, s.y);
+          ctx.lineTo(t.x, t.y);
+          // Highlight connection color based on active entity
+          const gradient = ctx.createLinearGradient(s.x, s.y, t.x, t.y);
+          gradient.addColorStop(0, s.color);
+          gradient.addColorStop(1, t.color);
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = 2.5;
+          ctx.globalAlpha = 0.8;
+          ctx.stroke();
+        } else {
+          ctx.beginPath();
+          ctx.moveTo(s.x, s.y);
+          ctx.lineTo(t.x, t.y);
+          ctx.strokeStyle = '#71717a';
+          ctx.lineWidth = 0.8;
+          ctx.globalAlpha = 0.15;
+          ctx.stroke();
         }
       });
 
       // Draw nodes
-      nodes.forEach((n) => {
-        if (!n) return;
-        const nx = n.x + offsetX;
-        const isMatchedNode = n.isMatch && (n.matchIndex || 0) <= revealedCount;
-
-        ctx.globalAlpha = isMatchedNode ? 1 : dimAlphaRef.current;
-
-        if (isMatchedNode) {
-          // Soft ambient bloom aura (subtle, no target rings)
-          ctx.beginPath();
-          ctx.arc(nx, n.y, (n.radius + 6) * pulseScale, 0, Math.PI * 2);
-          ctx.fillStyle = `${n.color}25`;
-          ctx.fill();
+      data.nodes.forEach((n) => {
+        let isHighlighted = false;
+        let isConnected = false;
+        
+        if (n.isMainEntity && activeEntity) {
+          if (n.entityName === activeEntity) {
+            isHighlighted = true;
+          } else if (revealedCount > 0) {
+            // Check if it's connected to the active entity
+            data.edges.forEach(e => {
+              if (e.isMainLink) {
+                const s = data.nodes[e.source];
+                const t = data.nodes[e.target];
+                if ((s.entityName === activeEntity && t.entityName === n.entityName) ||
+                    (t.entityName === activeEntity && s.entityName === n.entityName)) {
+                  isConnected = true;
+                }
+              }
+            });
+          }
         }
 
-        // Core dot
         ctx.beginPath();
-        ctx.arc(nx, n.y, isMatchedNode ? n.radius + 0.5 : n.radius, 0, Math.PI * 2);
-        ctx.fillStyle = n.color;
-        ctx.fill();
+        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
 
-        if (n.radius > 3.5 || isMatchedNode) {
+        if (isHighlighted || isConnected) {
+          // Glow effect for active or connected entities
+          const pulse = Math.sin(pulsePhaseRef.current) * 0.3 + 0.7;
+          
           ctx.shadowColor = n.color;
-          ctx.shadowBlur = isMatchedNode ? 14 : 8;
+          ctx.shadowBlur = 15 * pulse;
+          ctx.fillStyle = n.color;
+          ctx.globalAlpha = 1;
           ctx.fill();
+
           ctx.shadowBlur = 0;
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+
+          // Draw label
+          if (n.label) {
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '500 13px Inter, sans-serif';
+            ctx.globalAlpha = 0.9;
+            const offX = n.labelOffset?.x || 0;
+            const offY = n.labelOffset?.y || -15;
+            ctx.fillText(n.label, n.x + offX, n.y + offY);
+          }
+        } else if (n.isMainEntity) {
+          // Main entity, but not active (dimmed)
+          ctx.fillStyle = n.color;
+          ctx.globalAlpha = activeEntity ? 0.2 : 0.8;
+          ctx.fill();
+
+          if (n.label && !activeEntity) {
+            ctx.fillStyle = '#a1a1aa';
+            ctx.font = '400 11px Inter, sans-serif';
+            ctx.globalAlpha = 0.5;
+            const offX = n.labelOffset?.x || 0;
+            const offY = n.labelOffset?.y || -12;
+            ctx.fillText(n.label, n.x + offX, n.y + offY);
+          }
+        } else {
+          // Ambient node
+          ctx.fillStyle = n.color;
+          ctx.globalAlpha = activeEntity ? 0.1 : 0.3;
+          ctx.fill();
         }
       });
 
@@ -351,74 +321,13 @@ export default function ObsidianGraph({ isShifted = false, revealedCount = 0 }: 
       animId = requestAnimationFrame(render);
     };
 
-    animId = requestAnimationFrame(render);
+    render();
     return () => cancelAnimationFrame(animId);
-  }, [isShifted, revealedCount]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    const canvas = canvasRef.current;
-    if (!canvas || !graphDataRef.current) return;
-    const rect = canvas.getBoundingClientRect();
-    const mx = e.clientX - rect.left;
-    const my = e.clientY - rect.top;
-    const offsetX = currentOffsetX.current;
-
-    let found = false;
-    for (const node of graphDataRef.current.nodes) {
-      if (!node) continue;
-      const nx = node.x + offsetX;
-      const dx = nx - mx;
-      const dy = node.y - my;
-      if (Math.sqrt(dx * dx + dy * dy) < node.radius + 8) {
-        setHoveredNode({ label: node.label, color: node.color, x: nx, y: node.y });
-        found = true;
-        break;
-      }
-    }
-    if (!found) setHoveredNode(null);
-  };
+  }, [isShifted, revealedCount, activeEntity]);
 
   return (
-    <div
-      ref={containerRef}
-      className="w-full h-[600px] sm:h-[680px] relative select-none"
-      style={{
-        maskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 60%, transparent 100%)',
-        WebkitMaskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 60%, transparent 100%)',
-      }}
-    >
-      <canvas
-        ref={canvasRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={() => setHoveredNode(null)}
-        className="w-full h-full cursor-crosshair bg-transparent"
-      />
-
-      {/* Hyper-Subtle Aesthetic Floating Label Tags */}
-      {matchedPositions.map((pos) => (
-        <div
-          key={pos.id}
-          className="absolute pointer-events-none z-30 flex items-center gap-2 bg-[#08090e]/80 backdrop-blur-md border border-white/10 text-zinc-200 text-[11px] font-mono tracking-tight px-2.5 py-1 rounded-md shadow-[0_4px_20px_rgba(0,0,0,0.8)] transition-all duration-700 animate-in fade-in zoom-in-95"
-          style={{
-            left: `${pos.x + (pos.offset?.x ?? 20)}px`,
-            top: `${pos.y + (pos.offset?.y ?? -20)}px`,
-          }}
-        >
-          <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: pos.color }} />
-          <span className="whitespace-nowrap">{pos.label}</span>
-        </div>
-      ))}
-
-      {/* Hover Tooltip */}
-      {hoveredNode && revealedCount === 0 && (
-        <div
-          className="absolute z-30 pointer-events-none -translate-x-1/2 -translate-y-full mb-3 bg-[#0d0e14]/95 text-white text-[11px] font-medium px-3 py-1 rounded-full border border-white/20 shadow-xl flex items-center gap-1.5 backdrop-blur-md"
-          style={{ left: hoveredNode.x, top: hoveredNode.y }}
-        >
-          <span className="w-2 h-2 rounded-full" style={{ backgroundColor: hoveredNode.color }} />
-          <span>{hoveredNode.label}</span>
-        </div>
-      )}
+    <div ref={containerRef} className="absolute inset-0 z-0 pointer-events-none opacity-80 mix-blend-screen">
+      <canvas ref={canvasRef} className="block w-full h-full" />
     </div>
   );
 }
