@@ -13,8 +13,8 @@ interface MCPDemoProps {
 
 type Phase = 'idle' | 'user_typing' | 'sending' | 'tool_call' | 'tool_response' | 'claude_typing' | 'completed';
 
-const USER_PROMPT = "Hey Claude, check @lattice. Looking at my logs from August 7th evening and August 8th evening, which do you think is a better way of spending my work time?";
-const CLAUDE_RESPONSE = "On August 7th, you had an investor call with Marcus that relieved a lot of stress. On August 8th, you caught up with your friend Priya after two years. \n\nWhile the investor call was high-leverage for your business, you noted that seeing Priya made you realize how much you missed her. Given your recent stress levels, the personal connection on the 8th likely provided the emotional recharge you needed to sustain your work long-term.";
+const USER_PROMPT = "Hey Claude, check @lattice — every time I've mentioned my river trail run, who was I with and what time of day was it usually?";
+const CLAUDE_RESPONSE = "Four mentions this year — mostly solo evening runs to decompress, like January and July when you just needed to clear your head. The two exceptions were mornings, both with someone: Adi in April, working through his job situation on the run, and your sister in October, your first run together in months.\n\nPattern's pretty clear — alone in the evening to unwind, but when someone joins, it's a morning thing, and it's never really about the run.";
 
 const TYPING_SPEED = 30; // ms per char
 
@@ -22,6 +22,7 @@ export default function MCPDemo({ isUnlocked = true, onComplete }: MCPDemoProps)
   const [phase, setPhase] = useState<Phase>('idle');
   const [userTypedText, setUserTypedText] = useState('');
   const [claudeTypedText, setClaudeTypedText] = useState('');
+  const [codeExpanded, setCodeExpanded] = useState(false);
   
   const hasStarted = useRef(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -73,7 +74,11 @@ export default function MCPDemo({ isUnlocked = true, onComplete }: MCPDemoProps)
     }
     
     if (phase === 'tool_response') {
-      const timer = setTimeout(() => setPhase('claude_typing'), 800);
+      setCodeExpanded(true);
+      const timer = setTimeout(() => {
+        setCodeExpanded(false);
+        setPhase('claude_typing');
+      }, 2000);
       return () => clearTimeout(timer);
     }
     
@@ -98,6 +103,7 @@ export default function MCPDemo({ isUnlocked = true, onComplete }: MCPDemoProps)
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Enter' && phase !== 'completed' && phase !== 'idle') {
         setPhase('completed');
+        setCodeExpanded(false);
         setUserTypedText(USER_PROMPT);
         setClaudeTypedText(CLAUDE_RESPONSE);
         if (onComplete) onComplete();
@@ -123,9 +129,9 @@ export default function MCPDemo({ isUnlocked = true, onComplete }: MCPDemoProps)
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.7, ease }}
       >
-        <h2 className="font-display w-full text-[32px] sm:text-[48px] md:text-[56px] font-medium text-white leading-[1.1] tracking-tight md:whitespace-nowrap">
-          Bring your memory <br className="hidden md:block" />
-          <span className="text-zinc-400">to any AI.</span>
+        <h2 className="font-display w-full text-[32px] sm:text-[48px] md:text-[56px] font-medium leading-[1.1] tracking-tight md:whitespace-nowrap">
+          <span className="text-white">Bring your memory</span> <br className="hidden md:block" />
+          <span className="text-gradient-cyan">to any AI.</span>
         </h2>
         <p className="text-[#a1a1aa] text-[14px] md:text-[15px] max-w-lg leading-[1.6]">
           Lattice exposes a Model Context Protocol (MCP) server. Connect it to Claude, ChatGPT, or any tool, and let them reason over your life&apos;s context.
@@ -179,7 +185,14 @@ export default function MCPDemo({ isUnlocked = true, onComplete }: MCPDemoProps)
               >
                 <div className="w-8 h-8 rounded-full bg-[#18181b] flex items-center justify-center flex-shrink-0" />
                 <div className="flex-1 pt-1">
-                  <div className="inline-flex items-center gap-2.5 bg-zinc-800/50 hover:bg-zinc-800/80 transition-colors border border-white/[0.05] rounded-xl px-3 py-2 cursor-pointer shadow-sm">
+                  <div 
+                    className="inline-flex items-center gap-2.5 bg-zinc-800/50 hover:bg-zinc-800/80 transition-colors border border-white/[0.05] rounded-xl px-3 py-2 cursor-pointer shadow-sm select-none"
+                    onClick={() => {
+                      if (['tool_response', 'claude_typing', 'completed'].includes(phase)) {
+                        setCodeExpanded(!codeExpanded);
+                      }
+                    }}
+                  >
                     {phase === 'tool_call' ? (
                       <Loader2 className="w-3.5 h-3.5 text-zinc-400 animate-spin" />
                     ) : (
@@ -188,8 +201,42 @@ export default function MCPDemo({ isUnlocked = true, onComplete }: MCPDemoProps)
                     <span className="text-[13px] font-medium text-zinc-300 tracking-tight">
                       Using <span className="text-zinc-100">lattice</span>
                     </span>
-                    <ChevronDown className="w-3 h-3 text-zinc-500 ml-1" />
+                    <ChevronDown className={`w-3 h-3 text-zinc-500 ml-1 transition-transform ${codeExpanded ? 'rotate-180' : ''}`} />
                   </div>
+
+                  <AnimatePresence>
+                    {codeExpanded && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                        animate={{ opacity: 1, height: 'auto', marginTop: 12 }}
+                        exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                        className="w-full max-w-[440px] bg-[#111113] border border-white/[0.05] rounded-xl p-4 font-mono text-[11px] overflow-hidden"
+                      >
+                        <div className="text-zinc-400 mb-2 border-b border-white/[0.05] pb-2">
+                          Request
+                        </div>
+                        <div className="text-zinc-300">
+                          <span className="text-purple-400">query_lattice</span>({'{'}
+                        </div>
+                        <div className="pl-4 text-zinc-400">
+                          topic: <span className="text-green-400">"river trail run"</span>,<br/>
+                          fields: [<span className="text-green-400">"date"</span>, <span className="text-green-400">"time"</span>, <span className="text-green-400">"companions"</span>, <span className="text-green-400">"context"</span>]
+                        </div>
+                        <div className="text-zinc-300">{'}'})</div>
+
+                        <div className="text-zinc-400 mt-4 mb-2 border-b border-white/[0.05] pb-2">
+                          Response
+                        </div>
+                        <div className="text-zinc-500">
+                          <span className="text-cyan-500/80">Returned 4 memory clusters:</span><br/>
+                          - Jan: Solo (Evening) "needed to clear head"<br/>
+                          - Apr: With Adi (Morning) "working through job situation"<br/>
+                          - Jul: Solo (Evening) "decompress"<br/>
+                          - Oct: With sister (Morning) "first run in months"
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </motion.div>
             )}

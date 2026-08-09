@@ -82,32 +82,20 @@ export default function WaitlistSection() {
 
 
       {/* Giant background wordmark — letters spread edge-to-edge */}
-      <div className={styles.giantText} aria-hidden="true">
-        {'LATTICE'.split('').map((char, i) => (
-          <span key={i}>{char}</span>
-        ))}
+      <div className="absolute bottom-0 left-0 right-0 w-full text-center pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+        <span className={`watermark-text ${syncopate.className}`}>
+          Lattice
+        </span>
       </div>
 
       <div className={styles.content}>
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.8 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className={styles.badge}
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-            <path d="M4 21V4a1 1 0 0 1 1-1h13.5a.5.5 0 0 1 .4.8L15 10l3.9 6.2a.5.5 0 0 1-.4.8H5a1 1 0 0 0-1 1Z" />
-          </svg>
-          Waitlist
-        </motion.div>
 
         <motion.h1 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.8 }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className={styles.headline}
+          className="font-display text-[44px] md:text-[52px] lg:text-[64px] font-medium tracking-tight leading-[1.05] mb-12 text-center text-gradient-cyan"
         >
           Coming soon!
         </motion.h1>
@@ -119,8 +107,8 @@ export default function WaitlistSection() {
           transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className={styles.card} aria-labelledby="waitlist-heading"
         >
-          <h2 id="waitlist-heading">Join our waitlist!</h2>
-          <p>Sign up for our newsletter to receive the latest updates and insights straight to your inbox.</p>
+          <h2 id="waitlist-heading" className="font-display text-2xl md:text-[28px] font-medium tracking-tight mb-3">Join our waitlist!</h2>
+          <p className="text-zinc-400 text-[15px] leading-relaxed max-w-[440px] mx-auto mb-9">Sign up for our newsletter to receive the latest updates and insights straight to your inbox.</p>
 
           <WaitlistForm />
         </motion.section>
@@ -132,7 +120,7 @@ export default function WaitlistSection() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className={styles.footerText}
         >
-          <span>© 2026 Waitlist</span>
+          <span>© 2026 Lattice</span>
           <span className={styles.dot} />
           <span>All rights reserved</span>
         </motion.p>

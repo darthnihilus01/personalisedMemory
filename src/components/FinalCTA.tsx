@@ -328,7 +328,7 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
       <div className="max-w-6xl mx-auto flex flex-col items-center relative z-10">
 
         <motion.h2
-          className="font-display w-full max-w-[1200px] text-[32px] sm:text-[48px] md:text-[56px] font-medium text-white leading-[1.1] tracking-tight mb-3 md:whitespace-nowrap text-center"
+          className="font-display w-full max-w-[1200px] text-[32px] sm:text-[48px] md:text-[56px] font-medium text-gradient-cyan leading-[1.1] tracking-tight mb-3 md:whitespace-nowrap text-center"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
