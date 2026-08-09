@@ -155,7 +155,7 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
 
         {/* Main Headlines */}
         <motion.h2
-          className="text-[32px] sm:text-[44px] md:text-[56px] font-medium text-white leading-[1.1] tracking-tight mb-4 max-w-3xl text-center"
+          className="font-display w-full max-w-[1200px] text-[32px] sm:text-[44px] md:text-[56px] font-medium text-white leading-[1.1] tracking-tight mb-4 md:whitespace-nowrap text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -165,7 +165,7 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
         </motion.h2>
 
         <motion.h3
-          className="text-[32px] sm:text-[44px] md:text-[56px] font-medium leading-[1.1] tracking-tight text-cyan-500 mb-8 max-w-3xl text-center"
+          className="font-display w-full max-w-[1200px] text-[32px] sm:text-[44px] md:text-[56px] font-medium leading-[1.1] tracking-tight text-cyan-500 mb-8 md:whitespace-nowrap text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

@@ -104,8 +104,8 @@ export default function WaitlistSection() {
       </svg>
 
       {/* Giant background wordmark */}
-      <div className={`${styles.giantText} ${syncopate.className}`} aria-hidden="true">
-        LORE AI
+      <div className={`${styles.giantText} font-display`} aria-hidden="true">
+        Waitlist
       </div>
 
       <div className={styles.content}>

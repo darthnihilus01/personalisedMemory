@@ -92,7 +92,7 @@ export default function CaptureDemo({ onComplete }: CaptureDemoProps) {
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.7, ease }}
       >
-        <h2 className="text-[28px] md:text-[40px] font-medium text-white leading-[1.15] tracking-tight">
+        <h2 className="font-display text-[28px] md:text-[40px] font-medium text-white leading-[1.15] tracking-tight">
           Everything you tell it <br className="hidden md:block" />
           <span className="text-cyan-500">becomes part of your story.</span>
         </h2>
