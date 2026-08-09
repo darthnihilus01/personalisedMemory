@@ -7,7 +7,7 @@ export default function Footer() {
         {/* Left Status */}
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
             <span className="text-white/80 font-semibold">Memory Engine v1.0</span>
           </div>
           <span className="text-white/20">•</span>
@@ -30,6 +30,9 @@ export default function Footer() {
           </a>
           <a href="#privacy" className="hover:text-white transition-colors">
             Privacy
+          </a>
+          <a href="#waitlist" className="hover:text-white transition-colors">
+            Waitlist
           </a>
         </div>
 

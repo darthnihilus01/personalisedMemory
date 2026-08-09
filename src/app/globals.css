@@ -6,16 +6,16 @@
 
 @layer base {
   :root {
-    --bg-primary: #0b0a12;
-    --bg-surface: #12111a;
-    --bg-hover: #1a1826;
-    --bg-active: #242136;
+    --bg-primary: #020308;
+    --bg-surface: #050914;
+    --bg-hover: #0a1224;
+    --bg-active: #101a30;
     --border-subtle: rgba(255, 255, 255, 0.08);
-    --border-medium: rgba(168, 85, 247, 0.25);
-    --border-purple: rgba(192, 132, 252, 0.4);
-    --accent-purple: #c084fc;
-    --accent-purple-light: #e9d5ff;
-    --accent-purple-glow: rgba(168, 85, 247, 0.25);
+    --border-medium: rgba(45, 212, 191, 0.25);
+    --border-cyan: rgba(45, 212, 191, 0.4);
+    --accent-cyan: #2dd4bf;
+    --accent-cyan-light: #99f6e4;
+    --accent-cyan-glow: rgba(45, 212, 191, 0.25);
     --accent-emerald: #34d399;
     --text-primary: #f8fafc;
     --text-secondary: #cbd5e1;
@@ -27,31 +27,31 @@
     color: var(--text-primary);
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     overflow-x: hidden;
-    selection-background-color: rgba(168, 85, 247, 0.3);
+    selection-background-color: rgba(45, 212, 191, 0.3);
     selection-color: #ffffff;
   }
 }
 
 /* Custom Purple Radial Glow Background from Image */
 .radial-glow-hero {
-  background: radial-gradient(circle at 50% 35%, rgba(147, 51, 234, 0.18) 0%, rgba(168, 85, 247, 0.08) 40%, rgba(11, 10, 18, 0) 75%);
+  background: radial-gradient(circle at 50% 35%, rgba(45, 212, 191, 0.18) 0%, rgba(45, 212, 191, 0.08) 40%, rgba(2, 3, 8, 0) 75%);
 }
 
-.text-gradient-purple {
-  background: linear-gradient(135deg, #e9d5ff 0%, #c084fc 50%, #818cf8 100%);
+.text-gradient-cyan {
+  background: linear-gradient(135deg, #99f6e4 0%, #2dd4bf 50%, #38bdf8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .btn-white-glow {
   background-color: #ffffff;
-  color: #0b0a12;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.35), 0 0 50px rgba(168, 85, 247, 0.25);
+  color: #020308;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.35), 0 0 50px rgba(45, 212, 191, 0.25);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-white-glow:hover {
-  box-shadow: 0 0 35px rgba(255, 255, 255, 0.5), 0 0 70px rgba(168, 85, 247, 0.4);
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.5), 0 0 70px rgba(45, 212, 191, 0.4);
   transform: translateY(-1px);
 }
 
@@ -62,11 +62,11 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.glass-pill-purple {
-  background: rgba(168, 85, 247, 0.08);
+.glass-pill-cyan {
+  background: rgba(45, 212, 191, 0.08);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(192, 132, 252, 0.3);
+  border: 1px solid rgba(45, 212, 191, 0.3);
 }
 
 .panel-quiet {
@@ -83,8 +83,8 @@
 
 .panel-quiet-hover:hover {
   background: rgba(255, 255, 255, 0.04);
-  border-color: var(--border-purple);
-  box-shadow: 0 0 25px rgba(168, 85, 247, 0.1);
+  border-color: var(--border-cyan);
+  box-shadow: 0 0 25px rgba(45, 212, 191, 0.1);
 }
 
 /* Background noise overlay */
@@ -99,7 +99,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #0b0a12;
+  background: #020308;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -108,7 +108,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(192, 132, 252, 0.4);
+  background: rgba(45, 212, 191, 0.4);
 }
 
 /* Slow pulse rings for mic visual */

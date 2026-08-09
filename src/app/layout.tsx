@@ -58,7 +58,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${geistMono.variable} ${newsreader.variable} dark antialiased scroll-smooth`}
     >
-      <body className="bg-[#050505] text-gray-100 min-h-screen flex flex-col font-sans bg-noise selection:bg-blue-500/30 selection:text-white" style={{ fontFamily: "var(--font-inter), sans-serif" }}>
+      <body className="bg-[#020308] text-gray-100 min-h-screen flex flex-col font-sans bg-noise selection:bg-cyan-500/30 selection:text-white" style={{ fontFamily: "var(--font-inter), sans-serif" }}>
         {children}
       </body>
     </html>

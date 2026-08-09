@@ -78,18 +78,18 @@ export default function HowItWorksWalkthrough() {
       className="py-20 md:py-32 relative bg-[#070709] border-t border-white/[0.06] overflow-hidden"
     >
       {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-cyan-600/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-white/10 text-xs font-mono uppercase tracking-widest text-purple-300 mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-panel border border-white/10 text-xs font-mono uppercase tracking-widest text-cyan-300 mb-4">
+            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
             <span>See It In Action</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-light text-white leading-tight tracking-tight mb-4">
             How it works in practice.{" "}
-            <span className="font-serif italic text-gradient-purple block sm:inline">
+            <span className="font-serif italic text-gradient-cyan block sm:inline">
               From speech to memory.
             </span>
           </h2>
@@ -135,7 +135,7 @@ export default function HowItWorksWalkthrough() {
                 {/* Step Header Badge */}
                 <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
                   <div className="flex items-center gap-2.5">
-                    <span className="px-2.5 py-0.5 rounded-md bg-purple-500/15 text-purple-300 border border-purple-500/30 text-xs font-mono">
+                    <span className="px-2.5 py-0.5 rounded-md bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 text-xs font-mono">
                       {activeStep.badge}
                     </span>
                   </div>
@@ -170,7 +170,7 @@ export default function HowItWorksWalkthrough() {
                             {[40, 75, 90, 50, 100, 60, 85, 30, 95, 70, 45, 80].map((h, i) => (
                               <div
                                 key={i}
-                                className="w-1 bg-purple-400/80 rounded-full animate-pulse"
+                                className="w-1 bg-cyan-400/80 rounded-full animate-pulse"
                                 style={{
                                   height: `${h}%`,
                                   animationDelay: `${i * 0.08}s`,
@@ -212,8 +212,8 @@ export default function HowItWorksWalkthrough() {
                         </div>
 
                         {/* Corrected Clean Note */}
-                        <div className="p-5 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 space-y-2">
-                          <div className="text-[11px] font-mono text-emerald-400 uppercase tracking-wider flex items-center justify-between">
+                        <div className="p-5 rounded-2xl bg-teal-950/20 border border-teal-500/30 space-y-2">
+                          <div className="text-[11px] font-mono text-teal-400 uppercase tracking-wider flex items-center justify-between">
                             <span>What It Stores</span>
                             <span className="flex items-center gap-1">
                               <Check className="w-3.5 h-3.5" /> Cleaned Live
@@ -221,7 +221,7 @@ export default function HowItWorksWalkthrough() {
                           </div>
                           <p className="text-xs sm:text-sm font-sans text-white leading-relaxed pt-1">
                             "Just had lunch with{" "}
-                            <span className="text-emerald-300 font-semibold bg-emerald-500/20 px-1 py-0.5 rounded">
+                            <span className="text-teal-300 font-semibold bg-teal-500/20 px-1 py-0.5 rounded">
                               Priya
                             </span>
                             , and she told me she's finally quitting her job. Really happy for her."
@@ -229,7 +229,7 @@ export default function HowItWorksWalkthrough() {
                         </div>
                       </div>
 
-                      <p className="text-xs font-mono text-purple-300 text-center sm:text-left">
+                      <p className="text-xs font-mono text-cyan-300 text-center sm:text-left">
                         ✨ {activeStep.caption}
                       </p>
                     </div>
@@ -255,16 +255,16 @@ export default function HowItWorksWalkthrough() {
                           <span className="text-[10px] font-mono text-white/40 shrink-0">Fragment 1</span>
                         </div>
 
-                        <div className="p-3.5 rounded-xl bg-purple-950/20 border border-purple-500/30 flex items-center justify-between gap-4">
+                        <div className="p-3.5 rounded-xl bg-cyan-950/20 border border-cyan-500/30 flex items-center justify-between gap-4">
                           <div className="flex items-center gap-3">
-                            <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-purple-500/20 text-purple-300">
+                            <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-500/20 text-cyan-300">
                               1:30 PM
                             </span>
                             <span className="text-xs sm:text-sm text-white font-sans">
                               "Just had lunch with Priya, and she told me she's finally quitting her job. Really happy for her."
                             </span>
                           </div>
-                          <span className="text-[10px] font-mono text-purple-300 shrink-0">Fragment 2</span>
+                          <span className="text-[10px] font-mono text-cyan-300 shrink-0">Fragment 2</span>
                         </div>
 
                         <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 flex items-center justify-between gap-4">
@@ -309,12 +309,12 @@ export default function HowItWorksWalkthrough() {
                       <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-[#14141c] to-[#0d0d12] border border-white/15 shadow-xl space-y-4">
                         <div className="flex items-center justify-between border-b border-white/10 pb-3">
                           <div className="flex items-center gap-2">
-                            <BookOpen className="w-4 h-4 text-purple-400" />
-                            <span className="text-xs font-mono text-purple-300 uppercase tracking-wider">
+                            <BookOpen className="w-4 h-4 text-cyan-400" />
+                            <span className="text-xs font-mono text-cyan-300 uppercase tracking-wider">
                               Daily Compiled Entry • Tuesday, Oct 14
                             </span>
                           </div>
-                          <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/30 px-2 py-0.5 rounded border border-emerald-500/30">
+                          <span className="text-[10px] font-mono text-teal-400 bg-teal-950/30 px-2 py-0.5 rounded border border-teal-500/30">
                             100% In Your Voice
                           </span>
                         </div>
@@ -324,7 +324,7 @@ export default function HowItWorksWalkthrough() {
                         </p>
                       </div>
 
-                      <p className="text-xs font-mono text-purple-300 text-center sm:text-left">
+                      <p className="text-xs font-mono text-cyan-300 text-center sm:text-left">
                         ✨ {activeStep.caption}
                       </p>
                     </div>
@@ -368,8 +368,8 @@ export default function HowItWorksWalkthrough() {
                   {activeStepIndex === 5 && (
                     <div className="space-y-8 text-center py-4">
                       <div className="relative inline-block mx-auto">
-                        <div className="w-24 h-24 rounded-full bg-purple-500/20 border-2 border-purple-400 flex items-center justify-center text-white mx-auto shadow-2xl shadow-purple-500/30 animate-pulse">
-                          <Mic className="w-10 h-10 text-purple-300" />
+                        <div className="w-24 h-24 rounded-full bg-cyan-500/20 border-2 border-cyan-400 flex items-center justify-center text-white mx-auto shadow-2xl shadow-cyan-500/30 animate-pulse">
+                          <Mic className="w-10 h-10 text-cyan-300" />
                         </div>
                       </div>
 
@@ -402,7 +402,7 @@ export default function HowItWorksWalkthrough() {
                     key={i}
                     onClick={() => setActiveStepIndex(i)}
                     className={`h-1.5 rounded-full transition-all ${
-                      i === activeStepIndex ? "w-6 bg-purple-400" : "w-1.5 bg-white/20 hover:bg-white/40"
+                      i === activeStepIndex ? "w-6 bg-cyan-400" : "w-1.5 bg-white/20 hover:bg-white/40"
                     }`}
                   />
                 ))}

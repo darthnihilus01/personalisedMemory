@@ -28,7 +28,7 @@ export default function Navbar({
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "py-3 bg-[#0b0a12]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-2xl shadow-black/60"
+          ? "py-3 bg-[#020308]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-2xl shadow-black/60"
           : "py-5 bg-transparent"
       }`}
     >
@@ -39,11 +39,11 @@ export default function Navbar({
           className="flex items-center gap-3 group text-left"
           id="nav-logo"
         >
-          <div className="relative w-8 h-8 rounded-full bg-white/[0.05] border border-white/15 flex items-center justify-center transition-all group-hover:border-purple-500/50">
-            <span className="w-2.5 h-2.5 rounded-full bg-purple-400 animate-pulse" />
+          <div className="relative w-8 h-8 rounded-full bg-white/[0.05] border border-white/15 flex items-center justify-center transition-all group-hover:border-cyan-500/50">
+            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
           </div>
           <div className="flex flex-col">
-            <span className="text-xs font-semibold tracking-wider uppercase text-white group-hover:text-purple-300 transition-colors">
+            <span className="text-xs font-semibold tracking-wider uppercase text-white group-hover:text-cyan-300 transition-colors">
               Memory Engine
             </span>
             <span className="text-[10px] tracking-widest text-slate-400 font-mono uppercase">
@@ -81,7 +81,7 @@ export default function Navbar({
             </button>
             <button
               onClick={() => onToggleViewMode("workspace")}
-              className="px-3.5 py-1 rounded-lg text-xs font-mono bg-purple-500/20 text-purple-200 border border-purple-500/40"
+              className="px-3.5 py-1 rounded-lg text-xs font-mono bg-cyan-500/20 text-cyan-200 border border-cyan-500/40"
             >
               Interactive Product
             </button>
@@ -92,7 +92,7 @@ export default function Navbar({
         <div className="flex items-center gap-3">
           <button
             onClick={() => onToggleViewMode(viewMode === "landing" ? "workspace" : "landing")}
-            className="hidden sm:flex items-center gap-1.5 text-xs font-mono text-purple-300 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 hover:bg-purple-500/20 transition-all"
+            className="hidden sm:flex items-center gap-1.5 text-xs font-mono text-cyan-300 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 hover:bg-cyan-500/20 transition-all"
           >
             <Layout className="w-3.5 h-3.5" />
             <span>{viewMode === "landing" ? "Product Mode" : "Overview Mode"}</span>

@@ -192,7 +192,7 @@ export default function ProductWorkspace() {
                 Listening... "Just had lunch with Priya... she's quitting her job..."
               </span>
             ) : recordingSuccess ? (
-              <span className="text-xs font-mono text-emerald-400 flex items-center gap-1.5">
+              <span className="text-xs font-mono text-teal-400 flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5" />
                 Added to memory • Resolved Priya (Friend) & Career Transition
               </span>

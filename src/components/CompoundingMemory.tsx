@@ -113,7 +113,7 @@ function MilestoneContent({ milestone }: { milestone: Milestone }) {
               initial={{ opacity: 0, x: 8 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3, delay: qi * 0.15 }}
-              className="p-3.5 rounded-xl bg-emerald-950/15 border border-emerald-500/20 text-sm text-emerald-100/90 font-serif italic leading-relaxed"
+              className="p-3.5 rounded-xl bg-teal-950/15 border border-teal-500/20 text-sm text-emerald-100/90 font-serif italic leading-relaxed"
             >
               &ldquo;{question}&rdquo;
             </motion.li>
@@ -173,7 +173,7 @@ export default function CompoundingMemory() {
                     : "bg-white/[0.04] text-white/50 border border-white/10 hover:text-white"
                 }`}
               >
-                {isPast && <span className="text-emerald-500">✓</span>}
+                {isPast && <span className="text-teal-500">✓</span>}
                 {milestone.label}
               </button>
             );

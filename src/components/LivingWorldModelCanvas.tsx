@@ -101,7 +101,7 @@ export default function LivingWorldModelCanvas() {
       {/* Header bar overlay matching reference image */}
       <div className="absolute top-4 left-6 right-6 z-20 flex items-center justify-between pointer-events-none">
         <div className="flex items-center gap-2 bg-[#161522] px-3.5 py-1.5 rounded-full border border-white/10 text-xs text-white/70 font-mono">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
           <span className="tracking-wide">MEMORY ENGINE • CONNECTED MEMORY</span>
         </div>
         <div className="hidden sm:flex items-center gap-4 text-[11px] font-mono text-slate-400">
@@ -155,10 +155,10 @@ export default function LivingWorldModelCanvas() {
               <div
                 className={`relative flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all duration-200 ${
                   isActive
-                    ? "bg-white/15 text-white border-purple-400/50 scale-105 shadow-lg shadow-purple-500/20"
+                    ? "bg-white/15 text-white border-cyan-400/50 scale-105 shadow-lg shadow-cyan-500/20"
                     : isConnected
                     ? "bg-white/10 text-white/90 border-white/20"
-                    : "bg-[#141320] text-slate-300 border-white/10 hover:border-purple-400/30 hover:text-white"
+                    : "bg-[#141320] text-slate-300 border-white/10 hover:border-cyan-400/30 hover:text-white"
                 }`}
               >
                 <div
@@ -184,11 +184,11 @@ export default function LivingWorldModelCanvas() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="p-4 rounded-xl bg-[#141320] border border-purple-500/20 shadow-2xl space-y-2"
+            className="p-4 rounded-xl bg-[#141320] border border-cyan-500/20 shadow-2xl space-y-2"
           >
             <div className="flex items-center justify-between">
               <span
-                className="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-medium text-purple-200"
+                className="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-medium text-cyan-200"
                 style={{ backgroundColor: `${activeNode.color}25` }}
               >
                 {activeNode.category}
@@ -210,7 +210,7 @@ export default function LivingWorldModelCanvas() {
 
       {/* Helper text */}
       <div className="absolute bottom-4 right-6 hidden sm:flex items-center gap-1.5 text-[11px] font-mono text-slate-400 pointer-events-none">
-        <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+        <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
         <span>Click or hover nodes to inspect narrative context</span>
       </div>
     </div>

@@ -141,7 +141,7 @@ export default function WhatItDoes() {
                             <span className="w-2 h-2 rounded-full bg-amber-400/80" />
                             <span className="text-xs font-mono text-amber-100/90">{item}</span>
                             {idx === CONNECTION_CHAIN.length - 1 && (
-                              <Link2 className="w-3.5 h-3.5 text-emerald-400/80" />
+                              <Link2 className="w-3.5 h-3.5 text-teal-400/80" />
                             )}
                           </div>
                           {idx < CONNECTION_CHAIN.length - 1 && (

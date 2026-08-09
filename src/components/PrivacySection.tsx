@@ -62,7 +62,7 @@ export default function PrivacySection() {
               const Icon = item.icon;
               return (
                 <li key={idx} className="flex items-start gap-4">
-                  <span className="w-8 h-8 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-emerald-400 shrink-0">
+                  <span className="w-8 h-8 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-teal-400 shrink-0">
                     <Icon className="w-4 h-4" />
                   </span>
                   <p className="text-base text-white/85 leading-relaxed font-normal">

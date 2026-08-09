@@ -12,7 +12,7 @@ export default function HeroSection({ onScrollToWaitlist, onScrollToContent }: H
   return (
     <section className="relative pt-36 pb-24 md:pt-48 md:pb-32 overflow-hidden radial-glow-hero">
       {/* Background Subtle Ambient Glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-purple-600/15 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-cyan-600/15 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
         {/* Tagline */}
@@ -23,7 +23,7 @@ export default function HeroSection({ onScrollToWaitlist, onScrollToContent }: H
           className="text-5xl sm:text-6xl md:text-7xl font-light tracking-tight text-white leading-[1.08] mb-8 font-sans"
         >
           Never lose the thread{" "}
-          <span className="font-serif italic font-normal text-gradient-purple">
+          <span className="font-serif italic font-normal text-gradient-cyan">
             of your life.
           </span>
         </motion.h1>
@@ -50,10 +50,10 @@ export default function HeroSection({ onScrollToWaitlist, onScrollToContent }: H
           aria-label="Press to talk"
           className="relative mx-auto mb-14 group"
         >
-          <span className="absolute inset-0 rounded-full bg-purple-500/25 blur-2xl group-hover:bg-purple-500/40 transition-all" />
-          <span className="absolute -inset-3 rounded-full border border-purple-400/30 animate-pulse-slow" />
-          <span className="absolute -inset-7 rounded-full border border-purple-400/15 animate-pulse-slower" />
-          <span className="relative w-24 h-24 rounded-full glass-pill-purple flex items-center justify-center text-purple-200 shadow-xl shadow-purple-900/40 group-hover:text-white group-hover:scale-105 transition-all duration-300">
+          <span className="absolute inset-0 rounded-full bg-cyan-500/25 blur-2xl group-hover:bg-cyan-500/40 transition-all" />
+          <span className="absolute -inset-3 rounded-full border border-cyan-400/30 animate-pulse-slow" />
+          <span className="absolute -inset-7 rounded-full border border-cyan-400/15 animate-pulse-slower" />
+          <span className="relative w-24 h-24 rounded-full glass-pill-cyan flex items-center justify-center text-cyan-200 shadow-xl shadow-cyan-900/40 group-hover:text-white group-hover:scale-105 transition-all duration-300">
             <Mic className="w-9 h-9" />
           </span>
         </motion.button>

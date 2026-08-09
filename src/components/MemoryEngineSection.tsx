@@ -81,9 +81,9 @@ function QuestionDemo() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="p-5 rounded-xl bg-emerald-950/20 border border-emerald-500/25"
+            className="p-5 rounded-xl bg-teal-950/20 border border-teal-500/25"
           >
-            <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider block mb-2">
+            <span className="text-[10px] font-mono text-teal-400 uppercase tracking-wider block mb-2">
               How it understands it
             </span>
             <p className="text-sm text-white/90 leading-relaxed font-sans">

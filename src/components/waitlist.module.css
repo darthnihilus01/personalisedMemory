@@ -1,0 +1,295 @@
+/*
+  All custom properties are scoped to .scene (not :root) so they never
+  leak into the rest of the app's global styles.
+*/
+
+.scene {
+  --bg-0: #020308;
+  --bg-1: #050914;
+  --cyan: #5eead4;
+  --cyan-bright: #a5f3fc;
+  --ink: #f5f7fb;
+  --muted: #8b96ab;
+  --muted-2: #5b6478;
+  --card-line: rgba(255, 255, 255, 0.1);
+  --card-fill: rgba(255, 255, 255, 0.045);
+
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 90% 60% at 22% 8%, rgba(30, 58, 95, 0.55) 0%, rgba(30, 58, 95, 0) 60%),
+    radial-gradient(ellipse 70% 50% at 85% 15%, rgba(20, 80, 90, 0.35) 0%, rgba(20, 80, 90, 0) 60%),
+    radial-gradient(ellipse 100% 70% at 50% 100%, rgba(10, 20, 38, 0.9) 0%, rgba(2, 3, 8, 1) 70%),
+    linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 15%, var(--bg-0) 45%, #000000 100%);
+  font-family: var(--font-geist), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Wave layer ---------- */
+.waves {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+.waveGroup {
+  animation: waitlistDrift 22s ease-in-out infinite alternate;
+  transform-origin: 50% 50%;
+}
+.waveGroup.slow {
+  animation-duration: 30s;
+}
+@keyframes waitlistDrift {
+  from { transform: translate3d(-1.2%, 0, 0); }
+  to { transform: translate3d(1.2%, 0, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .waveGroup { animation: none; }
+}
+
+/* ---------- Giant background wordmark ---------- */
+.giantText {
+  position: absolute;
+  bottom: -4.5vw;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  text-align: center;
+  font-size: clamp(8rem, 19vw, 24rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  white-space: nowrap;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.03) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  user-select: none;
+  z-index: 1;
+}
+
+.orb {
+  position: absolute;
+  bottom: 6.5vw;
+  width: clamp(2rem, 5vw, 4.5rem);
+  height: clamp(2rem, 5vw, 4.5rem);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.02) 70%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1;
+}
+.o1 { left: 44%; }
+.o2 { left: 66%; }
+
+/* ---------- Content ---------- */
+.content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4.5rem 1.5rem 12rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  background: var(--card-fill);
+  border: 1px solid var(--card-line);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 2.75rem;
+}
+.badge svg { width: 14px; height: 14px; color: var(--cyan-bright); }
+
+.headline {
+  font-size: clamp(2.75rem, 8.5vw, 5.75rem);
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  line-height: 1.02;
+  margin-bottom: 3rem;
+  background: linear-gradient(180deg, #ffffff 15%, #93a0b8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Card ---------- */
+.card {
+  width: 100%;
+  max-width: 650px;
+  padding: 2.75rem 2.25rem;
+  border-radius: 26px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--card-line);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  margin-bottom: 2.25rem;
+}
+
+.card h2 {
+  font-size: clamp(1.4rem, 2.4vw, 1.75rem);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.85rem;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.55;
+  max-width: 440px;
+  margin: 0 auto 2.25rem;
+}
+
+/* ---------- Form (used by the client island) ---------- */
+.signupForm {
+  display: flex;
+  gap: 0.75rem;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.signupForm input[type='email'] {
+  flex: 1;
+  min-width: 0;
+  padding: 0.9rem 1.15rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.signupForm input[type='email']::placeholder { color: var(--muted-2); }
+.signupForm input[type='email']:focus-visible {
+  border-color: rgba(165, 243, 252, 0.55);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 3px rgba(94, 234, 212, 0.15);
+}
+.inputError {
+  border-color: rgba(248, 113, 113, 0.7) !important;
+  animation: waitlistShake 0.32s ease;
+}
+@keyframes waitlistShake {
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.submitBtn {
+  padding: 0.9rem 1.6rem;
+  border-radius: 12px;
+  border: none;
+  background: #ffffff;
+  color: #05070d;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+.submitBtn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(255, 255, 255, 0.18); }
+.submitBtn:active { transform: translateY(0); }
+.submitBtn:focus-visible { outline: 2px solid var(--cyan-bright); outline-offset: 2px; }
+.submitBtn:disabled { opacity: 0.6; cursor: default; transform: none; box-shadow: none; }
+
+.successMsg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 0.9rem 1.15rem;
+  border-radius: 12px;
+  border: 1px solid rgba(94, 234, 212, 0.35);
+  background: rgba(94, 234, 212, 0.08);
+  color: var(--cyan-bright);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+.successMsg svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+.fieldError {
+  max-width: 440px;
+  margin: 0.6rem auto 0;
+  font-size: 0.8rem;
+  color: #fca5a5;
+  text-align: left;
+  min-height: 1em;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* ---------- Socials ---------- */
+.socials {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.socialBtn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card-fill);
+  border: 1px solid var(--card-line);
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.socialBtn svg { width: 17px; height: 17px; }
+.socialBtn:hover { background: rgba(255, 255, 255, 0.12); color: #fff; transform: translateY(-2px); }
+.socialBtn:focus-visible { outline: 2px solid var(--cyan-bright); outline-offset: 2px; }
+
+.footerText {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.8rem;
+  color: var(--muted-2);
+}
+.footerText .dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--muted-2);
+}
+
+@media (max-width: 560px) {
+  .signupForm { flex-direction: column; }
+  .submitBtn { width: 100%; }
+  .card { padding: 2.25rem 1.5rem; }
+  .footerText { flex-wrap: wrap; justify-content: center; text-align: center; }
+}
