@@ -328,7 +328,7 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
       <div className="max-w-6xl mx-auto flex flex-col items-center relative z-10">
 
         <motion.h2
-          className="font-display w-full max-w-[1200px] text-[32px] sm:text-[48px] md:text-[56px] font-medium text-gradient-cyan leading-[1.1] tracking-tight mb-3 md:whitespace-nowrap text-center"
+          className="font-display w-full max-w-[1200px] text-[28px] sm:text-[40px] md:text-[56px] font-medium text-gradient-cyan leading-[1.1] tracking-tight mb-3 md:whitespace-nowrap text-center"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
@@ -336,7 +336,7 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
         </motion.h2>
 
         <motion.h3
-          className="font-display w-full max-w-[1200px] text-[32px] sm:text-[48px] md:text-[56px] font-medium leading-[1.1] tracking-tight text-zinc-400 mb-4 md:whitespace-nowrap text-center"
+          className="font-display w-full max-w-[1200px] text-[28px] sm:text-[40px] md:text-[56px] font-medium leading-[1.1] tracking-tight text-zinc-400 mb-4 md:whitespace-nowrap text-center"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
@@ -410,13 +410,13 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
             {activeEntity && (
               <motion.div
                 key={activeEntity.name}
-                className="absolute right-0 sm:right-4 top-[140px] z-40 w-full max-w-[480px] px-3 sm:px-0"
+                className="absolute right-0 sm:right-4 top-[90px] sm:top-[140px] z-40 w-full max-w-[480px] px-3 sm:px-0"
                 initial={{ opacity: 0, x: 20, scale: 0.96 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
                 exit={{ opacity: 0, x: 10, scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 100, damping: 18 }}
               >
-                <div className="w-full bg-[#0a0b10]/95 backdrop-blur-md border border-white/[0.08] rounded-xl shadow-lg flex flex-col relative overflow-hidden max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 font-sans tracking-tight">
+                <div className="w-full bg-[#0a0b10]/95 backdrop-blur-md border border-white/[0.08] rounded-xl shadow-lg flex flex-col relative overflow-hidden max-h-[65vh] sm:max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 font-sans tracking-tight">
 
                   {/* HEADER */}
                   <div className="p-4 pb-3 border-b border-white/[0.04] sticky top-0 bg-[#0a0b10]/95 backdrop-blur-md z-10">

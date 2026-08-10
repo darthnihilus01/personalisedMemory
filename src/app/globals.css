@@ -156,7 +156,7 @@
 
 /* ── Giant watermark text ── */
 .watermark-text {
-  font-size: clamp(7rem, 18vw, 22rem);
+  font-size: clamp(4rem, 15vw, 22rem);
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;

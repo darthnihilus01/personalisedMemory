@@ -160,7 +160,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="font-display text-[44px] md:text-[52px] lg:text-[64px] text-gradient-headline leading-[1.05] mb-6 max-w-[976px] tracking-tight"
+              className="font-display text-4xl sm:text-[44px] md:text-[52px] lg:text-[64px] text-gradient-headline leading-[1.05] mb-6 max-w-[976px] tracking-tight"
             >
               turn your life into a continuously evolving memory system.
             </motion.h1>

@@ -153,7 +153,7 @@ export default function MCPDemo({ isUnlocked = true, onComplete }: MCPDemoProps)
         </div>
 
         {/* Chat Body */}
-        <div className="p-6 md:p-8 flex flex-col gap-6 min-h-[400px] bg-[#18181b]">
+        <div className="p-4 sm:p-6 md:p-8 flex flex-col gap-6 min-h-[400px] bg-[#18181b]">
           
           <AnimatePresence>
             {showChat && (
@@ -210,7 +210,7 @@ export default function MCPDemo({ isUnlocked = true, onComplete }: MCPDemoProps)
                         initial={{ opacity: 0, height: 0, marginTop: 0 }}
                         animate={{ opacity: 1, height: 'auto', marginTop: 12 }}
                         exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                        className="w-full max-w-[440px] bg-[#111113] border border-white/[0.05] rounded-xl p-4 font-mono text-[11px] overflow-hidden"
+                        className="w-full max-w-[440px] bg-[#111113] border border-white/[0.05] rounded-xl p-4 font-mono text-[11px] overflow-x-auto"
                       >
                         <div className="text-zinc-400 mb-2 border-b border-white/[0.05] pb-2">
                           Request

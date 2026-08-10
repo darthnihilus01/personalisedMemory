@@ -210,15 +210,15 @@ export default function CaptureDemo({ onComplete }: CaptureDemoProps) {
       </AnimatePresence>
 
       {/* ── INSTANCE TOGGLE ── */}
-      <div className="flex justify-center mb-12 relative z-30">
-        <div className="flex items-center bg-[#0d0e14] border border-white/[0.08] rounded-full p-1 shadow-sm">
+      <div className="flex justify-center mb-12 relative z-30 px-2 max-w-full">
+        <div className="flex items-center bg-[#0d0e14] border border-white/[0.08] rounded-full p-1 shadow-sm overflow-x-auto">
           {(Object.keys(INSTANCES) as InstanceType[]).map((key) => {
             const isActive = activeInstance === key;
             return (
               <button
                 key={key}
                 onClick={() => handleToggle(key)}
-                className={`px-4 py-2 text-[12px] font-medium rounded-full transition-all flex items-center gap-2 ${
+                className={`px-4 py-2 text-[12px] font-medium rounded-full transition-all flex items-center gap-2 whitespace-nowrap flex-shrink-0 ${
                   isActive 
                     ? 'bg-zinc-800/80 text-white shadow-sm border border-white/[0.05]' 
                     : 'text-zinc-500 hover:text-zinc-300'
@@ -243,7 +243,7 @@ export default function CaptureDemo({ onComplete }: CaptureDemoProps) {
 
           {/* ── STAGE 1: Voice Input Card ── */}
           <motion.div
-            className="w-full bg-[#0d0e14] rounded-2xl flex flex-col border border-white/[0.08] p-6 md:p-8 gap-5"
+            className="w-full bg-[#0d0e14] rounded-2xl flex flex-col border border-white/[0.08] p-4 sm:p-6 md:p-8 gap-5"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}

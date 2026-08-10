@@ -90,7 +90,7 @@ export default function WaitlistSection() {
 
       <div className={styles.content}>
 
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.8 }}
@@ -100,7 +100,7 @@ export default function WaitlistSection() {
           Coming soon!
         </motion.h1>
 
-        <motion.section 
+        <motion.section
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -113,7 +113,7 @@ export default function WaitlistSection() {
           <WaitlistForm />
         </motion.section>
 
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

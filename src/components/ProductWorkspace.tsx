@@ -134,10 +134,10 @@ export default function ProductWorkspace() {
         </div>
 
         {/* View Switcher Tabs */}
-        <div className="flex items-center gap-1 bg-[#121215] p-1 rounded-xl border border-white/[0.08]">
+        <div className="flex items-center gap-1 bg-[#121215] p-1 rounded-xl border border-white/[0.08] overflow-x-auto max-w-full">
           <button
             onClick={() => setActiveTab("feed")}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all whitespace-nowrap flex-shrink-0 ${
               activeTab === "feed"
                 ? "bg-white/10 text-white font-medium shadow-sm"
                 : "text-white/50 hover:text-white"
@@ -147,7 +147,7 @@ export default function ProductWorkspace() {
           </button>
           <button
             onClick={() => setActiveTab("people")}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all whitespace-nowrap flex-shrink-0 ${
               activeTab === "people"
                 ? "bg-white/10 text-white font-medium shadow-sm"
                 : "text-white/50 hover:text-white"
@@ -157,7 +157,7 @@ export default function ProductWorkspace() {
           </button>
           <button
             onClick={() => setActiveTab("graph")}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all whitespace-nowrap flex-shrink-0 ${
               activeTab === "graph"
                 ? "bg-white/10 text-white font-medium shadow-sm"
                 : "text-white/50 hover:text-white"
@@ -167,7 +167,7 @@ export default function ProductWorkspace() {
           </button>
           <button
             onClick={() => setActiveTab("reasoning")}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all whitespace-nowrap flex-shrink-0 ${
               activeTab === "reasoning"
                 ? "bg-white/10 text-white font-medium shadow-sm"
                 : "text-white/50 hover:text-white"
@@ -202,14 +202,14 @@ export default function ProductWorkspace() {
                 readOnly
                 placeholder="Say it messy. We'll clean it up and connect it."
                 onClick={handleStartRecord}
-                className="w-full bg-transparent text-xs text-white/80 placeholder-white/40 focus:outline-none cursor-pointer"
+                className="w-full bg-transparent text-xs text-white/80 placeholder-white/40 focus:outline-none cursor-pointer min-w-0"
               />
             )}
           </div>
 
           <button
             onClick={handleStartRecord}
-            className={`px-4 py-2 rounded-xl text-xs font-mono transition-all flex items-center gap-2 ${
+            className={`px-4 py-2 rounded-xl text-xs font-mono transition-all flex items-center gap-2 whitespace-nowrap flex-shrink-0 ${
               isRecording
                 ? "bg-red-500/20 text-red-300 border border-red-500/30"
                 : "bg-white/10 hover:bg-white/15 text-white border border-white/10"
