@@ -332,7 +332,7 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          Not another place to store your life.
+          Not another place to store your&nbsp;life.
         </motion.h2>
 
         <motion.h3

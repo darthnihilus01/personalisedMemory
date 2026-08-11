@@ -38,7 +38,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="text-white/30 text-[11px]">
-          © {new Date().getFullYear()} Personal Memory Engine Inc.
+          © {new Date().getFullYear()} Personal Memory Engine Inc. &nbsp;|&nbsp; Lattice
         </div>
       </div>
     </footer>

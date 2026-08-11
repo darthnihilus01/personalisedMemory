@@ -36,7 +36,7 @@ function generateGraphData(width: number, height: number, targetCx: number) {
   const edges: Edge[] = [];
   const nodeCount = 380;
 
-  const cy = height / 2;
+  const cy = width < 768 ? height / 2 + 140 : height / 2;
   const scale = width < 768 ? Math.max(0.5, width / 768) : 1;
 
   // The 4 main isolated entities
