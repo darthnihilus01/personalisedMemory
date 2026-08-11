@@ -34,22 +34,29 @@ interface ObsidianGraphProps {
 function generateGraphData(width: number, height: number, targetCx: number) {
   const nodes: Node[] = [];
   const edges: Edge[] = [];
-  const nodeCount = 380;
+  const isMobile = width < 768;
+  const nodeCount = isMobile ? 160 : 380;
 
-  const cy = width < 768 ? height / 2 - 20 : height / 2;
-  const scale = width < 768 ? Math.max(0.5, width / 768) : 1;
+  const cy = height / 2;
 
-  // The 4 main isolated entities
-  // Group 1: Priya & California Burrito (Top Leftish)
-  // Group 2: Marcus & Solstice Capital (Bottom Rightish)
-  const mainEntities = [
-    { name: 'Priya', color: '#ec4899', x: targetCx - 140 * scale, y: cy - 90 * scale, offset: { x: -15, y: -20 }, cluster: 0 },
-    { name: 'California Burrito', color: '#f59e0b', x: targetCx - 70 * scale, y: cy - 140 * scale, offset: { x: -45, y: -15 }, cluster: 0 },
-    { name: 'Sarah', color: '#a855f7', x: targetCx - 180 * scale, y: cy - 150 * scale, offset: { x: -15, y: -15 }, cluster: 0 },
-    { name: 'Marcus', color: '#2dd4bf', x: targetCx + 80 * scale, y: cy + 100 * scale, offset: { x: -20, y: 25 }, cluster: 2 },
-    { name: 'Solstice Capital', color: '#38bdf8', x: targetCx + 160 * scale, y: cy + 50 * scale, offset: { x: -35, y: 25 }, cluster: 2 },
-    { name: 'Alicia', color: '#10b981', x: targetCx + 220 * scale, y: cy + 120 * scale, offset: { x: -15, y: 20 }, cluster: 2 },
-  ];
+  // Mobile vs Desktop entity coordinates & label offsets
+  const mainEntities = isMobile
+    ? [
+        { name: 'Priya', color: '#ec4899', x: targetCx - 50, y: cy - 50, offset: { x: -35, y: -15 }, cluster: 0 },
+        { name: 'California Burrito', color: '#f59e0b', x: targetCx + 45, y: cy - 90, offset: { x: 10, y: 0 }, cluster: 0 },
+        { name: 'Sarah', color: '#a855f7', x: targetCx - 75, y: cy - 115, offset: { x: -35, y: -12 }, cluster: 0 },
+        { name: 'Marcus', color: '#2dd4bf', x: targetCx - 45, y: cy + 65, offset: { x: -35, y: 15 }, cluster: 2 },
+        { name: 'Solstice Capital', color: '#38bdf8', x: targetCx + 55, y: cy + 100, offset: { x: 10, y: 15 }, cluster: 2 },
+        { name: 'Alicia', color: '#10b981', x: targetCx - 75, y: cy + 130, offset: { x: -30, y: 18 }, cluster: 2 },
+      ]
+    : [
+        { name: 'Priya', color: '#ec4899', x: targetCx - 140, y: cy - 90, offset: { x: -15, y: -20 }, cluster: 0 },
+        { name: 'California Burrito', color: '#f59e0b', x: targetCx - 70, y: cy - 140, offset: { x: -45, y: -15 }, cluster: 0 },
+        { name: 'Sarah', color: '#a855f7', x: targetCx - 180, y: cy - 150, offset: { x: -15, y: -15 }, cluster: 0 },
+        { name: 'Marcus', color: '#2dd4bf', x: targetCx + 80, y: cy + 100, offset: { x: -20, y: 25 }, cluster: 2 },
+        { name: 'Solstice Capital', color: '#38bdf8', x: targetCx + 160, y: cy + 50, offset: { x: -35, y: 25 }, cluster: 2 },
+        { name: 'Alicia', color: '#10b981', x: targetCx + 220, y: cy + 120, offset: { x: -15, y: 20 }, cluster: 2 },
+      ];
 
   for (let i = 0; i < nodeCount; i++) {
     if (i < mainEntities.length) {
@@ -73,10 +80,14 @@ function generateGraphData(width: number, height: number, targetCx: number) {
 
     // Generate random ambient nodes clustered around the two groups
     const isGroup1 = Math.random() > 0.5;
-    const centerX = isGroup1 ? targetCx - 100 * scale : targetCx + 120 * scale;
-    const centerY = isGroup1 ? cy - 110 * scale : cy + 70 * scale;
+    const centerX = isMobile
+      ? (isGroup1 ? targetCx - 40 : targetCx + 30)
+      : (isGroup1 ? targetCx - 100 : targetCx + 120);
+    const centerY = isMobile
+      ? (isGroup1 ? cy - 80 : cy + 90)
+      : (isGroup1 ? cy - 110 : cy + 70);
     
-    const r = (Math.random() * Math.random()) * 220 * scale;
+    const r = (Math.random() * Math.random()) * (isMobile ? 120 : 220);
     const a = Math.random() * Math.PI * 2;
 
     nodes.push({
@@ -328,7 +339,7 @@ export default function ObsidianGraph({ isShifted = false, revealedCount = 0, ac
 
           if (n.label) {
             ctx.fillStyle = '#ffffff';
-            ctx.font = '500 13px Inter, sans-serif';
+            ctx.font = width < 768 ? '500 11px Inter, sans-serif' : '500 13px Inter, sans-serif';
             ctx.globalAlpha = n.currentAlpha * 0.9;
             const offX = n.labelOffset?.x || 0;
             const offY = n.labelOffset?.y || -15;
@@ -341,7 +352,7 @@ export default function ObsidianGraph({ isShifted = false, revealedCount = 0, ac
 
           if (n.label && !activeEntity) {
             ctx.fillStyle = '#a1a1aa';
-            ctx.font = '400 11px Inter, sans-serif';
+            ctx.font = width < 768 ? '400 10px Inter, sans-serif' : '400 11px Inter, sans-serif';
             ctx.globalAlpha = n.currentAlpha * 0.5;
             const offX = n.labelOffset?.x || 0;
             const offY = n.labelOffset?.y || -12;

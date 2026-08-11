@@ -379,11 +379,11 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
                         />
                         <span className="text-[10px] font-mono text-zinc-500 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.05] ml-2">⌘K</span>
                       </div>
-                      <div className="flex items-center gap-2 px-4 pb-3 pt-1 border-t border-white/[0.03]">
-                        <span className="text-[10px] text-zinc-500">Try:</span>
+                      <div className="flex items-center gap-2 px-4 pb-3 pt-1 border-t border-white/[0.03] overflow-x-auto no-scrollbar">
+                        <span className="text-[10px] text-zinc-500 flex-shrink-0">Try:</span>
                         {SEARCH_SUGGESTIONS.map((s) => (
                           <button key={s} type="button" onClick={() => handleSuggestionClick(s)}
-                            className={`text-[10px] px-2 py-0.5 rounded border transition-colors ${searchQuery.toLowerCase() === s.toLowerCase() ? 'border-zinc-500 text-zinc-200 bg-white/[0.05]' : 'border-transparent text-zinc-500 hover:text-zinc-300'}`}
+                            className={`text-[10px] px-2 py-0.5 rounded border transition-colors flex-shrink-0 whitespace-nowrap ${searchQuery.toLowerCase() === s.toLowerCase() ? 'border-zinc-500 text-zinc-200 bg-white/[0.05]' : 'border-transparent text-zinc-500 hover:text-zinc-300'}`}
                           >{s}</button>
                         ))}
                       </div>
