@@ -329,15 +329,15 @@ export default function ProductWorkspace() {
               <line x1="50%" y1="35%" x2="50%" y2="75%" stroke="rgba(255,255,255,0.15)" strokeWidth="1" strokeDasharray="3 3" />
             </svg>
 
-            <div className="relative z-10 flex items-center justify-around w-full px-8">
-              <div className="p-3 rounded-full bg-white/10 border border-white/20 text-xs font-mono text-white">
-                Priya (Close Friend)
+            <div className="relative z-10 flex items-center justify-around w-full px-2 sm:px-8 gap-2">
+              <div className="p-2 sm:p-3 rounded-xl sm:rounded-full bg-white/10 border border-white/20 text-[10px] sm:text-xs font-mono text-white text-center leading-tight">
+                Priya<br className="sm:hidden" /> (Close Friend)
               </div>
-              <div className="p-4 rounded-full bg-amber-500/20 border border-amber-500/40 text-xs font-mono text-amber-200">
-                Career Transition
+              <div className="p-3 sm:p-4 rounded-xl sm:rounded-full bg-amber-500/20 border border-amber-500/40 text-[10px] sm:text-xs font-mono text-amber-200 text-center leading-tight">
+                Career<br className="sm:hidden" /> Transition
               </div>
-              <div className="p-3 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-white/50">
-                Mom (Family)
+              <div className="p-2 sm:p-3 rounded-xl sm:rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-xs font-mono text-white/50 text-center leading-tight">
+                Mom<br className="sm:hidden" /> (Family)
               </div>
             </div>
           </div>
