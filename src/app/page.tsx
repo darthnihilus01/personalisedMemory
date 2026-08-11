@@ -179,7 +179,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
-            className="absolute bottom-4 sm:bottom-[-2vw] left-1/2 -translate-x-1/2 w-[100vw] text-center pointer-events-none z-0"
+            className="absolute bottom-12 sm:bottom-[-2vw] left-1/2 -translate-x-1/2 w-[100vw] text-center pointer-events-none z-0"
           >
             <span className={`watermark-text ${syncopate.className}`}>
               Lattice

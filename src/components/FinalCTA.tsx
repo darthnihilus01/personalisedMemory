@@ -410,7 +410,7 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
             {activeEntity && (
               <motion.div
                 key={activeEntity.name}
-                className="absolute right-0 sm:right-4 top-[90px] sm:top-[140px] z-40 w-full max-w-[480px] px-3 sm:px-0"
+                className="relative sm:absolute right-0 sm:right-4 mt-[300px] sm:mt-0 sm:top-[140px] z-40 w-full max-w-[480px] px-3 sm:px-0"
                 initial={{ opacity: 0, x: 20, scale: 0.96 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
                 exit={{ opacity: 0, x: 10, scale: 0.98 }}

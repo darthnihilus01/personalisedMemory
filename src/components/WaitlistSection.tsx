@@ -82,7 +82,7 @@ export default function WaitlistSection() {
 
 
       {/* Giant background wordmark — letters spread edge-to-edge */}
-      <div className="absolute bottom-8 left-0 right-0 w-full text-center pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+      <div className="absolute bottom-6 md:bottom-8 left-0 right-0 w-full text-center pointer-events-none z-0 overflow-hidden" aria-hidden="true">
         <span className={`watermark-text ${syncopate.className}`}>
           Lattice
         </span>

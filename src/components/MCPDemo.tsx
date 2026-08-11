@@ -130,7 +130,7 @@ export default function MCPDemo({ isUnlocked = true, onComplete }: MCPDemoProps)
         transition={{ duration: 0.7, ease }}
       >
         <h2 className="font-display w-full text-[32px] sm:text-[48px] md:text-[56px] font-medium leading-[1.1] tracking-tight md:whitespace-nowrap">
-          <span className="text-white">Bring your memory</span> <br className="hidden md:block" />
+          <span className="text-white">Bring your memory</span> <br />
           <span className="text-gradient-cyan">to any AI.</span>
         </h2>
         <p className="text-[#a1a1aa] text-[14px] md:text-[15px] max-w-lg leading-[1.6]">
