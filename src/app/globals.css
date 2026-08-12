@@ -155,14 +155,10 @@
 }
 
 /* ── Giant watermark text ── */
-.watermark-text-container {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 0 1vw;
-  font-size: clamp(4rem, 18.5vw, 26rem);
+.watermark-text {
+  font-size: clamp(4rem, 18vw, 22rem);
   font-weight: 700;
+  letter-spacing: -0.04em;
   line-height: 1;
   white-space: nowrap;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%);
