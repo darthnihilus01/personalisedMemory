@@ -122,6 +122,8 @@ export default function WaitlistSection() {
         >
           <span>© 2026 Lattice</span>
           <span className={styles.dot} />
+          <span>Created by Aditya Pokuri &amp; Ramanand Vishvakarma</span>
+          <span className={styles.dot} />
           <span>All rights reserved</span>
         </motion.p>
       </div>
