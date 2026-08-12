@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lattice Watermark Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #020308;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, -apple-system, sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Controls Bar */
+    .controls {
+      position: fixed;
+      top: 20px;
+      z-index: 100;
+      display: flex;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .controls button {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .controls button:hover, .controls button.active {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    /* Watermark text styling */
+    .watermark-container {
+      width: 100vw;
+      text-align: center;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .watermark-text {
+      font-family: 'Syncopate', sans-serif;
+      font-size: clamp(4rem, 18vw, 22rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      text-transform: uppercase;
+      display: inline-block;
+      transition: color 0.3s ease;
+      color: rgba(255, 255, 255, 0.03); /* Original site watermark opacity */
+    }
+
+    /* Variant classes for screenshotting ease */
+    .watermark-text.visible {
+      color: rgba(255, 255, 255, 0.2);
+    }
+    .watermark-text.bright {
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .watermark-text.gradient {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.1) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Preset Opacity Controls for Easy Screenshotting -->
+  <div class="controls">
+    <button onclick="setOpacity('default')" id="btn-default" class="active">Default Site (3%)</button>
+    <button onclick="setOpacity('visible')" id="btn-visible">Medium (20%)</button>
+    <button onclick="setOpacity('bright')" id="btn-bright">High Contrast (85%)</button>
+    <button onclick="setOpacity('gradient')" id="btn-gradient">Gradient</button>
+  </div>
+
+  <div class="watermark-container">
+    <span id="target-text" class="watermark-text">Lattice</span>
+  </div>
+
+  <script>
+    function setOpacity(type) {
+      const el = document.getElementById('target-text');
+      const btns = document.querySelectorAll('.controls button');
+      btns.forEach(b => b.classList.remove('active'));
+      
+      el.className = 'watermark-text';
+      if (type !== 'default') {
+        el.classList.add(type);
+      }
+      document.getElementById('btn-' + type).classList.add('active');
+    }
+  </script>
+</body>
+</html>
