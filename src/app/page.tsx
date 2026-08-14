@@ -163,7 +163,7 @@ export default function Home() {
               transition={{ duration: 1.2, ease: "easeOut" }}
               className="font-display text-4xl sm:text-[44px] md:text-[52px] lg:text-[64px] text-gradient-headline leading-[1.05] mb-6 max-w-[976px] tracking-tight"
             >
-              Talk. It remembers everything that matters.
+              turn your life into a continuously evolving memory system.
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 15 }}
@@ -171,7 +171,7 @@ export default function Home() {
               transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
               className="text-[15px] md:text-[17px] tracking-wide text-zinc-400 font-normal mb-20"
             >
-              Humans lose context. <span className="text-cyan-300/90 font-medium drop-shadow-[0_0_12px_rgba(45,212,191,0.35)]">Lattice doesn&apos;t.</span>
+              humans lose context, <span className="text-cyan-300/90 font-medium drop-shadow-[0_0_12px_rgba(45,212,191,0.35)]">lattice doesn&apos;t.</span>
             </motion.p>
           </div>
 
