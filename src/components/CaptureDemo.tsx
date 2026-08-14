@@ -191,7 +191,7 @@ export default function CaptureDemo({ onComplete }: CaptureDemoProps) {
           <span className="text-gradient-cyan">becomes part of your story.</span>
         </h2>
         <p className="text-[#a1a1aa] text-[14px] md:text-[15px] max-w-lg leading-[1.6]">
-          Talk naturally — stumble, correct yourself, ramble. Lattice listens through the noise and compiles your raw thoughts into clean, structured memory.
+          Talk naturally — stumble, correct yourself, ramble. Lattice listens through the noise and turns it into one clean entry, in your own words.
         </p>
       </motion.section>
 
@@ -210,6 +210,11 @@ export default function CaptureDemo({ onComplete }: CaptureDemoProps) {
       </AnimatePresence>
 
       {/* ── INSTANCE TOGGLE ── */}
+      <div className="text-center mb-4 relative z-30">
+        <p className="text-[13px] text-zinc-500 max-w-xl mx-auto">
+          Same day, two different moments — a work call, and catching up with an old friend. Watch how each one gets captured.
+        </p>
+      </div>
       <div className="flex justify-center mb-12 relative z-30 px-2 max-w-full">
         <div className="flex items-center bg-[#0d0e14] border border-white/[0.08] rounded-full p-1 shadow-sm overflow-x-auto">
           {(Object.keys(INSTANCES) as InstanceType[]).map((key) => {
@@ -383,6 +388,11 @@ export default function CaptureDemo({ onComplete }: CaptureDemoProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease }}
           >
+            <div className="text-center mb-4 relative z-30">
+              <p className="text-[13px] text-zinc-500 max-w-xl mx-auto">
+                Now watch both moments become one page — written like you wrote it yourself.
+              </p>
+            </div>
             <div className="w-full bg-[#0a0b10] border border-white/[0.06] rounded-2xl p-6 md:p-8 flex flex-col gap-4">
               <div className="flex items-center justify-between border-b border-white/[0.04] pb-4 mb-2">
                 <div className="flex items-center gap-2">

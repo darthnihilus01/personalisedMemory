@@ -25,8 +25,7 @@ export default function PrivacySection() {
           </h2>
           
           <p className="text-[15px] sm:text-[17px] leading-relaxed text-zinc-400 max-w-xl mb-16">
-            Your personal memory graph is exactly that—personal. We use industry-standard encryption to keep your data secure, and we adhere to strict privacy policies. 
-            <span className="block mt-2 text-zinc-300 font-medium">We never train on your life, and we never sell your data.</span>
+            Everything is encrypted. Nothing you say is ever used to train a model. You can delete anything, anytime — permanently.
           </p>
         </motion.div>
 
@@ -42,7 +41,7 @@ export default function PrivacySection() {
             <Lock className="w-5 h-5 text-cyan-400/70 shrink-0 mt-0.5" />
             <div className="text-left">
               <h4 className="text-[14px] font-medium text-zinc-200 mb-1.5">Data Security</h4>
-              <p className="text-[13px] text-zinc-500 leading-relaxed">Your memories are encrypted both in transit and at rest using enterprise-grade security protocols.</p>
+              <p className="text-[13px] text-zinc-500 leading-relaxed">Your memories are encrypted both in transit and at rest.</p>
             </div>
           </div>
           
@@ -50,7 +49,7 @@ export default function PrivacySection() {
             <EyeOff className="w-5 h-5 text-cyan-400/70 shrink-0 mt-0.5" />
             <div className="text-left">
               <h4 className="text-[14px] font-medium text-zinc-200 mb-1.5">Zero Training</h4>
-              <p className="text-[13px] text-zinc-500 leading-relaxed">Your knowledge graph is yours alone. We explicitly opt out of all AI model training and never sell your data.</p>
+              <p className="text-[13px] text-zinc-500 leading-relaxed">Your memory is yours alone. We explicitly opt out of all AI model training and never sell your data.</p>
             </div>
           </div>
         </motion.div>

@@ -348,7 +348,7 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
           initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Lattice weaves your thoughts into a living knowledge graph. Search anything — we remember the connections.
+          Every person, place, and moment you mention gets connected automatically — search a name and see everything tied to it.
         </motion.p>
 
         {/* ── STAGE ── */}
@@ -364,6 +364,11 @@ export default function FinalCTA({ isUnlocked = true, onComplete }: FinalCTAProp
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ type: 'spring', stiffness: 100, damping: 18 }}
               >
+                <div className="text-center mb-4 relative z-30">
+                  <p className="text-[13px] text-zinc-500 max-w-xl mx-auto">
+                    Search &apos;California Burrito&apos; — here&apos;s everything Lattice remembers about it, automatically.
+                  </p>
+                </div>
                 {isInteractive ? (
                   <form onSubmit={handleSearchSubmit} className="w-full">
                     <div className="w-full bg-[#0a0b10] border border-white/[0.08] rounded-xl shadow-sm overflow-hidden">

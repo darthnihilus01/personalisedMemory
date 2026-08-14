@@ -134,11 +134,16 @@ export default function MCPDemo({ isUnlocked = true, onComplete }: MCPDemoProps)
           <span className="text-gradient-cyan">to any AI.</span>
         </h2>
         <p className="text-[#a1a1aa] text-[14px] md:text-[15px] max-w-lg leading-[1.6]">
-          Lattice exposes a Model Context Protocol (MCP) server. Connect it to Claude, ChatGPT, or any tool, and let them reason over your life&apos;s context.
+          Connect it to Claude, ChatGPT, or any AI you already use — ask it anything about your life, and it&apos;ll answer from your real memories, not a guess.
         </p>
       </motion.section>
 
       {/* ── CHAT UI CONTAINER ── */}
+      <div className="text-center mb-4 relative z-30">
+        <p className="text-[13px] text-zinc-500 max-w-xl mx-auto">
+          Ask Claude directly — it reasons over your real memories, not a guess.
+        </p>
+      </div>
       <motion.div
         className="w-full max-w-[760px] mx-auto bg-[#0d0e14]/80 backdrop-blur-xl border border-white/[0.08] rounded-2xl shadow-2xl overflow-hidden flex flex-col relative z-30"
         initial={{ opacity: 0, y: 30 }}

@@ -107,8 +107,8 @@ export default function WaitlistSection() {
           transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className={styles.card} aria-labelledby="waitlist-heading"
         >
-          <h2 id="waitlist-heading" className="font-display text-2xl md:text-[28px] font-medium tracking-tight mb-3">Join our waitlist!</h2>
-          <p className="text-zinc-400 text-[15px] leading-relaxed max-w-[440px] mx-auto mb-9">Sign up for our newsletter to receive the latest updates and insights straight to your inbox.</p>
+          <h2 id="waitlist-heading" className="font-display text-2xl md:text-[28px] font-medium tracking-tight mb-3">Get early access</h2>
+          <p className="text-zinc-400 text-[15px] leading-relaxed max-w-[440px] mx-auto mb-9">Be one of the first to try Lattice. We&apos;ll email you the moment we open up access.</p>
 
           <WaitlistForm />
         </motion.section>
