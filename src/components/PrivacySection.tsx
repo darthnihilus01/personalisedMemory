@@ -1,79 +1,61 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, MicOff, Lock, Trash2, Eye } from "lucide-react";
-
-const STATEMENTS = [
-  {
-    icon: MicOff,
-    text: "You choose what enters your memory.",
-  },
-  {
-    icon: Lock,
-    text: "Your memories are encrypted.",
-  },
-  {
-    icon: Trash2,
-    text: "You can delete what you don't want remembered.",
-  },
-  {
-    icon: Eye,
-    text: "The system should show where important memories and conclusions came from.",
-  },
-];
+import { Lock, Fingerprint, EyeOff } from "lucide-react";
 
 export default function PrivacySection() {
   return (
-    <section id="privacy" className="py-24 md:py-32 relative bg-[#09090b] border-t border-white/[0.06]">
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-10"
-        >
-          <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono uppercase tracking-widest text-amber-300/80">
-            <ShieldCheck className="w-3.5 h-3.5" />
-            <span>Privacy</span>
-          </span>
-        </motion.div>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-3xl sm:text-5xl font-light text-white text-center leading-tight tracking-tight mb-12"
-        >
-          Your life{" "}
-          <span className="font-serif italic text-amber-200/90">is yours.</span>
-        </motion.h2>
-
+    <section className="relative pt-32 pb-16 flex flex-col items-center justify-center px-6 overflow-hidden z-10">
+      
+      <div className="w-full max-w-3xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="panel-quiet p-8 sm:p-10 rounded-2xl border border-white/10"
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="flex flex-col items-center text-center"
         >
-          <ul className="space-y-4">
-            {STATEMENTS.map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <li key={idx} className="flex items-start gap-4">
-                  <span className="w-8 h-8 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-teal-400 shrink-0">
-                    <Icon className="w-4 h-4" />
-                  </span>
-                  <p className="text-base text-white/85 leading-relaxed font-normal">
-                    {item.text}
-                  </p>
-                </li>
-              );
-            })}
-          </ul>
+          <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-white/[0.02] border border-white/[0.05] flex items-center justify-center mb-8 shadow-[0_0_30px_rgba(255,255,255,0.02)]">
+            <Lock className="w-6 h-6 sm:w-8 sm:h-8 text-zinc-400" strokeWidth={1.5} />
+          </div>
+          
+          <h2 className="font-display text-[32px] sm:text-[48px] md:text-[56px] font-medium leading-[1.1] tracking-tight mb-6 text-white">
+            Private by design.<br />
+            <span className="text-gradient-cyan">Secure by default.</span>
+          </h2>
+          
+          <p className="text-[15px] sm:text-[17px] leading-relaxed text-zinc-400 max-w-xl mb-16">
+            Your personal memory graph is exactly that—personal. We use industry-standard encryption to keep your data secure, and we adhere to strict privacy policies. 
+            <span className="block mt-2 text-zinc-300 font-medium">We never train on your life, and we never sell your data.</span>
+          </p>
+        </motion.div>
+
+        {/* Minimal feature row */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto"
+        >
+          <div className="p-6 rounded-2xl bg-[#0a0b10] border border-white/[0.04] flex items-start gap-4 hover:border-white/[0.08] transition-colors">
+            <Lock className="w-5 h-5 text-cyan-400/70 shrink-0 mt-0.5" />
+            <div className="text-left">
+              <h4 className="text-[14px] font-medium text-zinc-200 mb-1.5">Data Security</h4>
+              <p className="text-[13px] text-zinc-500 leading-relaxed">Your memories are encrypted both in transit and at rest using enterprise-grade security protocols.</p>
+            </div>
+          </div>
+          
+          <div className="p-6 rounded-2xl bg-[#0a0b10] border border-white/[0.04] flex items-start gap-4 hover:border-white/[0.08] transition-colors">
+            <EyeOff className="w-5 h-5 text-cyan-400/70 shrink-0 mt-0.5" />
+            <div className="text-left">
+              <h4 className="text-[14px] font-medium text-zinc-200 mb-1.5">Zero Training</h4>
+              <p className="text-[13px] text-zinc-500 leading-relaxed">Your knowledge graph is yours alone. We explicitly opt out of all AI model training and never sell your data.</p>
+            </div>
+          </div>
         </motion.div>
       </div>
+
     </section>
   );
 }

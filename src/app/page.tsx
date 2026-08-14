@@ -6,6 +6,7 @@ import { Syncopate } from "next/font/google";
 import CaptureDemo from "@/components/CaptureDemo";
 import FinalCTA from "@/components/FinalCTA";
 import MCPDemo from "@/components/MCPDemo";
+import PrivacySection from "@/components/PrivacySection";
 import WaitlistSection from "@/components/WaitlistSection";
 
 const syncopate = Syncopate({
@@ -70,7 +71,7 @@ export default function Home() {
         {/* ── HERO ── */}
         <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
           {/* ── Flowing neon wave SVG — restricted to hero section with smooth fade ── */}
-          <div 
+          <div
             className="absolute top-0 left-0 right-0 h-[140vh] pointer-events-none z-0"
             style={{
               maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
@@ -156,7 +157,7 @@ export default function Home() {
           </div>
 
           <div className="w-full max-w-5xl mx-auto text-center flex flex-col items-center pb-42 pt-36 relative z-10">
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
@@ -164,13 +165,13 @@ export default function Home() {
             >
               turn your life into a continuously evolving memory system.
             </motion.h1>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
               className="text-[15px] md:text-[17px] tracking-wide text-zinc-400 font-normal mb-20"
             >
-              humans lose context, <span className="text-cyan-300/90 font-medium drop-shadow-[0_0_12px_rgba(45,212,191,0.35)]">lattice doesn&apos;t.</span>
+              humans lose context <span className="text-cyan-300/90 font-medium drop-shadow-[0_0_12px_rgba(45,212,191,0.35)]">lattice doesn&apos;t.</span>
             </motion.p>
           </div>
 
@@ -196,8 +197,13 @@ export default function Home() {
         {/* ── Stage 3: MCP Demo ── */}
         {graphCompleted && <MCPDemo isUnlocked={graphCompleted} onComplete={() => setMcpCompleted(true)} />}
 
-        {/* ── Stage 4: Waitlist ── */}
-        {mcpCompleted && <WaitlistSection />}
+        {/* ── Stage 4: Privacy & Waitlist ── */}
+        {mcpCompleted && (
+          <>
+            <PrivacySection />
+            <WaitlistSection />
+          </>
+        )}
       </div>
     </div>
   );
